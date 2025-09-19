@@ -102,7 +102,7 @@ const REFRESH_TOKEN = import.meta.env.SPOTIFY_REFRESH_TOKEN;
         </div -->
         
         <!-- Now Playing Spotify section with enhanced design -->
-        <div class="col-span-1 md:col-span-6">
+        <!-- div class="col-span-1 md:col-span-6">
           <h3 class="text-sm font-semibold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider theme-transition-color flex items-center relative inline-block after:content-[''] after:absolute after:w-8 after:h-0.5 after:bg-zinc-300 dark:after:bg-zinc-700 after:bottom-0 after:left-0 pb-2">
             <span class="pulse-dot mr-2 w-2 h-2 bg-[#1DB954] rounded-full inline-block animate-pulse"></span>
             NOW PLAYING
@@ -142,7 +142,7 @@ const REFRESH_TOKEN = import.meta.env.SPOTIFY_REFRESH_TOKEN;
             </div>
           </div>
         </div>
-      </div>
+      </div -->
       
       <!-- Bottom section with enhanced styling -->
       <div class="mt-12 pt-8 border-t border-zinc-200 dark:border-zinc-800 theme-transition-all">
@@ -180,7 +180,7 @@ const REFRESH_TOKEN = import.meta.env.SPOTIFY_REFRESH_TOKEN;
   const SPOTIFY_CLIENT_ID = "737b609c375e412a93fc3e1b6eae5b66";
   const SPOTIFY_CLIENT_SECRET = "5e411f3c8c2547d19a860d5a6a9ed611";
   const REFRESH_TOKEN = 'AQBcbskr8ow1vRkKHvUA-vQeyqt2TVrCR3iMD9XWn-lHS4oWZ2OqQe9FdNzqWB5l64UteQc4VP9E4Gsb3O45vp5wAF6iZS6zTb04Y4EZmRPUWwjw28H9oZ_FkdXYN7wn79Q';
-  
+
   // Cache for current track
   let currentTrackId = null;
   // Change the type declaration to allow for Timer/number
@@ -189,7 +189,7 @@ const REFRESH_TOKEN = import.meta.env.SPOTIFY_REFRESH_TOKEN;
   let lastUpdateTime = 0;
   let currentProgress = 0;
   let trackDuration = 0;
-  
+
   // Function to format time in MM:SS
   function formatTime(ms) {
     const seconds = Math.floor(ms / 1000);
@@ -197,7 +197,7 @@ const REFRESH_TOKEN = import.meta.env.SPOTIFY_REFRESH_TOKEN;
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   }
-  
+
   // Function to get access token
   async function getAccessToken() {
     try {
@@ -205,7 +205,7 @@ const REFRESH_TOKEN = import.meta.env.SPOTIFY_REFRESH_TOKEN;
       if (accessToken && Date.now() - lastUpdateTime < 3500000) { // Token is valid for 1 hour, refresh after 58 minutes
         return accessToken;
       }
-      
+
       const response = await fetch('https://accounts.spotify.com/api/token', {
         method: 'POST',
         headers: {
@@ -217,7 +217,7 @@ const REFRESH_TOKEN = import.meta.env.SPOTIFY_REFRESH_TOKEN;
           refresh_token: REFRESH_TOKEN
         })
       });
-      
+
       const data = await response.json();
       accessToken = data.access_token;
       lastUpdateTime = Date.now();
@@ -227,7 +227,7 @@ const REFRESH_TOKEN = import.meta.env.SPOTIFY_REFRESH_TOKEN;
       return null;
     }
   }
-  
+
   // Function to get currently playing track
   async function getCurrentlyPlaying(token) {
     try {
@@ -236,54 +236,54 @@ const REFRESH_TOKEN = import.meta.env.SPOTIFY_REFRESH_TOKEN;
           'Authorization': 'Bearer ' + token
         }
       });
-      
+
       if (response.status === 204) {
         return null; // No track playing
       }
-      
+
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      
+
       return await response.json();
     } catch (error) {
       console.error('Error fetching currently playing:', error);
       return null;
     }
   }
-  
+
   // Function to show track change animation
   function showTrackChangeAnimation() {
     const animationEl = document.getElementById('track-change-animation');
     if (!animationEl) return; // Add null check
-    
+
     animationEl.classList.remove('hidden');
-    
+
     setTimeout(() => {
       if (!animationEl) return; // Add null check
       animationEl.classList.add('hidden');
     }, 1000);
   }
-  
+
   // Function to handle text overflow with marquee effect
   function setupMarquee() {
     const containers = document.querySelectorAll('.marquee-container');
-    
+
     containers.forEach(container => {
       const textElement = container.querySelector('p');
       if (!textElement) return;
-      
+
       // Check if text is overflowing
       if (textElement.scrollWidth > container.clientWidth) {
         // Add null check before accessing properties
         if (container && !container.classList.contains('marquee-active')) {
           container.classList.add('marquee-active');
-          
+
           // Clone the text for seamless scrolling
           const clone = textElement.cloneNode(true);
           const wrapper = document.createElement('div');
           wrapper.classList.add('marquee-wrapper');
-          
+
           // Wrap the original text and its clone
           container.innerHTML = '';
           wrapper.appendChild(textElement);
@@ -302,7 +302,7 @@ const REFRESH_TOKEN = import.meta.env.SPOTIFY_REFRESH_TOKEN;
       }
     });
   }
-  
+
   // Function to update progress in real-time
   function startProgressInterval(startMs, durationMs) {
     // Clear any existing interval
@@ -310,16 +310,16 @@ const REFRESH_TOKEN = import.meta.env.SPOTIFY_REFRESH_TOKEN;
       clearInterval(progressInterval);
       progressInterval = null; // Reset to null after clearing
     }
-    
+
     currentProgress = startMs;
     trackDuration = durationMs;
     const startTime = Date.now();
-    
+
     // Update progress every 100ms for smooth animation
     progressInterval = setInterval(() => {
       const elapsed = Date.now() - startTime;
       currentProgress = startMs + elapsed;
-      
+
       // If we've reached the end of the track, stop updating
       if (currentProgress >= durationMs) {
         if (progressInterval) { // Add null check
@@ -330,24 +330,24 @@ const REFRESH_TOKEN = import.meta.env.SPOTIFY_REFRESH_TOKEN;
         setTimeout(updateSpotifyNowPlaying, 1000);
         return;
       }
-      
+
       // Update UI
       updateProgressUI(currentProgress, durationMs);
     }, 100);
   }
-  
+
   // Function to update just the progress UI
   function updateProgressUI(progressMs, durationMs) {
     const progressBarEl = document.getElementById('progress-bar');
     const currentTimeEl = document.getElementById('current-time');
-    
+
     if (progressBarEl && currentTimeEl && durationMs > 0) {
       const progress = (progressMs / durationMs) * 100;
       progressBarEl.style.width = `${progress}%`;
       currentTimeEl.textContent = formatTime(progressMs);
     }
   }
-  
+
   // Function to update the UI
   function updateNowPlayingUI(data) {
     const trackNameEl = document.getElementById('track-name');
@@ -358,8 +358,8 @@ const REFRESH_TOKEN = import.meta.env.SPOTIFY_REFRESH_TOKEN;
     const currentTimeEl = document.getElementById('current-time');
     const totalTimeEl = document.getElementById('total-time');
     const nowPlayingEl = document.getElementById('spotify-now-playing');
-    
-    if (!data || !data.item || !trackNameEl || !trackArtistEl || !trackImageEl || 
+
+    if (!data || !data.item || !trackNameEl || !trackArtistEl || !trackImageEl ||
         !spotifyLinkEl || !progressBarEl || !currentTimeEl || !totalTimeEl || !nowPlayingEl) {
       // Handle case when elements or data are missing
       if (trackNameEl) trackNameEl.textContent = 'Not playing';
@@ -370,61 +370,61 @@ const REFRESH_TOKEN = import.meta.env.SPOTIFY_REFRESH_TOKEN;
       if (currentTimeEl) currentTimeEl.textContent = '0:00';
       if (totalTimeEl) totalTimeEl.textContent = '0:00';
       if (nowPlayingEl) nowPlayingEl.classList.remove('is-playing');
-      
+
       // Clear any progress interval
       if (progressInterval) {
         clearInterval(progressInterval);
         progressInterval = null;
       }
-      
+
       return;
     }
-    
+
     // Check if this is a new track
     const newTrackId = data.item.id;
     const isNewTrack = newTrackId !== currentTrackId;
-    
+
     if (isNewTrack) {
       // Show track change animation
       showTrackChangeAnimation();
-      
+
       // Update track info with fade effect
       trackNameEl.style.opacity = '0';
       trackArtistEl.style.opacity = '0';
       trackImageEl.style.opacity = '0';
-      
+
       setTimeout(() => {
         if (!trackNameEl || !trackArtistEl || !trackImageEl || !spotifyLinkEl || !totalTimeEl) return;
-        
+
         // Update track info
         trackNameEl.textContent = data.item.name;
         trackArtistEl.textContent = data.item.artists.map(artist => artist.name).join(', ');
-        
+
         // Update image if available
         if (data.item.album.images && data.item.album.images.length > 0) {
           trackImageEl.src = data.item.album.images[0].url;
         }
-        
+
         // Fade back in
         trackNameEl.style.opacity = '1';
         trackArtistEl.style.opacity = '1';
         trackImageEl.style.opacity = '1';
-        
+
         // Setup marquee for text overflow
         setTimeout(setupMarquee, 100);
       }, 300);
-      
+
       // Update link
       spotifyLinkEl.href = data.item.external_urls.spotify;
       totalTimeEl.textContent = formatTime(data.item.duration_ms);
-      
+
       // Update current track ID
       currentTrackId = newTrackId;
     }
-    
+
     // Add playing class
     nowPlayingEl.classList.add('is-playing');
-    
+
     // Update progress and start real-time progress
     if (data.progress_ms !== undefined && data.item.duration_ms) {
       // Only restart the interval if it's a new track or if we don't have one running
@@ -433,27 +433,27 @@ const REFRESH_TOKEN = import.meta.env.SPOTIFY_REFRESH_TOKEN;
       }
     }
   }
-  
+
   // Main function to fetch and update
   async function updateSpotifyNowPlaying() {
     try {
       const token = await getAccessToken();
       if (!token) return;
-      
+
       const currentlyPlaying = await getCurrentlyPlaying(token);
       updateNowPlayingUI(currentlyPlaying);
     } catch (error) {
       console.error('Error updating Spotify now playing:', error);
     }
   }
-  
+
   // Update on page load and every 5 seconds (as a fallback)
   document.addEventListener('DOMContentLoaded', () => {
-    updateSpotifyNowPlaying();
-    
+    // updateSpotifyNowPlaying();
+
     // Fallback polling every 5 seconds to catch any track changes
     // The real-time progress will handle most updates
-    setInterval(updateSpotifyNowPlaying, 5000);
+    // setInterval(updateSpotifyNowPlaying, 5000);
   });
 </script>
 
