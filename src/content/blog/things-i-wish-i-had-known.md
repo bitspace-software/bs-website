@@ -17,34 +17,74 @@ Cuando comenzamos en el mundo del desarrollo de software estamos muy confundidos
 El tema de **qué hay disponible y qué queremos** es algo que todos subestimamos. El enfoque no existe, y lo nostálgico es que se vuelve más 
 identificable cuanto más lejos estamos del punto de partida.
 
-Estamos tan inmersos en aprender cosas al azar, o siguiendo un plan de estudio estudiantil sin un verdadero fundamento, que olvidamos 
-reflexionar sobre aquello que realmente nos ayudaría a ahorrar tiempo en nuestra carrera; me refiero a avanzar de verdad. Esto es algo 
-que muchos no nos planteamos al inicio. Se debe a que **existe una galaxia de herramientas y tecnologías** que están ahí, disponibles 
-para ser utilizadas.
+Estamos tan inmersos en aprender cosas al azar, o en seguir un plan de estudios sin fundamento, que olvidamos reflexionar sobre aquello que 
+realmente nos ayudaría a ahorrar tiempo en nuestra carrera; me refiero a **avanzar de verdad**.
 
-Esto provoca que, muchas veces, no aprendamos ninguna herramienta o tecnología de forma correcta, incluso después de varios años. 
-Nos convencemos de que con conocer lo rudimentario ya hemos dominado el conocimiento, cuando en realidad esas mismas herramientas 
-suelen tener complementos que nos permiten construir el software en el que estamos trabajando. 
+Esto es algo que muchos no nos planteamos al inicio, y es normal sentirse desorientado. Además, se debe a que en nuestro currículum 
+profesional **existe una galaxia de herramientas y tecnologías** que están ahí, disponibles para ser utilizadas.
 
-Esos complementos nos hacen la vida más fácil y tambien resuelven problemas, pero no sacian nuestro conocimiento técnico necesario, 
-es decir, no llenan las lagunas de conocimiento para dimensionar tanto el problema como la solución desde un punto heurístico, confiable y certero.
+El porqué y el para qué no siempre lo sabemos, pero ahí están, y nosotros queremos ser unos magos del desarrollo de software, tragándonos 
+todo sin detenernos a pensar si realmente es necesario o no.
 
-La verdad detrás de todo esto es que pasamos años de nuestra vida sabiendo un poco de todo, pero sin llegar a ser expertos en nada. 
-Y es duro, porque la industria informática da la impresión de ser precisamente eso: un montón de cosas que hay que saber “para ayer”.
+Esto provoca que, muchas veces, nos atasquemos y no aprendamos ninguna herramienta o tecnología de forma correcta, incluso después de 
+varios años. Yo me di cuenta de esto bastante tarde, y fue frustrante.
 
-### Confianza
-Hablemos de la confianza al momento de escribir código o resolver un problema.
+Nos convencemos de que, con conocer lo rudimentario, ya hemos dominado el conocimiento necesario, cuando en realidad solo obedecemos órdenes de un framework o un entorno de desarrollo.
 
-Actualmente, con la inteligencia artificial, muchos dirían: ¿para qué quiero saber código?, ¿para qué quiero aprender lógica?, 
-¿para qué quiero saber cómo funciona el intérprete o el compilador? ¿para qué quiero saber qué es una variable, una referecia?, etc.
+Es más, nunca nos cuestionamos más allá de eso. Obedecemos las sugerencias del IDE, la estructura sugerida del programa, los complementos de integración, los nombres de las variables, etc.
 
-La verdad es dura, y se nota cuando alguien escribe código sin la ayuda de una IA: se distingue entre quien conoce los fundamentos 
+Nos descargamos de responsabilidad con la ilusión de que no es necesario saberlo, ya que, para eso existen herramientas.
+
+### Cómo ganar confianza en lo que hacemos
+Hablemos de la confianza al momento de escribir código o elegir una herramienta para resolver un problema.
+
+Actualmente, con la inteligencia artificial, muchos dirían —sobre todo respecto al código—:  
+*¿para qué quiero saber programar?*  
+*¿para qué quiero aprender lógica?*  
+*¿para qué quiero entender cómo funciona el intérprete o el compilador?*  
+*¿para qué quiero saber qué es una variable o una referencia?*
+
+* Si contamos con herramientas que hacen todo por nosotros.
+
+La verdad es dura, y se nota cuando alguien escribe código sin la ayuda de una IA o una herramienta que lo haga por ellos: se distingue entre quien conoce los fundamentos 
 y quien los desconoce. Pero bueno, no es lo que se intenta descifrar en este post, aunque es algo que empeora cada vez más.
 
-Me refiero, específicamente, a los fundamentos: la parte intangible de la aplicación de tecnologías, la filosofía detrás de cada una, 
-la esencia del porqué de su existencia y uso. ¿Acaso una es mejor que otra? Si uso una tecnología u otra, 
-¿el computador trabaja de forma diferente? ¿Debería aprender las nuevas o quedarme con las antiguas? 
-La herramienta existe, sí, pero ¿debería existir? ¿Qué define qué herramienta usar en un momento u en otro?
+Es por eso que te voy a dar la clave para aprender y avanzar realmente en la industria. 
+
+Comienza por aprender específicamente la parte intangible de la **aplicación** de tecnologías, la filosofía detrás de cada una, 
+la esencia del porqué de su existencia y uso. 
+
+Sabemos que los lenguajes de programación no son más que otras herramientas que sirven como base de todo el desarrollo de software. 
+Este es un tema intrinseco al desarrollo de aplicaciones muy amplio, es indiscutiblemente fundamental. De esto tendrás muchos artículos próximos.
+
+Solo voy a decir que es totalmente necesario conocer los **cimientos**. Me refiero a entender exactamente cómo se comporta el lenguaje en la computadora: 
+cómo se ejecuta, cómo se convierte a código de máquina, qué es el sistema de tipos, qué es una instancia, qué es en realidad una variable (algo muy interesante), 
+cuál es la unidad base de trabajo del compilador (en lenguajes compilados), etc.
+
+A esto y mucho más me refiero con **conocer el lenguaje**, al menos uno de cada modo de ejecución: interpretado o compilado.
+
+No, pero *tengo que conocerlos todos* —dirían muchos. La verdad cruda es que no es necesario. Aprende bien, pero bien, al menos dos, y luego te darás 
+cuenta de que es suficiente. Para construir una aplicación utilizable no basta con una sola tecnología, y lo sabrás de la forma más cruda: el usuario 
+no va a utilizar una pantalla negra sin una interfaz amigable, intuitiva y funcional.
+
+Así que no te frustres intentando aprender todos los lenguajes. Créeme en lo que te digo: aprende dos lenguajes de backend y domina bien alguna 
+tecnología para hacer frontend. Y, como sabes, si eres aprendiz, ni siquiera esto será suficiente, ya que también tendrás que aprender a manejar 
+la capa de datos.
+
+En conclusión, no te frustres tratando de aprenderlo todo, porque al final solo te estarás engañando.
+
+Concéntrate en la parte **pragmática** de la tecnología: aprende a identificar el problema a resolver, busca una solución clara, elige las herramientas más adecuadas y aprende a razonar con un enfoque que vaya más allá del simple uso de las herramientas.
+
+Al final, no quieres ser solamente un codificador; necesitas aprender a dimensionar el problema e intentar llevarlo al mundo real.
+
+- ¿El problema es realmente un problema?
+- ¿El problema tiene una solución tecnológica?
+- ¿Tengo clara la solución?
+- ¿Existe una herramienta o software que ya lo resuelva, completa o parcialmente?
+- ¿Vale la pena hacerlo desde cero?
+- ¿Estos problemas son comunes o existe software/sectores especializados en resolverlos?
+- ¿Debería dedicar tiempo a esto, o solo me está retrasando?
+- Etc.
 
 Todas estas preguntas, que a primera vista parecen no tener sentido, son justamente las que los creadores de la tecnología 
 se hacen al momento de resolver un problema. Tomemos un ejemplo: Git.
@@ -61,10 +101,19 @@ Si lo observamos desde una perspectiva filosófica, Git no se limita únicamente
 - Permite sincronizar los cambios realizados por otros miembros con acceso a los repositorios. 
 - Facilita compartir datos con quienes deseemos. 
 - Ayuda a organizar nuestros cambios en pequeños incrementos. 
+- Asegurar trazabilidad.
 - Y muchas más.
 
-Git fue diseñado para resolver un problema específico, real y tangible, pero su enfoque trasciende el mundo del software.
+Git fue diseñado para resolver problemas específicos, problemas que solo se identifican al construir productos.
 
-Así que cuando vemos una herramienta deberíamos preguntarnos ..
+El objetivo de este artículo es que aprendamos a escribir código con fundamento, porque pasamos mucho tiempo frente a una computadora, pero, como mencioné anteriormente, miles de líneas de código nunca resolvieron nada. Y si lo hicieron, fue posiblemente sin la intención correcta.
 
-Hablemos de los lenguajes de programación...
+Aquí es donde todos nos perdemos: los programadores pasamos horas *supuestamente* aprendiendo una tecnología, pero seamos francos… **¿cuánto sabemos realmente?**
+
+- ¿Podríamos identificar un patrón de diseño a partir de la descripción de la solución a un problema?
+- ¿Y la arquitectura necesaria para escalar un software que soporte millones de usuarios al mismo tiempo?
+- Respuestas demasiado penosas.
+
+El enfoque que te planteo es **observar desde arriba**, no desde en medio de la confusión. Tú dirás qué estás aprendiendo:
+
+**¿Será que necesitas todo ese *stack*?**
