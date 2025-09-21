@@ -78,7 +78,7 @@ Al final, no quieres ser solamente un codificador; necesitas aprender a dimensio
 - ¿Debería dedicar tiempo a esto, o solo me está retrasando?
 - Etc.
 
-Todas estas preguntas, que a primera vista parecen no tener sentido, son justamente las que los creadores de la tecnología se hacen al momento de resolver un problema.
+Todas estas preguntas, que a primera vista parecen no tener sentido, son justamente las que los creadores de la tecnología se hacen al momento de resolver un problema (construir software).
 
 ---
 
