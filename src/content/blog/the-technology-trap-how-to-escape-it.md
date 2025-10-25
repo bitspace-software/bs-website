@@ -1,5 +1,5 @@
 ---
-title: "Cosas que me habría gustado saber"
+title: "La trampa de la tecnología: cómo salir de ella"
 description: "Algunas cosas que solemos olvidar tener en cuenta cuando empezamos en la industria del software."
 pubDate: 2025-09-19
 readingTime: "8 min de lectura"

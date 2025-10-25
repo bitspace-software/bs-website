@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import SpotifyNowPlaying from '../components/SpotifyNowPlaying.astro';
 
 // Get all blog posts
 const allPosts = await getCollection('blog');
@@ -21,23 +22,24 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
   <section class="py-10 sm:py-16 md:py-20 px-4 sm:px-6 theme-transition-all">
     <div class="max-w-2xl mx-auto relative">
       <!-- Adjusted blob positions and sizes for better mobile appearance -->
-      <div class="absolute -top-10 sm:-top-20 -left-10 sm:-left-20 w-40 sm:w-64 h-40 sm:h-64 bg-zinc-100 dark:bg-zinc-800/50 rounded-full blur-3xl opacity-50 animate-blob theme-transition-bg"></div>
-      <div class="absolute -bottom-10 sm:-bottom-20 -right-10 sm:-right-20 w-40 sm:w-64 h-40 sm:h-64 bg-zinc-200 dark:bg-zinc-800/30 rounded-full blur-3xl opacity-30 animate-blob animation-delay-2000 theme-transition-bg"></div>
+      <div class="absolute -top-10 sm:-top-20 -left-10 sm:-left-20 w-40 sm:w-64 h-40 sm:h-64 bg-primary-100 dark:bg-primary-500/20 rounded-full blur-3xl opacity-50 animate-blob theme-transition-bg"></div>
+      <div class="absolute -bottom-10 sm:-bottom-20 -right-10 sm:-right-20 w-40 sm:w-64 h-40 sm:h-64 bg-accent-100 dark:bg-accent-500/20 rounded-full blur-3xl opacity-30 animate-blob animation-delay-2000 theme-transition-bg"></div>
       
       <div class="relative text-center sm:text-left">
-        <h2 class="text-4xl sm:text-4xl md:text-5xl lg:text-5xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 theme-transition-color hero-text">
+        <h2 class="text-4xl sm:text-4xl md:text-5xl lg:text-5xl font-bold tracking-tight text-zinc-900 dark:text-brand-text theme-transition-color hero-text">
           <span class="block">Datos y</span>
           <span class="block mt-1">software</span>
           <span class="block mt-1 relative">
             <span class="relative inline-block">
                que generan valor.
-              <span class="absolute -bottom-1 left-0 w-full h-1 bg-zinc-800 dark:bg-zinc-200 transform origin-left theme-transition-bg"></span>
+              <span class="absolute -bottom-1 left-0 w-full h-1 bg-primary-500 dark:bg-accent-500 transform origin-left theme-transition-bg"></span>
             </span>
           </span>
         </h2>
-        <p class="mt-4 sm:mt-6 md:mt-8 text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed theme-transition-color max-w-lg mx-auto sm:mx-0">
+        <p class="mt-4 sm:mt-6 md:mt-8 text-base sm:text-lg text-zinc-600 dark:text-brand-text/80 leading-relaxed theme-transition-color max-w-lg mx-auto sm:mx-0">
           En este espacio se comparten métodos y aprendizajes para convertir datos en productos y experiencias digitales, y construir software fiable, seguro y escalable.
         </p>
+        
         <!-- div class="mt-6 sm:mt-8 md:mt-10 flex flex-wrap gap-3 sm:gap-4 md:gap-6 justify-center sm:justify-start">
           <a 
             href="/about" 
@@ -47,7 +49,7 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1">
               <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
             </svg>
-            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-zinc-800 dark:bg-zinc-200 transition-all duration-300 group-hover:w-full theme-transition-bg"></span>
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 dark:bg-accent-500 transition-all duration-300 group-hover:w-full theme-transition-bg"></span>
           </a>
         </div -->
       </div>
@@ -55,13 +57,18 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
   </section>
 
   <!-- Featured Post Section - Improved for mobile -->
-  <section class="py-10 sm:py-12 md:py-16 px-4 sm:px-6 border-t border-zinc-100 dark:border-zinc-800 theme-transition-all">
+  <section class="py-10 sm:py-12 md:py-16 px-4 sm:px-6 border-t border-zinc-100 dark:border-zinc-700 theme-transition-all">
     <div class="max-w-3xl mx-auto">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8 md:mb-12">
-        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 theme-transition-color text-center sm:text-left">Posts Recientes</h2>
+        <div class="flex-1">
+          <h2 class="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-zinc-900 dark:text-brand-text theme-transition-color text-center sm:text-left">Posts Recientes</h2>
+          <p class="mt-2 text-sm text-zinc-600 dark:text-brand-text/70 text-center sm:text-left">
+            Compartiendo pensamientos sobre datos y desarrollo de software.
+          </p>
+        </div>
         <a 
           href="/blog" 
-          class="group relative text-sm font-medium text-zinc-900 dark:text-zinc-100 hover:text-zinc-700 dark:hover:text-zinc-300 self-center sm:self-auto theme-transition-color min-h-[44px] flex items-center justify-center"
+          class="group relative text-sm font-medium text-zinc-900 dark:text-brand-text hover:text-primary-600 dark:hover:text-accent-400 self-center sm:self-auto theme-transition-color min-h-[44px] flex items-center justify-center"
         >
           <span class="flex items-center gap-1">
             Todos los posts
@@ -69,8 +76,13 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
               <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
             </svg>
           </span>
-          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-zinc-800 dark:bg-zinc-200 transition-all duration-300 group-hover:w-full theme-transition-bg"></span>
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 dark:bg-accent-500 transition-all duration-300 group-hover:w-full theme-transition-bg"></span>
         </a>
+      </div>
+      
+      <!-- Spotify Widget -->
+      <div class="mb-8 max-w-sm mx-auto sm:mx-0">
+        <SpotifyNowPlaying />
       </div>
       
       <!-- Improved grid for better mobile layout -->
@@ -379,55 +391,22 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
     }
   });
   
-  // SPA transition handling for homepage
-  function setupSPATransitions() {
-    // Handle all internal links for SPA transitions
-    document.querySelectorAll('a[href^="/"]').forEach(link => {
-      // Skip links that are anchor links, external links, or already processed
-      if (link.getAttribute('href').includes('#') || 
-          link.getAttribute('target') === '_blank' || 
-          link.hasAttribute('data-spa-handled')) {
-        return;
-      }
-      
-      // Mark as handled to avoid duplicate listeners
-      link.setAttribute('data-spa-handled', 'true');
-      
-      link.addEventListener('click', (e) => {
-        // Don't handle if modifier keys are pressed (for opening in new tab, etc.)
-        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) {
-          return;
-        }
-        
-        e.preventDefault();
-        const targetHref = link.getAttribute('href');
-        
-        // Trigger page transition animation
-        const pageTransition = document.getElementById('page-transition');
-        if (pageTransition) {
-          pageTransition.classList.remove('opacity-0');
-          pageTransition.classList.add('opacity-100');
-          
-          // Navigate after transition effect
-          setTimeout(() => {
-            window.location.href = targetHref;
-          }, 300);
-        } else {
-          // Fallback if transition element doesn't exist
-          window.location.href = targetHref;
-        }
-      });
-    });
+  // Homepage specific initialization - let Layout handle SPA transitions
+  function initializeHomepage() {
+    // Only handle homepage-specific functionality
+    const mainContent = document.querySelector('main');
+    if (mainContent) {
+      mainContent.style.opacity = '1';
+      mainContent.style.transform = 'translateY(0)';
+      mainContent.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+    }
   }
   
   // Initialize on first load
-  document.addEventListener('DOMContentLoaded', setupSPATransitions);
+  document.addEventListener('DOMContentLoaded', initializeHomepage);
   
-  // Re-initialize when content changes via Astro's view transitions
-  document.addEventListener('astro:page-load', setupSPATransitions);
-  
-  // For compatibility with custom transition system
-  document.addEventListener('page-transition-complete', setupSPATransitions);
+  // Re-initialize when content changes
+  document.addEventListener('astro:page-load', initializeHomepage);
 </script>
 
 <style>

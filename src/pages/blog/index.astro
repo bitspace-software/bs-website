@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import Layout from '../../layouts/Layout.astro';
 
 const allPosts = await getCollection('blog') || [];
 const sortedPosts = allPosts.sort(
@@ -24,20 +24,20 @@ const totalPosts = sortedPosts.length;
 const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))];
 ---
 
-<BaseLayout title="Blog">
+<Layout title="Blog">
   <div class="w-full max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
     <!-- Enhanced header with search - improved responsive spacing -->
     <div class="relative mb-12 sm:mb-20">
       <!-- Decorative elements - adjusted for better mobile appearance -->
-      <div class="absolute -top-10 sm:-top-20 -left-10 sm:-left-20 w-48 sm:w-72 h-48 sm:h-72 bg-zinc-100 dark:bg-zinc-800/30 rounded-full blur-3xl opacity-30 animate-blob"></div>
-      <div class="absolute -bottom-10 sm:-bottom-20 -right-10 sm:-right-20 w-48 sm:w-72 h-48 sm:h-72 bg-zinc-200 dark:bg-zinc-800/30 rounded-full blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+      <div class="absolute -top-10 sm:-top-20 -left-10 sm:-left-20 w-48 sm:w-72 h-48 sm:h-72 bg-primary-100 dark:bg-primary-500/20 rounded-full blur-3xl opacity-30 animate-blob"></div>
+      <div class="absolute -bottom-10 sm:-bottom-20 -right-10 sm:-right-20 w-48 sm:w-72 h-48 sm:h-72 bg-accent-100 dark:bg-accent-500/20 rounded-full blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
       
       <div class="relative text-center">
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 mb-4">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-brand-text mb-4">
           Diario
         </h1>
         
-        <p class="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 mb-6 sm:mb-10 max-w-2xl mx-auto">
+        <p class="text-sm sm:text-base text-zinc-600 dark:text-brand-text/80 mb-6 sm:mb-10 max-w-2xl mx-auto">
           Pensamientos, ideas y exploraciones sobre datos y tecnología.
         </p>
       </div>
@@ -204,7 +204,7 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))];
       </div>
     </div>
   </div>
-</BaseLayout>
+</Layout>
 
 <style>
   /* Blob animation */
@@ -286,7 +286,7 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))];
 </style>
 
 <script>
-  // Script không thay đổi - giữ nguyên chức năng
+  // Script functionality remains unchanged - keeping original functionality
   document.addEventListener('DOMContentLoaded', () => {
     const backToTopButton = document.getElementById('back-to-top');
     
@@ -354,56 +354,23 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))];
     }
   });
   
-  // SPA transition handling
-  function setupSPATransitions() {
-    // Handle all blog post links for SPA transitions
-    document.querySelectorAll('a[href^="/blog/"]').forEach(link => {
-      // Skip links that are anchor links or already processed
-      if (link.getAttribute('href').includes('#') || link.hasAttribute('data-spa-handled')) {
-        return;
-      }
-      
-      // Mark as handled to avoid duplicate listeners
-      link.setAttribute('data-spa-handled', 'true');
-      
-      link.addEventListener('click', (e) => {
-        // Don't handle if modifier keys are pressed (for opening in new tab, etc.)
-        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) {
-          return;
-        }
-        
-        e.preventDefault();
-        const targetHref = link.getAttribute('href');
-        
-        // Trigger page transition animation
-        const pageTransition = document.getElementById('page-transition');
-        if (pageTransition) {
-          pageTransition.classList.remove('opacity-0');
-          pageTransition.classList.add('opacity-100');
-          
-          // Navigate after transition effect
-          setTimeout(() => {
-            window.location.href = targetHref;
-          }, 300);
-        } else {
-          // Fallback if transition element doesn't exist
-          window.location.href = targetHref;
-        }
-      });
-    });
-    
-    // Handle year anchor links specially
-    document.querySelectorAll('a[href^="#year-"]').forEach(anchor => {
-      anchor.setAttribute('data-spa-internal', 'true');
-    });
+  // Blog index specific initialization - let Layout handle SPA transitions
+  function initializeBlogIndex() {
+    // Ensure content visibility
+    const mainContent = document.querySelector('main');
+    if (mainContent) {
+      mainContent.style.opacity = '1';
+      mainContent.style.transform = 'translateY(0)';
+      mainContent.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+    }
   }
   
   // Initialize on first load
-  document.addEventListener('DOMContentLoaded', setupSPATransitions);
+  document.addEventListener('DOMContentLoaded', initializeBlogIndex);
   
   // Re-initialize when content changes via Astro's view transitions
-  document.addEventListener('astro:page-load', setupSPATransitions);
+  document.addEventListener('astro:page-load', initializeBlogIndex);
   
   // For compatibility with custom transition system
-  document.addEventListener('page-transition-complete', setupSPATransitions);
+  document.addEventListener('page-transition-complete', initializeBlogIndex);
 </script>

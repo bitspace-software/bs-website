@@ -14,7 +14,7 @@ const pathname = new URL(Astro.request.url).pathname;
 const currentPath = pathname.slice(1); // remove the first "/"
 ---
 
-<header class="py-4 fixed top-0 left-0 right-0 z-40 bg-white dark:bg-zinc-900 border-b border-zinc-100 dark:border-zinc-800">
+<header class="py-4 fixed top-0 left-0 right-0 z-40 bg-white/85 dark:bg-zinc-900/85 backdrop-blur-md border-b border-zinc-100/50 dark:border-zinc-800/50">
   <div class="max-w-3xl mx-auto px-4 flex items-center justify-between">
     <!-- Logo -->
     <a href="/" class="font-bold text-xl text-zinc-900 dark:text-white">BSpace</a>
@@ -47,8 +47,8 @@ const currentPath = pathname.slice(1); // remove the first "/"
 </header>
 
 <!-- Mobile Menu Overlay -->
-<div id="mobile-menu" class="fixed inset-0 z-50 bg-white dark:bg-zinc-900 flex flex-col opacity-0 pointer-events-none transition-all duration-300 ease-in-out">
-  <div class="flex justify-between items-center p-4 border-b border-zinc-100 dark:border-zinc-800">
+<div id="mobile-menu" class="fixed inset-0 z-50 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-lg flex flex-col opacity-0 pointer-events-none transition-all duration-300 ease-in-out">
+  <div class="flex justify-between items-center p-4 border-b border-zinc-100/50 dark:border-zinc-800/50">
     <a href="/" class="font-bold text-xl text-zinc-900 dark:text-white">BSpace</a>
     <button id="close-menu-button" class="text-zinc-900 dark:text-white p-2 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Close menu">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

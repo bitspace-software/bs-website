@@ -25,9 +25,9 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   </head>
-  <body class="bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 min-h-screen flex flex-col">
+  <body class="bg-white dark:bg-brand-background text-zinc-900 dark:text-brand-text min-h-screen flex flex-col">
     <!-- Page transition overlay - for smooth transitions between pages -->
-    <div id="page-transition" class="fixed inset-0 z-40 bg-white dark:bg-zinc-900 opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center">
+    <div id="page-transition" class="fixed inset-0 z-40 bg-white dark:bg-brand-background opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center">
       <div class="transition-spinner"></div>
     </div>
     
@@ -43,22 +43,23 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
     <Footer />
     
     <script>
-      // Enhanced SPA transition system with history API
+      // Enhanced SPA transition system with proper content visibility
       document.addEventListener('DOMContentLoaded', () => {
         const pageTransition = document.getElementById('page-transition');
         const mainContent = document.querySelector('main');
         
-        // Initialize content with entrance animation
+        // Ensure content is always visible on initial load
         if (mainContent) {
-          mainContent.classList.add('content-entering');
-          setTimeout(() => {
-            mainContent.classList.remove('content-entering');
-          }, 800);
+          mainContent.style.opacity = '1';
+          mainContent.style.transform = 'translateY(0)';
+          mainContent.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
         }
         
-        // Function to load content via fetch
+        // Enhanced SPA transition with robust content visibility
         async function loadContent(url) {
           try {
+            console.log('Loading content for:', url);
+            
             // Show transition overlay
             if (pageTransition) {
               pageTransition.classList.remove('opacity-0', 'pointer-events-none');
@@ -100,7 +101,7 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
             }
             
             // Wait a bit for transition effect
-            await new Promise(resolve => setTimeout(resolve, 300));
+            await new Promise(resolve => setTimeout(resolve, 150));
             
             // Replace the content
             if (mainContent && newContent) {
@@ -119,22 +120,45 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
               });
             }
             
-            // Fade in new content with animation
+            // CRITICAL: Force content visibility with multiple methods
             if (mainContent) {
+              // Method 1: Reset all styles
+              mainContent.style.cssText = '';
+              
+              // Method 2: Force visibility properties
               mainContent.style.opacity = '0';
               mainContent.style.transform = 'translateY(10px)';
+              mainContent.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+              mainContent.style.display = 'block';
+              mainContent.style.visibility = 'visible';
+              mainContent.style.position = 'relative';
+              mainContent.style.zIndex = '1';
               
-              setTimeout(() => {
-                mainContent.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                mainContent.style.opacity = '1';
-                mainContent.style.transform = 'translateY(0)';
-                
-                // Add entrance animation class
-                mainContent.classList.add('content-entering');
-                setTimeout(() => {
-                  mainContent.classList.remove('content-entering');
-                }, 800);
-              }, 50);
+              // Method 3: Remove problematic classes
+              mainContent.classList.remove('content-entering', 'content-hidden', 'opacity-0');
+              
+              // Method 4: Force reflow
+              mainContent.offsetHeight;
+              
+              // Method 5: Use multiple animation frames for reliability
+              requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                  mainContent.style.opacity = '1';
+                  mainContent.style.transform = 'translateY(0)';
+                  console.log('Content faded in successfully');
+                  
+                  // Method 6: Additional verification after animation
+                  setTimeout(() => {
+                    if (mainContent.style.opacity !== '1') {
+                      console.warn('Content visibility issue detected, forcing visibility');
+                      mainContent.style.opacity = '1';
+                      mainContent.style.transform = 'translateY(0)';
+                      mainContent.style.display = 'block';
+                      mainContent.style.visibility = 'visible';
+                    }
+                  }, 100);
+                });
+              });
             }
             
             // Hide transition overlay
@@ -142,7 +166,7 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
               setTimeout(() => {
                 pageTransition.classList.add('opacity-0', 'pointer-events-none');
                 pageTransition.classList.remove('opacity-100');
-              }, 200);
+              }, 400);
             }
             
             // Dispatch custom event for content loaded
@@ -150,7 +174,7 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
               detail: { url }
             }));
             
-            // Scroll to top or to saved position
+            // Scroll to top
             window.scrollTo(0, 0);
             
             // Re-attach event listeners to new content
@@ -158,6 +182,24 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
             
           } catch (error) {
             console.error('Error loading content:', error);
+            
+            // CRITICAL: Ensure content is visible even on error
+            if (mainContent) {
+              mainContent.style.cssText = '';
+              mainContent.style.opacity = '1';
+              mainContent.style.transform = 'translateY(0)';
+              mainContent.style.display = 'block';
+              mainContent.style.visibility = 'visible';
+              mainContent.style.position = 'relative';
+              mainContent.style.zIndex = '1';
+              mainContent.classList.remove('content-entering', 'content-hidden', 'opacity-0');
+            }
+            
+            // Hide transition overlay
+            if (pageTransition) {
+              pageTransition.classList.add('opacity-0', 'pointer-events-none');
+              pageTransition.classList.remove('opacity-100');
+            }
             
             // Fallback to traditional navigation on error
             window.location.href = url;
@@ -258,6 +300,87 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
       
       // Initialize theme handling
       document.addEventListener('DOMContentLoaded', setupThemeHandling);
+      
+      // Ensure content visibility on every page load
+      function ensureContentVisibility() {
+        const mainContent = document.querySelector('main');
+        if (mainContent) {
+          mainContent.style.opacity = '1';
+          mainContent.style.transform = 'translateY(0)';
+          mainContent.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        }
+      }
+      
+      // Enhanced content visibility with error recovery
+      function robustContentVisibility() {
+        const mainContent = document.querySelector('main');
+        if (mainContent) {
+          console.log('Ensuring content visibility...');
+          
+          // Method 1: Reset all inline styles
+          mainContent.style.cssText = '';
+          
+          // Method 2: Force visibility with multiple methods
+          mainContent.style.opacity = '1';
+          mainContent.style.transform = 'translateY(0)';
+          mainContent.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+          mainContent.style.display = 'block';
+          mainContent.style.visibility = 'visible';
+          mainContent.style.position = 'relative';
+          mainContent.style.zIndex = '1';
+          mainContent.style.width = '100%';
+          mainContent.style.height = 'auto';
+          mainContent.style.minHeight = 'auto';
+          
+          // Method 3: Remove any problematic classes
+          mainContent.classList.remove('content-entering', 'content-hidden', 'opacity-0', 'hidden');
+          
+          // Method 4: Force a reflow to ensure styles are applied
+          mainContent.offsetHeight;
+          
+          // Method 5: Additional verification
+          setTimeout(() => {
+            if (mainContent.style.opacity !== '1' || mainContent.style.display !== 'block') {
+              console.warn('Content visibility issue detected, forcing visibility');
+              mainContent.style.opacity = '1';
+              mainContent.style.transform = 'translateY(0)';
+              mainContent.style.display = 'block';
+              mainContent.style.visibility = 'visible';
+            }
+          }, 50);
+          
+          console.log('Content visibility ensured');
+        } else {
+          console.warn('Main content element not found');
+        }
+      }
+      
+      // Run on every page load with multiple event listeners
+      document.addEventListener('DOMContentLoaded', robustContentVisibility);
+      document.addEventListener('astro:page-load', robustContentVisibility);
+      document.addEventListener('spa-content-loaded', robustContentVisibility);
+      
+      // Additional fallback: ensure visibility every 500ms for the first 10 seconds
+      let visibilityCheckCount = 0;
+      const visibilityInterval = setInterval(() => {
+        robustContentVisibility();
+        visibilityCheckCount++;
+        if (visibilityCheckCount >= 20) {
+          clearInterval(visibilityInterval);
+        }
+      }, 500);
+      
+      // Emergency fallback: check visibility on window focus
+      window.addEventListener('focus', robustContentVisibility);
+      
+      // Additional fallback: check visibility on scroll
+      window.addEventListener('scroll', () => {
+        const mainContent = document.querySelector('main');
+        if (mainContent && mainContent.style.opacity !== '1') {
+          console.warn('Content visibility issue detected on scroll, fixing');
+          robustContentVisibility();
+        }
+      });
     </script>
   </body>
 </html>
@@ -275,13 +398,13 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
     height: 30px;
     border: 2px solid rgba(0, 0, 0, 0.1);
     border-radius: 50%;
-    border-top-color: #3b82f6;
+    border-top-color: #3B82F6;
     animation: spin 0.7s linear infinite;
   }
   
   :global(.dark) .transition-spinner {
-    border-color: rgba(255, 255, 255, 0.1);
-    border-top-color: #60a5fa;
+    border-color: rgba(226, 232, 240, 0.1);
+    border-top-color: #10B981;
   }
   
   @keyframes spin {

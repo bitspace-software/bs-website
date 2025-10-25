@@ -24,7 +24,7 @@ export default defineConfig({
     react(),
   ],
   vite: {
-    // Đảm bảo biến môi trường được chuyển đến client
+    // Ensure environment variables are passed to client
     define: {
       'import.meta.env.SPOTIFY_CLIENT_ID': JSON.stringify(process.env.SPOTIFY_CLIENT_ID),
       'import.meta.env.SPOTIFY_CLIENT_SECRET': JSON.stringify(process.env.SPOTIFY_CLIENT_SECRET),

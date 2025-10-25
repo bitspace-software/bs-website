@@ -1,17 +1,17 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
-import BaseLayout from './BaseLayout.astro';
+import Layout from './Layout.astro';
 
 const { title, description } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description}>
+<Layout title={title} description={description}>
   <ViewTransitions fallback="swap" />
   
   <div transition:animate="slide">
     <slot />
   </div>
-</BaseLayout>
+</Layout>
 
 <style>
   /* Custom transition styles */
