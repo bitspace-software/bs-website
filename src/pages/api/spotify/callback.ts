@@ -87,11 +87,12 @@ export const GET: APIRoute = async ({ request, url }) => {
     });
   } catch (error) {
     console.error('Spotify callback error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return new Response(`
       <html>
         <body>
           <h1>Authorization Failed</h1>
-          <p>Error: ${error.message}</p>
+          <p>Error: ${errorMessage}</p>
           <a href="/">Back to blog</a>
         </body>
       </html>

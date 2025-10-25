@@ -2,8 +2,6 @@
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import Background from '../components/Background.astro';
-import OfflineIndicator from '../components/OfflineIndicator.astro';
-import NotificationPermission from '../components/NotificationPermission.astro';
 import SkipLink from '../components/SkipLink.astro';
 import '../styles/global.css';
 
@@ -137,25 +135,31 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
       }
     </style>
     
-    <!-- PWA -->
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="Bitspace" />
-    <link rel="apple-touch-icon" href="/placeholder-logo.png" />
     
-    <!-- Service Worker Registration -->
+    
+    <!-- Service Worker Unregistration -->
     <script>
       if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js')
-            .then(registration => {
-              console.log('SW registered: ', registration);
-            })
-            .catch(registrationError => {
-              console.log('SW registration failed: ', registrationError);
-            });
+        // Unregister any existing service workers
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          for(let registration of registrations) {
+            registration.unregister();
+            console.log('Service worker unregistered');
+          }
         });
+        
+        // Clear all caches
+        if ('caches' in window) {
+          caches.keys().then(function(cacheNames) {
+            return Promise.all(
+              cacheNames.map(function(cacheName) {
+                return caches.delete(cacheName);
+              })
+            );
+          }).then(function() {
+            console.log('All caches cleared');
+          });
+        }
       }
     </script>
     
@@ -209,11 +213,7 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
     </div>
     <Footer />
     
-    <!-- Offline Indicator -->
-    <OfflineIndicator />
     
-    <!-- Notification Permission -->
-    <NotificationPermission />
     
     <script>
       // Early theme application - before DOM is ready
