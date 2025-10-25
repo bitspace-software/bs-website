@@ -43,122 +43,72 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
     <Footer />
     
     <script>
-      // Enhanced SPA transition system with proper content visibility
+      // Robust SPA transition system
       document.addEventListener('DOMContentLoaded', () => {
+        console.log('SPA system initializing...');
+        
         const pageTransition = document.getElementById('page-transition');
         const mainContent = document.querySelector('main');
         
-        // Ensure content is always visible on initial load
+        // Ensure content is visible on initial load
         if (mainContent) {
           mainContent.style.opacity = '1';
           mainContent.style.transform = 'translateY(0)';
-          mainContent.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+          console.log('Content visibility ensured');
         }
         
-        // Enhanced SPA transition with robust content visibility
+        // SPA transition function
         async function loadContent(url) {
           try {
-            console.log('Loading content for:', url);
+            console.log('🔄 Loading content for:', url);
             
             // Show transition overlay
             if (pageTransition) {
               pageTransition.classList.remove('opacity-0', 'pointer-events-none');
               pageTransition.classList.add('opacity-100');
-            }
-            
-            // Fade out current content
-            if (mainContent) {
-              mainContent.style.opacity = '0';
-              mainContent.style.transform = 'translateY(10px)';
+              console.log('Transition overlay shown');
             }
             
             // Fetch the new page content
             const response = await fetch(url);
             if (!response.ok) throw new Error(`Failed to fetch ${url}`);
             const html = await response.text();
+            console.log('✅ Content fetched successfully');
             
-            // Create a temporary element to parse the HTML
+            // Parse HTML
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
             
-            // Extract the main content
+            // Extract content
             const newContent = doc.querySelector('main');
-            if (!newContent) throw new Error('Could not find main content in the fetched page');
-            
-            // Extract the title
             const newTitle = doc.querySelector('title');
+            
+            if (!newContent) throw new Error('Could not find main content');
+            
+            // Update title
             if (newTitle) {
               document.title = newTitle.textContent;
+              console.log('📄 Title updated:', newTitle.textContent);
             }
             
-            // Extract meta description
-            const newDescription = doc.querySelector('meta[name="description"]');
-            if (newDescription) {
-              const currentDescription = document.querySelector('meta[name="description"]');
-              if (currentDescription) {
-                currentDescription.setAttribute('content', newDescription.getAttribute('content') || '');
-              }
-            }
+            // Wait for transition
+            await new Promise(resolve => setTimeout(resolve, 300));
             
-            // Wait a bit for transition effect
-            await new Promise(resolve => setTimeout(resolve, 150));
-            
-            // Replace the content
-            if (mainContent && newContent) {
+            // Replace content
+            if (mainContent) {
               mainContent.innerHTML = newContent.innerHTML;
+              console.log('🔄 Content replaced');
               
-              // Run scripts in the new content
+              // Execute scripts
               Array.from(newContent.querySelectorAll('script')).forEach(oldScript => {
                 const newScript = document.createElement('script');
                 Array.from(oldScript.attributes).forEach(attr => {
                   newScript.setAttribute(attr.name, attr.value);
                 });
                 newScript.textContent = oldScript.textContent;
-                if (oldScript.parentNode) {
-                  mainContent.appendChild(newScript);
-                }
+                document.head.appendChild(newScript);
               });
-            }
-            
-            // CRITICAL: Force content visibility with multiple methods
-            if (mainContent) {
-              // Method 1: Reset all styles
-              mainContent.style.cssText = '';
-              
-              // Method 2: Force visibility properties
-              mainContent.style.opacity = '0';
-              mainContent.style.transform = 'translateY(10px)';
-              mainContent.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-              mainContent.style.display = 'block';
-              mainContent.style.visibility = 'visible';
-              mainContent.style.position = 'relative';
-              mainContent.style.zIndex = '1';
-              
-              // Method 3: Remove problematic classes
-              mainContent.classList.remove('content-entering', 'content-hidden', 'opacity-0');
-              
-              // Method 4: Force reflow
-              mainContent.offsetHeight;
-              
-              // Method 5: Use multiple animation frames for reliability
-              requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                  mainContent.style.opacity = '1';
-                  mainContent.style.transform = 'translateY(0)';
-                  console.log('Content faded in successfully');
-                  
-                  // Method 6: Additional verification after animation
-                  setTimeout(() => {
-                    if (mainContent.style.opacity !== '1') {
-                      console.warn('Content visibility issue detected, forcing visibility');
-                      mainContent.style.opacity = '1';
-                      mainContent.style.transform = 'translateY(0)';
-                      mainContent.style.display = 'block';
-                      mainContent.style.visibility = 'visible';
-                    }
-                  }, 100);
-                });
-              });
+              console.log('📜 Scripts executed');
             }
             
             // Hide transition overlay
@@ -166,34 +116,18 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
               setTimeout(() => {
                 pageTransition.classList.add('opacity-0', 'pointer-events-none');
                 pageTransition.classList.remove('opacity-100');
-              }, 400);
+                console.log('✅ Transition complete');
+              }, 200);
             }
-            
-            // Dispatch custom event for content loaded
-            document.dispatchEvent(new CustomEvent('spa-content-loaded', { 
-              detail: { url }
-            }));
             
             // Scroll to top
             window.scrollTo(0, 0);
             
-            // Re-attach event listeners to new content
+            // Re-attach listeners
             attachLinkListeners();
             
           } catch (error) {
-            console.error('Error loading content:', error);
-            
-            // CRITICAL: Ensure content is visible even on error
-            if (mainContent) {
-              mainContent.style.cssText = '';
-              mainContent.style.opacity = '1';
-              mainContent.style.transform = 'translateY(0)';
-              mainContent.style.display = 'block';
-              mainContent.style.visibility = 'visible';
-              mainContent.style.position = 'relative';
-              mainContent.style.zIndex = '1';
-              mainContent.classList.remove('content-entering', 'content-hidden', 'opacity-0');
-            }
+            console.error('❌ Error loading content:', error);
             
             // Hide transition overlay
             if (pageTransition) {
@@ -201,24 +135,41 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
               pageTransition.classList.remove('opacity-100');
             }
             
-            // Fallback to traditional navigation on error
+            // Fallback to traditional navigation
+            console.log('🔄 Falling back to traditional navigation');
             window.location.href = url;
           }
         }
         
         // Function to attach event listeners to all links
         function attachLinkListeners() {
-          document.querySelectorAll('a').forEach(link => {
-            // Skip links that are already handled, anchor links, external links, or have special attributes
-            if (
-              link.hasAttribute('data-spa-handled') ||
-              !link.href.startsWith(window.location.origin) || 
-              link.href.includes('#') ||
-              link.hasAttribute('target') ||
-              link.hasAttribute('download') ||
-              link.getAttribute('rel') === 'external' ||
-              link.getAttribute('rel') === 'nofollow'
-            ) {
+          console.log('🔗 Attaching link listeners...');
+          const links = document.querySelectorAll('a');
+          console.log(`Found ${links.length} links`);
+          
+          links.forEach((link, index) => {
+            // Skip links that are already handled
+            if (link.hasAttribute('data-spa-handled')) {
+              return;
+            }
+            
+            // Skip external links
+            if (!link.href.startsWith(window.location.origin)) {
+              return;
+            }
+            
+            // Skip anchor links
+            if (link.href.includes('#')) {
+              return;
+            }
+            
+            // Skip links with special attributes
+            if (link.hasAttribute('target') || link.hasAttribute('download')) {
+              return;
+            }
+            
+            // Skip external rel links
+            if (link.getAttribute('rel') === 'external' || link.getAttribute('rel') === 'nofollow') {
               return;
             }
             
@@ -226,8 +177,11 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
             link.setAttribute('data-spa-handled', 'true');
             
             link.addEventListener('click', (e) => {
-              // Don't handle if modifier keys are pressed (for opening in new tab, etc.)
+              console.log(`🖱️ Link clicked: ${link.href}`);
+              
+              // Don't handle if modifier keys are pressed
               if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) {
+                console.log('Modifier key pressed, skipping SPA');
                 return;
               }
               
@@ -236,8 +190,11 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
               
               // Don't transition if clicking the current page
               if (targetHref === window.location.href) {
+                console.log('Same page, skipping transition');
                 return;
               }
+              
+              console.log('🚀 Starting SPA transition to:', targetHref);
               
               // Update browser history
               window.history.pushState({ path: targetHref }, '', targetHref);
@@ -246,6 +203,8 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
               loadContent(targetHref);
             });
           });
+          
+          console.log('✅ Link listeners attached');
         }
         
         // Initial attachment of link listeners
@@ -253,6 +212,7 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
         
         // Handle browser back/forward navigation
         window.addEventListener('popstate', (e) => {
+          console.log('🔄 Browser navigation detected');
           if (e.state && e.state.path) {
             loadContent(e.state.path);
           } else {
@@ -260,20 +220,7 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
           }
         });
         
-        // Check RSS feed availability
-        const checkAndGenerateRSS = async () => {
-          try {
-            const response = await fetch('/rss.xml');
-            if (!response.ok) {
-              console.warn('RSS feed not found. Please generate it using an RSS plugin for Astro.');
-            }
-          } catch (error) {
-            console.warn('Could not check RSS feed status.');
-          }
-        };
-        
-        // Check RSS feed availability
-        checkAndGenerateRSS();
+        console.log('✅ SPA system initialized');
       });
       
       // Theme handling with transition effects

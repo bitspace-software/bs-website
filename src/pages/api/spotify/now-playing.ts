@@ -6,10 +6,15 @@ export const GET: APIRoute = async ({ request }) => {
   const refreshToken = import.meta.env.SPOTIFY_REFRESH_TOKEN;
 
   if (!clientId || !clientSecret || !refreshToken) {
-    return new Response(JSON.stringify({ error: 'Spotify credentials not configured' }), {
-      status: 500,
+    // Return a mock response when credentials are not configured
+    return new Response(JSON.stringify({ 
+      isPlaying: false,
+      message: 'Spotify credentials not configured. Please set up your Spotify API credentials.'
+    }), {
+      status: 200,
       headers: {
         'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache',
       },
     });
   }
