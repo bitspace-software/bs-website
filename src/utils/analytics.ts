@@ -56,14 +56,6 @@ export const trackSpotifyInteraction = (action: string, trackName?: string) => {
   });
 };
 
-// Newsletter signup tracking
-export const trackNewsletterSignup = (email: string) => {
-  trackEvent('newsletter_signup', {
-    event_category: 'engagement',
-    event_label: 'newsletter',
-    custom_parameter_1: email.substring(0, 3) + '***' // Partial email for privacy
-  });
-};
 
 // Social sharing tracking
 export const trackSocialShare = (platform: string, url: string, title: string) => {

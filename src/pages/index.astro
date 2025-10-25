@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import Newsletter from '../components/Newsletter.astro';
 
 // Get all blog posts
 const allPosts = await getCollection('blog');
@@ -155,12 +154,6 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
     </div>
   </section>
 
-  <!-- Newsletter Section -->
-  <section class="py-16 px-4 sm:px-6">
-    <div class="max-w-4xl mx-auto">
-      <Newsletter />
-    </div>
-  </section>
 
   <!-- Topics/Tags Section - Improved for mobile -->
   {allTags.length > 0 && (

@@ -70,21 +70,50 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
-    <!-- Critical CSS inline -->
+    <!-- Critical CSS inline - Complete dark mode support -->
     <style>
       /* Critical CSS for above-the-fold content */
-      body { margin: 0; font-family: Inter, system-ui, sans-serif; }
+      body { 
+        margin: 0; 
+        font-family: Inter, system-ui, sans-serif; 
+        background-color: #ffffff;
+        color: #18181b;
+      }
+      
+      /* Dark mode critical styles - applied immediately */
+      .dark {
+        background-color: #0F0F0F !important;
+        color: #FFFFFF !important;
+      }
+      
+      .dark body {
+        background-color: #0F0F0F !important;
+        color: #FFFFFF !important;
+      }
+      
+      /* Essential Tailwind classes for dark mode */
       .bg-white { background-color: #ffffff; }
-      .dark\\:bg-brand-background { background-color: #0F0F0F; }
+      .dark\\:bg-brand-background { background-color: #0F0F0F !important; }
       .text-zinc-900 { color: #18181b; }
-      .dark\\:text-brand-text { color: #FFFFFF; }
-      .dark\\:text-brand-textSecondary { color: #9CA3AF; }
-      .dark\\:bg-brand-surface { background-color: #1F2937; }
-      .dark\\:border-brand-border { border-color: #374151; }
-      .dark\\:text-brand-accent { color: #60A5FA; }
-      .dark\\:text-brand-accentOrange { color: #F59E0B; }
-      .dark\\:bg-brand-accentBlue { background-color: #3B82F6; }
-      .dark\\:bg-brand-black { background-color: #000000; }
+      .dark\\:text-brand-text { color: #FFFFFF !important; }
+      .dark\\:text-brand-textSecondary { color: #9CA3AF !important; }
+      .dark\\:bg-brand-surface { background-color: #1F2937 !important; }
+      .dark\\:border-brand-border { border-color: #374151 !important; }
+      .dark\\:text-brand-accent { color: #60A5FA !important; }
+      .dark\\:text-brand-accentOrange { color: #F59E0B !important; }
+      .dark\\:bg-brand-accentBlue { background-color: #3B82F6 !important; }
+      .dark\\:bg-brand-black { background-color: #000000 !important; }
+      
+      /* Override common conflicting classes */
+      .dark .bg-white { background-color: #0F0F0F !important; }
+      .dark .text-zinc-900 { color: #FFFFFF !important; }
+      .dark .text-zinc-800 { color: #FFFFFF !important; }
+      .dark .text-zinc-700 { color: #9CA3AF !important; }
+      .dark .text-zinc-600 { color: #9CA3AF !important; }
+      .dark .text-zinc-500 { color: #9CA3AF !important; }
+      .dark .text-zinc-400 { color: #9CA3AF !important; }
+      
+      /* Layout classes */
       .min-h-screen { min-height: 100vh; }
       .flex { display: flex; }
       .flex-col { flex-direction: column; }
@@ -95,6 +124,17 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
       .w-full { width: 100%; }
       .flex-grow { flex-grow: 1; }
       .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+      
+      /* Header specific styles */
+      .dark header {
+        background-color: rgba(15, 15, 15, 0.8) !important;
+        backdrop-filter: blur(16px);
+      }
+      
+      /* Ensure immediate application */
+      * {
+        box-sizing: border-box;
+      }
     </style>
     
     <!-- PWA -->
@@ -176,6 +216,22 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
     <NotificationPermission />
     
     <script>
+      // Early theme application - before DOM is ready
+      (function() {
+        const theme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const shouldBeDark = theme === 'dark' || (!theme && systemPrefersDark);
+        
+        if (shouldBeDark) {
+          document.documentElement.classList.add('dark');
+          document.documentElement.style.backgroundColor = '#0F0F0F';
+          console.log('🌙 Early dark mode applied');
+        } else {
+          document.documentElement.classList.remove('dark');
+          console.log('☀️ Early light mode applied');
+        }
+      })();
+      
       // Simplified and robust SPA transition system
       document.addEventListener('DOMContentLoaded', () => {
         console.log('🚀 SPA system initializing...');
@@ -295,37 +351,89 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
       // Theme handling
       function setupThemeHandling() {
         const theme = localStorage.getItem('theme');
-        console.log('🎨 Setting up theme:', theme);
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const shouldBeDark = theme === 'dark' || (!theme && systemPrefersDark);
         
-        if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        console.log('🎨 Setting up theme:', { theme, systemPrefersDark, shouldBeDark });
+
+        // Apply theme class immediately
+        if (shouldBeDark) {
           document.documentElement.classList.add('dark');
+          // Force immediate styles
+          document.documentElement.style.backgroundColor = '#0F0F0F';
+          document.body.style.backgroundColor = '#0F0F0F';
+          document.body.style.color = '#FFFFFF';
           console.log('🌙 Dark mode activated');
         } else {
           document.documentElement.classList.remove('dark');
+          // Force light mode styles
+          document.documentElement.style.backgroundColor = '';
+          document.body.style.backgroundColor = '';
+          document.body.style.color = '';
           console.log('☀️ Light mode activated');
         }
-        
-        // Force style recalculation without disrupting layout
+
+        // Force style recalculation
         requestAnimationFrame(() => {
-          // Trigger a reflow to ensure styles are applied
           document.body.offsetHeight;
+          document.documentElement.offsetHeight;
           console.log('🔄 Styles recalculated');
         });
       }
       
-      // Theme toggle functionality
+      // Enhanced theme toggle functionality
       function toggleTheme() {
         const isDark = document.documentElement.classList.contains('dark');
         console.log('🔄 Toggling theme from:', isDark ? 'dark' : 'light');
         
-        // Force immediate theme change before any animation
+        // Force immediate theme change
         if (isDark) {
           document.documentElement.classList.remove('dark');
           localStorage.setItem('theme', 'light');
+          
+          // Force light mode styles immediately
+          document.documentElement.style.backgroundColor = '';
+          document.body.style.backgroundColor = '';
+          document.body.style.color = '';
+          
+          // Reset all inline styles for light mode
+          const allElements = document.querySelectorAll('*');
+          allElements.forEach(el => {
+            if (el.classList.contains('bg-white')) {
+              el.style.backgroundColor = '';
+            }
+            if (el.classList.contains('text-zinc-900') || el.classList.contains('text-zinc-800')) {
+              el.style.color = '';
+            }
+            if (el.classList.contains('text-zinc-600') || el.classList.contains('text-zinc-500') || el.classList.contains('text-zinc-400')) {
+              el.style.color = '';
+            }
+          });
+          
           console.log('☀️ Switched to light mode');
         } else {
           document.documentElement.classList.add('dark');
           localStorage.setItem('theme', 'dark');
+          
+          // Force dark mode styles immediately
+          document.documentElement.style.backgroundColor = '#0F0F0F';
+          document.body.style.backgroundColor = '#0F0F0F';
+          document.body.style.color = '#FFFFFF';
+          
+          // Force all elements to use dark mode colors
+          const allElements = document.querySelectorAll('*');
+          allElements.forEach(el => {
+            if (el.classList.contains('bg-white')) {
+              el.style.backgroundColor = '#0F0F0F';
+            }
+            if (el.classList.contains('text-zinc-900') || el.classList.contains('text-zinc-800')) {
+              el.style.color = '#FFFFFF';
+            }
+            if (el.classList.contains('text-zinc-600') || el.classList.contains('text-zinc-500') || el.classList.contains('text-zinc-400')) {
+              el.style.color = '#9CA3AF';
+            }
+          });
+          
           console.log('🌙 Switched to dark mode');
         }
         
@@ -374,47 +482,108 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
         console.log('- System prefers dark:', window.matchMedia('(prefers-color-scheme: dark)').matches);
       };
       
-      // Ensure theme persists during SPA navigation
+      // Ensure theme persists during SPA navigation - Enhanced version
       function ensureThemePersistence() {
         const theme = localStorage.getItem('theme');
-        if (theme === 'dark') {
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const shouldBeDark = theme === 'dark' || (!theme && systemPrefersDark);
+        
+        // Apply theme class
+        if (shouldBeDark) {
           document.documentElement.classList.add('dark');
-          // Force styles with inline CSS
+          // Force immediate dark mode styles
           document.documentElement.style.backgroundColor = '#0F0F0F';
           document.body.style.backgroundColor = '#0F0F0F';
           document.body.style.color = '#FFFFFF';
-        } else if (theme === 'light') {
+          
+          // Force all elements to use dark mode colors
+          const allElements = document.querySelectorAll('*');
+          allElements.forEach(el => {
+            if (el.classList.contains('bg-white')) {
+              el.style.backgroundColor = '#0F0F0F';
+            }
+            if (el.classList.contains('text-zinc-900') || el.classList.contains('text-zinc-800')) {
+              el.style.color = '#FFFFFF';
+            }
+            if (el.classList.contains('text-zinc-600') || el.classList.contains('text-zinc-500') || el.classList.contains('text-zinc-400')) {
+              el.style.color = '#9CA3AF';
+            }
+          });
+        } else {
           document.documentElement.classList.remove('dark');
           // Force light mode styles
           document.documentElement.style.backgroundColor = '';
           document.body.style.backgroundColor = '';
           document.body.style.color = '';
+          
+          // Reset inline styles for light mode
+          const allElements = document.querySelectorAll('*');
+          allElements.forEach(el => {
+            if (el.classList.contains('bg-white')) {
+              el.style.backgroundColor = '';
+            }
+            if (el.classList.contains('text-zinc-900') || el.classList.contains('text-zinc-800')) {
+              el.style.color = '';
+            }
+            if (el.classList.contains('text-zinc-600') || el.classList.contains('text-zinc-500') || el.classList.contains('text-zinc-400')) {
+              el.style.color = '';
+            }
+          });
         }
+        
+        console.log('🔄 Theme persistence applied:', shouldBeDark ? 'dark' : 'light');
       }
       
       // Run theme persistence check periodically
       setInterval(ensureThemePersistence, 1000);
       
-      // Observer to detect DOM changes and re-apply theme
+      // Enhanced Observer to detect DOM changes and re-apply theme
       const themeObserver = new MutationObserver((mutations) => {
+        let shouldReapply = false;
+        
         mutations.forEach((mutation) => {
+          // Check if main content changed
           if (mutation.type === 'childList' && mutation.target.tagName === 'MAIN') {
-            // Main content changed, re-apply theme
-            setTimeout(() => {
-              ensureThemePersistence();
-              console.log('🔄 Theme re-applied after DOM change');
-            }, 50);
+            shouldReapply = true;
+          }
+          // Check if any child elements were added
+          if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+            shouldReapply = true;
           }
         });
+        
+        if (shouldReapply) {
+          // Apply theme immediately
+          ensureThemePersistence();
+          
+          // Also apply after a short delay to catch any async content
+          setTimeout(() => {
+            ensureThemePersistence();
+            console.log('🔄 Theme re-applied after DOM change');
+          }, 100);
+        }
       });
       
       // Start observing when DOM is ready
       document.addEventListener('DOMContentLoaded', () => {
         const mainElement = document.querySelector('main');
         if (mainElement) {
-          themeObserver.observe(mainElement, { childList: true, subtree: true });
-          console.log('👀 Theme observer started');
+          themeObserver.observe(mainElement, { 
+            childList: true, 
+            subtree: true,
+            attributes: false,
+            characterData: false
+          });
+          console.log('👀 Enhanced theme observer started');
         }
+        
+        // Also observe the entire document for any theme-related changes
+        themeObserver.observe(document.documentElement, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          attributeFilter: ['class']
+        });
       });
       
       document.addEventListener('DOMContentLoaded', setupThemeHandling);

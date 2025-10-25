@@ -26,13 +26,18 @@
     overflow-x: hidden;
   }
   
-  /* Dark mode colors matching Kent C. Dodds website */
+  /* Dark mode colors matching Kent C. Dodds website - Enhanced */
   .dark {
     background-color: #0F0F0F !important;
     color: #FFFFFF !important;
   }
   
-  /* Text colors matching Kent's site */
+  .dark body {
+    background-color: #0F0F0F !important;
+    color: #FFFFFF !important;
+  }
+  
+  /* Text colors matching Kent's site - Enhanced specificity */
   .dark .text-zinc-600,
   .dark .text-zinc-400,
   .dark .text-zinc-700,
@@ -46,6 +51,11 @@
     color: #FFFFFF !important;
   }
   
+  .dark .text-zinc-900,
+  .dark .text-zinc-800 {
+    color: #FFFFFF !important;
+  }
+  
   /* Background colors matching Kent's site */
   .dark .bg-zinc-700,
   .dark .bg-zinc-600 {
@@ -53,6 +63,10 @@
   }
   
   .dark .bg-zinc-900 {
+    background-color: #0F0F0F !important;
+  }
+  
+  .dark .bg-white {
     background-color: #0F0F0F !important;
   }
   
@@ -131,6 +145,19 @@
   
   .dark .dark\\:hover\\:bg-brand-border:hover {
     background-color: #374151 !important;
+  }
+  
+  /* Force dark mode on all elements */
+  .dark * {
+    color: inherit;
+  }
+  
+  .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+    color: #FFFFFF !important;
+  }
+  
+  .dark p, .dark span, .dark div {
+    color: inherit;
   }
 
   /* Enhanced theme transition - DISABLED FOR INSTANT SWITCHING */
