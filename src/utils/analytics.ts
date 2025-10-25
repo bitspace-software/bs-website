@@ -56,16 +56,6 @@ export const trackSpotifyInteraction = (action: string, trackName?: string) => {
   });
 };
 
-// Search tracking
-export const trackSearch = (query: string, resultsCount: number) => {
-  trackEvent('search', {
-    search_term: query,
-    results_count: resultsCount,
-    event_category: 'engagement',
-    event_label: 'site_search'
-  });
-};
-
 // Newsletter signup tracking
 export const trackNewsletterSignup = (email: string) => {
   trackEvent('newsletter_signup', {
@@ -145,7 +135,6 @@ export const calculateEngagementScore = () => {
   const startTime = performance.now();
   let scrollDepth = 0;
   let clickCount = 0;
-  let searchCount = 0;
   
   // Track scroll depth
   const trackScroll = () => {
@@ -159,11 +148,6 @@ export const calculateEngagementScore = () => {
     clickCount++;
   };
   
-  // Track searches
-  const trackSearches = () => {
-    searchCount++;
-  };
-  
   // Add event listeners
   window.addEventListener('scroll', trackScroll);
   document.addEventListener('click', trackClicks);
@@ -171,13 +155,12 @@ export const calculateEngagementScore = () => {
   // Return engagement score calculation function
   return () => {
     const timeOnPage = Math.round((performance.now() - startTime) / 1000);
-    const engagementScore = Math.min(100, (scrollDepth * 0.4) + (clickCount * 10) + (searchCount * 20) + (timeOnPage * 0.1));
+    const engagementScore = Math.min(100, (scrollDepth * 0.4) + (clickCount * 10) + (timeOnPage * 0.1));
     
     trackEvent('engagement_score', {
       score: engagementScore,
       scroll_depth: scrollDepth,
       click_count: clickCount,
-      search_count: searchCount,
       time_on_page: timeOnPage,
       event_category: 'engagement',
       event_label: 'user_engagement'

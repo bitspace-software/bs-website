@@ -89,9 +89,8 @@
     color: #FFFFFF !important;
   }
   
-  /* Search input colors matching Kent's site */
-  .dark input[type="text"],
-  .dark input[type="search"] {
+  /* Text input colors matching Kent's site */
+  .dark input[type="text"] {
     background-color: #1F2937 !important;
     border-color: #374151 !important;
     color: #FFFFFF !important;
