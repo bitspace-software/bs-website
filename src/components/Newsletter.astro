@@ -1,0 +1,149 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+  placeholder?: string;
+  buttonText?: string;
+}
+
+const { 
+  title = "📧 Mantente actualizado",
+  description = "Recibe los últimos artículos sobre datos y desarrollo de software directamente en tu bandeja de entrada.",
+  placeholder = "tu@email.com",
+  buttonText = "Suscribirse"
+} = Astro.props;
+---
+
+<div class="bg-gradient-to-br from-primary-50 to-amber-50 dark:from-primary-900/20 dark:to-amber-900/20 rounded-2xl p-8 border border-primary-200 dark:border-primary-800">
+  <div class="text-center max-w-2xl mx-auto">
+    <h3 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100 mb-4">
+      {title}
+    </h3>
+    <p class="text-zinc-600 dark:text-zinc-400 mb-8 leading-relaxed">
+      {description}
+    </p>
+    
+    <form id="newsletter-form" class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+      <div class="flex-1">
+        <input 
+          type="email" 
+          id="newsletter-email"
+          placeholder={placeholder}
+          required
+          class="w-full px-4 py-3 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 placeholder-zinc-500 dark:placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+        />
+      </div>
+      <button 
+        type="submit"
+        class="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-zinc-900"
+      >
+        {buttonText}
+      </button>
+    </form>
+    
+    <p class="text-xs text-zinc-500 dark:text-zinc-500 mt-4">
+      Sin spam. Cancela cuando quieras. 
+      <a href="/privacy" class="text-primary-600 dark:text-primary-400 hover:underline">
+        Política de privacidad
+      </a>
+    </p>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('newsletter-form');
+    const emailInput = document.getElementById('newsletter-email');
+    const submitBtn = form?.querySelector('button[type="submit"]');
+    
+    if (!form || !emailInput || !submitBtn) return;
+    
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const email = emailInput.value.trim();
+      if (!email) return;
+      
+      // Disable form during submission
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Suscribiendo...';
+      
+      try {
+        // Simulate API call (replace with actual newsletter service)
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        // Show success message
+        showMessage('¡Gracias! Te has suscrito correctamente.', 'success');
+        emailInput.value = '';
+        
+        // Track subscription event
+        if (typeof window !== 'undefined' && window.gtag) {
+          window.gtag('event', 'newsletter_signup', {
+            event_category: 'engagement',
+            event_label: 'newsletter'
+          });
+        }
+        
+      } catch (error) {
+        showMessage('Error al suscribirse. Inténtalo de nuevo.', 'error');
+      } finally {
+        // Re-enable form
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Suscribirse';
+      }
+    });
+    
+    function showMessage(text, type) {
+      // Remove existing messages
+      const existingMessage = form.querySelector('.newsletter-message');
+      if (existingMessage) {
+        existingMessage.remove();
+      }
+      
+      // Create new message
+      const message = document.createElement('div');
+      message.className = `newsletter-message mt-4 p-3 rounded-lg text-sm ${
+        type === 'success' 
+          ? 'bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-200' 
+          : 'bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200'
+      }`;
+      message.textContent = text;
+      
+      form.appendChild(message);
+      
+      // Auto-remove after 5 seconds
+      setTimeout(() => {
+        if (message.parentNode) {
+          message.remove();
+        }
+      }, 5000);
+    }
+  });
+</script>
+
+<style>
+  /* Newsletter form animations */
+  #newsletter-form {
+    transition: all 0.3s ease;
+  }
+  
+  #newsletter-form:focus-within {
+    transform: translateY(-2px);
+  }
+  
+  /* Input focus effects */
+  #newsletter-email:focus {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+  
+  /* Button hover effects */
+  button[type="submit"]:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  }
+  
+  button[type="submit"]:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+</style>

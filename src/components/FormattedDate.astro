@@ -1,21 +1,31 @@
 ---
 export interface Props {
   date?: Date | string;
+  format?: 'long' | 'short';
 }
 
-const { date } = Astro.props;
+const { date, format = 'long' } = Astro.props;
 
 // Convert string to Date if needed
 const parsedDate = typeof date === 'string' ? new Date(date) : date;
+
+// Define format options
+const formatOptions = {
+  long: {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  },
+  short: {
+    month: 'short',
+    day: 'numeric',
+  }
+};
 ---
 
 {parsedDate && (
   <time datetime={parsedDate.toISOString()}>
-    {parsedDate.toLocaleDateString('en-us', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    })}
+    {parsedDate.toLocaleDateString('es-ES', formatOptions[format])}
   </time>
 )}
 

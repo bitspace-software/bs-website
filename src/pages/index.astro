@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import SpotifyNowPlaying from '../components/SpotifyNowPlaying.astro';
+import Newsletter from '../components/Newsletter.astro';
 
 // Get all blog posts
 const allPosts = await getCollection('blog');
@@ -23,7 +23,7 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
     <div class="max-w-2xl mx-auto relative">
       <!-- Adjusted blob positions and sizes for better mobile appearance -->
       <div class="absolute -top-10 sm:-top-20 -left-10 sm:-left-20 w-40 sm:w-64 h-40 sm:h-64 bg-primary-100 dark:bg-primary-500/20 rounded-full blur-3xl opacity-50 animate-blob theme-transition-bg"></div>
-      <div class="absolute -bottom-10 sm:-bottom-20 -right-10 sm:-right-20 w-40 sm:w-64 h-40 sm:h-64 bg-accent-100 dark:bg-accent-500/20 rounded-full blur-3xl opacity-30 animate-blob animation-delay-2000 theme-transition-bg"></div>
+      <div class="absolute -bottom-10 sm:-bottom-20 -right-10 sm:-right-20 w-40 sm:w-64 h-40 sm:h-64 bg-amber-100 dark:bg-amber-500/20 rounded-full blur-3xl opacity-30 animate-blob animation-delay-2000 theme-transition-bg"></div>
       
       <div class="relative text-center sm:text-left">
         <h2 class="text-4xl sm:text-4xl md:text-5xl lg:text-5xl font-bold tracking-tight text-zinc-900 dark:text-brand-text theme-transition-color hero-text">
@@ -32,7 +32,7 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
           <span class="block mt-1 relative">
             <span class="relative inline-block">
                que generan valor.
-              <span class="absolute -bottom-1 left-0 w-full h-1 bg-primary-500 dark:bg-accent-500 transform origin-left theme-transition-bg"></span>
+              <span class="absolute -bottom-1 left-0 w-full h-1 bg-primary-500 dark:bg-amber-500 transform origin-left theme-transition-bg"></span>
             </span>
           </span>
         </h2>
@@ -63,7 +63,7 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
         <div class="flex-1">
           <h2 class="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-zinc-900 dark:text-brand-text theme-transition-color text-center sm:text-left">Posts Recientes</h2>
           <p class="mt-2 text-sm text-zinc-600 dark:text-brand-text/70 text-center sm:text-left">
-            Compartiendo pensamientos sobre datos y desarrollo de software.
+            Compartiendo ideas sobre datos y desarrollo de software.
           </p>
         </div>
         <a 
@@ -78,11 +78,6 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
           </span>
           <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 dark:bg-accent-500 transition-all duration-300 group-hover:w-full theme-transition-bg"></span>
         </a>
-      </div>
-      
-      <!-- Spotify Widget -->
-      <div class="mb-8 max-w-sm mx-auto sm:mx-0">
-        <SpotifyNowPlaying />
       </div>
       
       <!-- Improved grid for better mobile layout -->
@@ -157,6 +152,13 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
           </article>
         ))}
       </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="py-16 px-4 sm:px-6">
+    <div class="max-w-4xl mx-auto">
+      <Newsletter />
     </div>
   </section>
 

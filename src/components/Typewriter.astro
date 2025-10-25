@@ -1,0 +1,60 @@
+---
+export interface Props {
+  text: string;
+  delay?: number;
+  duration?: number;
+}
+
+const { text, delay = 0, duration = 1000 } = Astro.props;
+---
+
+<span 
+  class="typewriter-text inline-block"
+  data-text={text}
+  data-delay={delay}
+  data-duration={duration}
+>
+  {text}
+</span>
+
+<style>
+  .typewriter-text {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid currentColor;
+    animation: typewriter var(--duration, 1000ms) steps(var(--text-length, 0)) var(--delay, 0ms) forwards,
+               blink 1s infinite;
+  }
+  
+  @keyframes typewriter {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  
+  @keyframes blink {
+    0%, 50% { border-color: currentColor; }
+    51%, 100% { border-color: transparent; }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const typewriterElements = document.querySelectorAll('.typewriter-text');
+    
+    typewriterElements.forEach(element => {
+      const text = element.dataset.text;
+      const delay = parseInt(element.dataset.delay) || 0;
+      const duration = parseInt(element.dataset.duration) || 1000;
+      
+      // Set CSS custom properties
+      element.style.setProperty('--text-length', text.length.toString());
+      element.style.setProperty('--duration', `${duration}ms`);
+      element.style.setProperty('--delay', `${delay}ms`);
+      
+      // Start animation after delay
+      setTimeout(() => {
+        element.style.animationPlayState = 'running';
+      }, delay);
+    });
+  });
+</script>

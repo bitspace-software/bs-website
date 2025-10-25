@@ -1,0 +1,40 @@
+---
+export interface Props {
+  items: Array<{
+    label: string;
+    href?: string;
+  }>;
+}
+
+const { items } = Astro.props;
+---
+
+<nav aria-label="Breadcrumb" class="mb-6">
+  <ol class="flex items-center space-x-2 text-sm text-zinc-600 dark:text-zinc-400">
+    {items.map((item, index) => (
+      <li class="flex items-center">
+        {index > 0 && (
+          <svg class="w-4 h-4 mx-2 text-zinc-400" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+          </svg>
+        )}
+        {item.href ? (
+          <a 
+            href={item.href} 
+            class="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+            aria-current={index === items.length - 1 ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ) : (
+          <span 
+            class="text-zinc-900 dark:text-zinc-100 font-medium"
+            aria-current="page"
+          >
+            {item.label}
+          </span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>

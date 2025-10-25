@@ -1,0 +1,108 @@
+---
+export interface Props {
+  repo: string;
+  issueTerm?: string;
+  label?: string;
+  theme?: string;
+}
+
+const { 
+  repo = "marombeltran/bitspace-blog-comments",
+  issueTerm = "pathname",
+  label = "💬 Comentarios",
+  theme = "preferred-color-scheme"
+} = Astro.props;
+---
+
+<div id="comments" class="mt-12 pt-8 border-t border-zinc-200 dark:border-zinc-800">
+  <h3 class="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-6">
+    💬 Comentarios
+  </h3>
+  
+  <div class="bg-zinc-50 dark:bg-zinc-900 rounded-lg p-6">
+    <p class="text-sm text-zinc-600 dark:text-zinc-400 mb-4">
+      Los comentarios se sincronizan con GitHub Issues. 
+      <a 
+        href="https://github.com/marombeltran/bitspace-blog-comments/issues" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="text-primary-600 dark:text-primary-400 hover:underline"
+      >
+        Ver todos los comentarios en GitHub
+      </a>
+    </p>
+    
+    <script 
+      src="https://utteranc.es/client.js"
+      repo={repo}
+      issue-term={issueTerm}
+      label={label}
+      theme={theme}
+      crossorigin="anonymous"
+      async
+    ></script>
+  </div>
+</div>
+
+<style>
+  /* Custom styling for Utterances */
+  .utterances {
+    max-width: 100% !important;
+  }
+  
+  /* Dark mode adjustments */
+  :global(.dark) .utterances {
+    --utterances-bg-color: #1a1a1a;
+    --utterances-text-color: #e5e7eb;
+  }
+  
+  /* Loading state */
+  #comments::before {
+    content: "Cargando comentarios...";
+    display: block;
+    text-align: center;
+    color: #6b7280;
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+  
+  #comments .utterances {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  #comments .utterances.loaded {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  // Handle Utterances loading
+  document.addEventListener('DOMContentLoaded', () => {
+    const commentsContainer = document.getElementById('comments');
+    if (!commentsContainer) return;
+    
+    // Remove loading text when Utterances loads
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'childList') {
+          const utterances = commentsContainer.querySelector('.utterances');
+          if (utterances) {
+            utterances.classList.add('loaded');
+            observer.disconnect();
+          }
+        }
+      });
+    });
+    
+    observer.observe(commentsContainer, { childList: true });
+    
+    // Fallback timeout
+    setTimeout(() => {
+      const utterances = commentsContainer.querySelector('.utterances');
+      if (utterances) {
+        utterances.classList.add('loaded');
+      }
+    }, 3000);
+  });
+</script>

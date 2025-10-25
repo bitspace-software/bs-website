@@ -1,0 +1,76 @@
+---
+// Offline indicator component
+---
+
+<div id="offline-indicator" class="fixed top-4 right-4 z-50 transform translate-x-full transition-transform duration-300">
+  <div class="bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+    </svg>
+    <span class="text-sm font-medium">Sin conexión</span>
+  </div>
+</div>
+
+<div id="online-indicator" class="fixed top-4 right-4 z-50 transform translate-x-full transition-transform duration-300">
+  <div class="bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+    </svg>
+    <span class="text-sm font-medium">Conexión restaurada</span>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const offlineIndicator = document.getElementById('offline-indicator');
+    const onlineIndicator = document.getElementById('online-indicator');
+    
+    function showOfflineIndicator() {
+      offlineIndicator.classList.remove('translate-x-full');
+      setTimeout(() => {
+        offlineIndicator.classList.add('translate-x-full');
+      }, 3000);
+    }
+    
+    function showOnlineIndicator() {
+      onlineIndicator.classList.remove('translate-x-full');
+      setTimeout(() => {
+        onlineIndicator.classList.add('translate-x-full');
+      }, 2000);
+    }
+    
+    // Listen for online/offline events
+    window.addEventListener('online', () => {
+      showOnlineIndicator();
+      
+      // Sync any pending data
+      if ('serviceWorker' in navigator && 'sync' in window.ServiceWorkerRegistration.prototype) {
+        navigator.serviceWorker.ready.then(registration => {
+          return registration.sync.register('analytics-sync');
+        });
+      }
+    });
+    
+    window.addEventListener('offline', () => {
+      showOfflineIndicator();
+    });
+    
+    // Check initial connection status
+    if (!navigator.onLine) {
+      showOfflineIndicator();
+    }
+    
+    // Periodic connection check
+    setInterval(() => {
+      fetch('/favicon.svg', { 
+        method: 'HEAD',
+        cache: 'no-cache',
+        mode: 'no-cors'
+      }).catch(() => {
+        if (navigator.onLine) {
+          showOfflineIndicator();
+        }
+      });
+    }, 30000); // Check every 30 seconds
+  });
+</script>

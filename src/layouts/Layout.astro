@@ -2,382 +2,333 @@
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import Background from '../components/Background.astro';
+import SearchModal from '../components/SearchModal.astro';
+import OfflineIndicator from '../components/OfflineIndicator.astro';
+import NotificationPermission from '../components/NotificationPermission.astro';
+import SkipLink from '../components/SkipLink.astro';
 import '../styles/global.css';
 
 export interface Props {
   title: string;
   description?: string;
+  image?: string;
+  type?: string;
+  url?: string;
 }
 
-const { title, description = "A minimalist personal blog" } = Astro.props;
+const { title, description = "A minimalist personal blog", image, type = "website", url } = Astro.props;
+
+// Generate canonical URL
+const canonicalURL = url ? new URL(url) : new URL(Astro.url.pathname, Astro.site || 'https://bitspace.software');
+const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software') : new URL('/placeholder.jpg', Astro.site || 'https://bitspace.software');
 ---
 
 <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="description" content={description} />
+    
+    <!-- Basic Meta Tags -->
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageURL} />
+    <meta property="og:site_name" content="Bitspace Software" />
+    <meta property="og:locale" content="es_ES" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageURL} />
+    <meta name="twitter:creator" content="@marom_beltran" />
+    
+    <!-- Additional SEO -->
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Marlon Beltran" />
+    <meta name="theme-color" content="#3B82F6" />
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.spotify.com https://accounts.spotify.com; frame-src 'none';" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    
+    <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Critical CSS inline -->
+    <style>
+      /* Critical CSS for above-the-fold content */
+      body { margin: 0; font-family: Inter, system-ui, sans-serif; }
+      .bg-white { background-color: #ffffff; }
+      .dark\\:bg-brand-background { background-color: #1A1A1A; }
+      .text-zinc-900 { color: #18181b; }
+      .dark\\:text-brand-text { color: #ffffff; }
+      .min-h-screen { min-height: 100vh; }
+      .flex { display: flex; }
+      .flex-col { flex-direction: column; }
+      .max-w-3xl { max-width: 48rem; }
+      .mx-auto { margin-left: auto; margin-right: auto; }
+      .px-4 { padding-left: 1rem; padding-right: 1rem; }
+      .sm\\:px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .w-full { width: 100%; }
+      .flex-grow { flex-grow: 1; }
+      .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+    </style>
+    
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Bitspace" />
+    <link rel="apple-touch-icon" href="/placeholder-logo.png" />
+    
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+              console.log('SW registered: ', registration);
+            })
+            .catch(registrationError => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+    
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Bitspace Software",
+        "description": "Blog sobre datos y desarrollo de software",
+        "url": "https://bitspace.software",
+        "author": {
+          "@type": "Person",
+          "name": "Marlon Beltran",
+          "url": "https://bitspace.software",
+          "sameAs": [
+            "https://x.com/marom_beltran",
+            "https://github.com/marombeltran",
+            "https://www.linkedin.com/in/marlon-beltran-526730203"
+          ]
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Bitspace Software",
+          "url": "https://bitspace.software"
+        }
+      }
+    </script>
   </head>
   <body class="bg-white dark:bg-brand-background text-zinc-900 dark:text-brand-text min-h-screen flex flex-col">
-    <!-- Page transition overlay - for smooth transitions between pages -->
-    <div id="page-transition" class="fixed inset-0 z-40 bg-white dark:bg-brand-background opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center">
-      <div class="transition-spinner"></div>
-    </div>
+    <!-- Skip to content link -->
+    <SkipLink />
     
     <!-- Background component with dot pattern and ambient glow -->
     <Background />
     
     <div class="max-w-3xl mx-auto px-4 sm:px-6 w-full flex-grow">
       <Navigation />
-      <main class="py-12">
+      <main id="main-content" class="py-12" role="main">
         <slot />
       </main>
     </div>
     <Footer />
     
+    <!-- Search Modal -->
+    <SearchModal />
+    
+    <!-- Offline Indicator -->
+    <OfflineIndicator />
+    
+    <!-- Notification Permission -->
+    <NotificationPermission />
+    
     <script>
-      // Robust SPA transition system
+      // Simplified and robust SPA transition system
       document.addEventListener('DOMContentLoaded', () => {
-        console.log('SPA system initializing...');
+        console.log('🚀 SPA system initializing...');
         
-        const pageTransition = document.getElementById('page-transition');
         const mainContent = document.querySelector('main');
-        
-        // Ensure content is visible on initial load
-        if (mainContent) {
-          mainContent.style.opacity = '1';
-          mainContent.style.transform = 'translateY(0)';
-          console.log('Content visibility ensured');
-        }
         
         // SPA transition function
         async function loadContent(url) {
           try {
-            console.log('🔄 Loading content for:', url);
+            console.log('🔄 Loading:', url);
             
-            // Show transition overlay
-            if (pageTransition) {
-              pageTransition.classList.remove('opacity-0', 'pointer-events-none');
-              pageTransition.classList.add('opacity-100');
-              console.log('Transition overlay shown');
-            }
-            
-            // Fetch the new page content
+            // Fetch new content
             const response = await fetch(url);
-            if (!response.ok) throw new Error(`Failed to fetch ${url}`);
-            const html = await response.text();
-            console.log('✅ Content fetched successfully');
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
             
-            // Parse HTML
+            const html = await response.text();
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
             
-            // Extract content
+            // Extract new content
             const newContent = doc.querySelector('main');
             const newTitle = doc.querySelector('title');
             
-            if (!newContent) throw new Error('Could not find main content');
+            if (!newContent) throw new Error('No main content found');
             
-            // Update title
+            // Update title first
             if (newTitle) {
               document.title = newTitle.textContent;
-              console.log('📄 Title updated:', newTitle.textContent);
             }
-            
-            // Wait for transition
-            await new Promise(resolve => setTimeout(resolve, 300));
             
             // Replace content
             if (mainContent) {
               mainContent.innerHTML = newContent.innerHTML;
-              console.log('🔄 Content replaced');
-              
-              // Execute scripts
-              Array.from(newContent.querySelectorAll('script')).forEach(oldScript => {
-                const newScript = document.createElement('script');
-                Array.from(oldScript.attributes).forEach(attr => {
-                  newScript.setAttribute(attr.name, attr.value);
-                });
-                newScript.textContent = oldScript.textContent;
-                document.head.appendChild(newScript);
-              });
-              console.log('📜 Scripts executed');
-            }
-            
-            // Hide transition overlay
-            if (pageTransition) {
-              setTimeout(() => {
-                pageTransition.classList.add('opacity-0', 'pointer-events-none');
-                pageTransition.classList.remove('opacity-100');
-                console.log('✅ Transition complete');
-              }, 200);
             }
             
             // Scroll to top
-            window.scrollTo(0, 0);
+            window.scrollTo({ top: 0, behavior: 'instant' });
             
             // Re-attach listeners
             attachLinkListeners();
             
+            console.log('✅ Transition complete');
+            
           } catch (error) {
-            console.error('❌ Error loading content:', error);
+            console.error('❌ SPA Error:', error);
             
-            // Hide transition overlay
-            if (pageTransition) {
-              pageTransition.classList.add('opacity-0', 'pointer-events-none');
-              pageTransition.classList.remove('opacity-100');
-            }
-            
-            // Fallback to traditional navigation
-            console.log('🔄 Falling back to traditional navigation');
+            // Fallback to normal navigation
             window.location.href = url;
           }
         }
         
-        // Function to attach event listeners to all links
+        // Attach link listeners
         function attachLinkListeners() {
-          console.log('🔗 Attaching link listeners...');
-          const links = document.querySelectorAll('a');
-          console.log(`Found ${links.length} links`);
+          const links = document.querySelectorAll('a:not([data-spa-handled])');
           
-          links.forEach((link, index) => {
-            // Skip links that are already handled
-            if (link.hasAttribute('data-spa-handled')) {
+          links.forEach(link => {
+            // Skip external links, anchors, and special links
+            if (
+              !link.href.startsWith(window.location.origin) ||
+              link.href.includes('#') ||
+              link.hasAttribute('target') ||
+              link.hasAttribute('download') ||
+              link.getAttribute('rel') === 'external'
+            ) {
               return;
             }
             
-            // Skip external links
-            if (!link.href.startsWith(window.location.origin)) {
-              return;
-            }
-            
-            // Skip anchor links
-            if (link.href.includes('#')) {
-              return;
-            }
-            
-            // Skip links with special attributes
-            if (link.hasAttribute('target') || link.hasAttribute('download')) {
-              return;
-            }
-            
-            // Skip external rel links
-            if (link.getAttribute('rel') === 'external' || link.getAttribute('rel') === 'nofollow') {
-              return;
-            }
-            
-            // Mark as handled to avoid duplicate listeners
             link.setAttribute('data-spa-handled', 'true');
             
             link.addEventListener('click', (e) => {
-              console.log(`🖱️ Link clicked: ${link.href}`);
-              
-              // Don't handle if modifier keys are pressed
+              // Skip if modifier keys pressed
               if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) {
-                console.log('Modifier key pressed, skipping SPA');
+                return;
+              }
+              
+              const targetHref = link.href;
+              
+              // Skip if same page
+              if (targetHref === window.location.href) {
                 return;
               }
               
               e.preventDefault();
-              const targetHref = link.href;
+              console.log('🖱️ Navigating to:', targetHref);
               
-              // Don't transition if clicking the current page
-              if (targetHref === window.location.href) {
-                console.log('Same page, skipping transition');
-                return;
-              }
-              
-              console.log('🚀 Starting SPA transition to:', targetHref);
-              
-              // Update browser history
+              // Update history
               window.history.pushState({ path: targetHref }, '', targetHref);
               
-              // Load the new content
+              // Load content
               loadContent(targetHref);
             });
           });
-          
-          console.log('✅ Link listeners attached');
         }
         
-        // Initial attachment of link listeners
+        // Initial setup
         attachLinkListeners();
         
-        // Handle browser back/forward navigation
+        // Handle browser navigation
         window.addEventListener('popstate', (e) => {
-          console.log('🔄 Browser navigation detected');
-          if (e.state && e.state.path) {
-            loadContent(e.state.path);
-          } else {
-            loadContent(window.location.href);
-          }
+          const path = e.state?.path || window.location.href;
+          loadContent(path);
         });
         
-        console.log('✅ SPA system initialized');
+        console.log('✅ SPA system ready');
       });
       
-      // Theme handling with transition effects
+      // Theme handling
       function setupThemeHandling() {
-        // Apply theme from localStorage or system preference
         const theme = localStorage.getItem('theme');
         if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
           document.documentElement.classList.add('dark');
         } else {
           document.documentElement.classList.remove('dark');
         }
-        
-        // Listen for theme changes
-        document.addEventListener('themeChanged', () => {
-          // Add transition class to body
-          document.body.classList.add('theme-transitioning');
-          
-          // Remove class after transition completes
-          setTimeout(() => {
-            document.body.classList.remove('theme-transitioning');
-          }, 500);
-        });
       }
       
-      // Initialize theme handling
-      document.addEventListener('DOMContentLoaded', setupThemeHandling);
-      
-      // Ensure content visibility on every page load
-      function ensureContentVisibility() {
-        const mainContent = document.querySelector('main');
-        if (mainContent) {
-          mainContent.style.opacity = '1';
-          mainContent.style.transform = 'translateY(0)';
-          mainContent.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-        }
-      }
-      
-      // Enhanced content visibility with error recovery
-      function robustContentVisibility() {
-        const mainContent = document.querySelector('main');
-        if (mainContent) {
-          console.log('Ensuring content visibility...');
-          
-          // Method 1: Reset all inline styles
-          mainContent.style.cssText = '';
-          
-          // Method 2: Force visibility with multiple methods
-          mainContent.style.opacity = '1';
-          mainContent.style.transform = 'translateY(0)';
-          mainContent.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-          mainContent.style.display = 'block';
-          mainContent.style.visibility = 'visible';
-          mainContent.style.position = 'relative';
-          mainContent.style.zIndex = '1';
-          mainContent.style.width = '100%';
-          mainContent.style.height = 'auto';
-          mainContent.style.minHeight = 'auto';
-          
-          // Method 3: Remove any problematic classes
-          mainContent.classList.remove('content-entering', 'content-hidden', 'opacity-0', 'hidden');
-          
-          // Method 4: Force a reflow to ensure styles are applied
-          mainContent.offsetHeight;
-          
-          // Method 5: Additional verification
-          setTimeout(() => {
-            if (mainContent.style.opacity !== '1' || mainContent.style.display !== 'block') {
-              console.warn('Content visibility issue detected, forcing visibility');
-              mainContent.style.opacity = '1';
-              mainContent.style.transform = 'translateY(0)';
-              mainContent.style.display = 'block';
-              mainContent.style.visibility = 'visible';
-            }
-          }, 50);
-          
-          console.log('Content visibility ensured');
+      // Theme toggle functionality
+      function toggleTheme() {
+        const isDark = document.documentElement.classList.contains('dark');
+        if (isDark) {
+          document.documentElement.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
         } else {
-          console.warn('Main content element not found');
+          document.documentElement.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
         }
       }
       
-      // Run on every page load with multiple event listeners
-      document.addEventListener('DOMContentLoaded', robustContentVisibility);
-      document.addEventListener('astro:page-load', robustContentVisibility);
-      document.addEventListener('spa-content-loaded', robustContentVisibility);
-      
-      // Additional fallback: ensure visibility every 500ms for the first 10 seconds
-      let visibilityCheckCount = 0;
-      const visibilityInterval = setInterval(() => {
-        robustContentVisibility();
-        visibilityCheckCount++;
-        if (visibilityCheckCount >= 20) {
-          clearInterval(visibilityInterval);
-        }
-      }, 500);
-      
-      // Emergency fallback: check visibility on window focus
-      window.addEventListener('focus', robustContentVisibility);
-      
-      // Additional fallback: check visibility on scroll
-      window.addEventListener('scroll', () => {
-        const mainContent = document.querySelector('main');
-        if (mainContent && mainContent.style.opacity !== '1') {
-          console.warn('Content visibility issue detected on scroll, fixing');
-          robustContentVisibility();
+      // Listen for theme changes
+      window.addEventListener('storage', (e) => {
+        if (e.key === 'theme') {
+          setupThemeHandling();
         }
       });
+      
+      // Listen for system theme changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if (!localStorage.getItem('theme')) {
+          setupThemeHandling();
+        }
+      });
+      
+      // Make toggleTheme globally available
+      window.toggleTheme = toggleTheme;
+      
+      document.addEventListener('DOMContentLoaded', setupThemeHandling);
     </script>
   </body>
 </html>
 
 <style>
-  /* Enhanced page transition effects */
-  #page-transition {
-    transition: opacity 0.3s ease;
-    backdrop-filter: blur(4px);
-  }
-  
-  /* Transition spinner animation */
-  .transition-spinner {
-    width: 30px;
-    height: 30px;
-    border: 2px solid rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-    border-top-color: #3B82F6;
-    animation: spin 0.7s linear infinite;
-  }
-  
-  :global(.dark) .transition-spinner {
-    border-color: rgba(226, 232, 240, 0.1);
-    border-top-color: #10B981;
-  }
-  
-  @keyframes spin {
-    to { transform: rotate(360deg); }
-  }
-  
-  /* Content entrance animation */
+  /* Ensure main content is always visible */
   main {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-  }
-  
-  main.content-entering {
-    animation: content-fade-in 0.6s ease forwards;
-  }
-  
-  @keyframes content-fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    opacity: 1 !important;
+    display: block !important;
+    visibility: visible !important;
   }
   
   /* Theme transition effect */

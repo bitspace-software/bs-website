@@ -31,4 +31,14 @@ export default defineConfig({
       'import.meta.env.SPOTIFY_REFRESH_TOKEN': JSON.stringify(process.env.SPOTIFY_REFRESH_TOKEN),
     },
   },
+  // Security headers
+  security: {
+    checkOrigin: true,
+  },
+  // Output configuration
+  output: 'static',
+  // Build configuration
+  build: {
+    assets: '_astro',
+  },
 });

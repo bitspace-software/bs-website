@@ -3,6 +3,9 @@ import Layout from './Layout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import ShareButtons from '../components/ShareButtons.astro';
 import TagList from '../components/TagList.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Comments from '../components/Comments.astro';
+import { Image } from 'astro:assets';
 import './styles/markdown.css';
 export interface Props {
   title: string;
@@ -58,7 +61,20 @@ if (heroImage) {
 }
 ---
 
-<Layout title={title} description={description}>
+<Layout 
+  title={title} 
+  description={description}
+  image={heroImageUrl}
+  type="article"
+  url={canonicalURL.toString()}
+>
+  <!-- Breadcrumbs -->
+  <Breadcrumbs items={[
+    { label: 'Inicio', href: '/' },
+    { label: 'Blog', href: '/blog' },
+    { label: title }
+  ]} />
+  
   <article class="prose dark:prose-invert prose-zinc lg:prose-lg mx-auto max-w-4xl">
     <div class="mb-12">
       <h1 class="mb-4 text-2xl font-bold tracking-tight text-zinc-900 dark:text-brand-text sm:text-4xl">
@@ -77,11 +93,15 @@ if (heroImage) {
     {heroImage && (
       <div class="relative mb-8 sm:mb-12 overflow-hidden rounded-xl shadow-lg">
         <div class="aspect-[16/9] w-full">
-          <img 
+          <Image 
             src={heroImageUrl} 
             alt={title}
+            width={800}
+            height={450}
             class="w-full h-full object-cover"
             loading="eager"
+            formats={['avif', 'webp', 'png']}
+            quality={85}
           />
         </div>
         <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
@@ -106,7 +126,42 @@ if (heroImage) {
     )}
   </article>
   
+  <!-- Comments Section -->
+  <Comments />
+  
   <slot name="after-article" />
+  
+  <!-- Article Schema.org JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": title,
+    "description": description,
+    "image": heroImageUrl,
+    "author": {
+      "@type": "Person",
+      "name": "Marlon Beltran",
+      "url": "https://bitspace.software"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Bitspace Software",
+      "url": "https://bitspace.software",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://bitspace.software/favicon.svg"
+      }
+    },
+    "datePublished": pubDate.toISOString(),
+    "dateModified": updatedDate ? updatedDate.toISOString() : pubDate.toISOString(),
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": canonicalURL.toString()
+    },
+    "keywords": tags?.join(", "),
+    "articleSection": tags?.[0] || "General",
+    "wordCount": Math.ceil(readingTime?.match(/\d+/)?.[0] || 5) * 200
+  })} />
 </Layout>
 
 <script>
