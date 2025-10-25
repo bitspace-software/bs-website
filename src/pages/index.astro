@@ -25,18 +25,20 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
       <div class="absolute -bottom-10 sm:-bottom-20 -right-10 sm:-right-20 w-40 sm:w-64 h-40 sm:h-64 bg-amber-100 dark:bg-amber-500/20 rounded-full blur-3xl opacity-30 animate-blob animation-delay-2000 theme-transition-bg"></div>
       
       <div class="relative text-center sm:text-left">
-        <h2 class="text-4xl sm:text-4xl md:text-5xl lg:text-5xl font-bold tracking-tight text-zinc-900 dark:text-brand-text theme-transition-color hero-text">
+        <h1 class="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-zinc-900 dark:text-brand-text theme-transition-color">
           <span class="block">Datos y</span>
-          <span class="block mt-1">software</span>
+          <span class="block mt-1">
+            software que
+          </span>
           <span class="block mt-1 relative">
             <span class="relative inline-block">
-               que generan valor.
-              <span class="absolute -bottom-1 left-0 w-full h-1 bg-primary-500 dark:bg-brand-accentOrange transform origin-left theme-transition-bg"></span>
+              generan impacto real
+              <span class="absolute bottom-0 left-0 w-full h-1 bg-primary-500 dark:bg-brand-accentOrange transform origin-left theme-transition-bg" style="bottom: -10px;"></span>
             </span>
           </span>
-        </h2>
-        <p class="mt-4 sm:mt-6 md:mt-8 text-base sm:text-lg text-zinc-600 dark:text-brand-textSecondary leading-relaxed theme-transition-color max-w-lg mx-auto sm:mx-0">
-          En este espacio se comparten métodos y aprendizajes para convertir datos en productos y experiencias digitales, y construir software fiable, seguro y escalable.
+        </h1>
+        <p class="mt-6 sm:mt-8 md:mt-10 text-base sm:text-lg md:text-xl text-zinc-600 dark:text-brand-textSecondary leading-relaxed theme-transition-color max-w-2xl mx-auto sm:mx-0">
+          Desarrollamos soluciones digitales confiables y escalables que transforman datos en resultados.
         </p>
         
         <!-- div class="mt-6 sm:mt-8 md:mt-10 flex flex-wrap gap-3 sm:gap-4 md:gap-6 justify-center sm:justify-start">
