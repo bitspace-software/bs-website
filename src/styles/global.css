@@ -133,7 +133,8 @@
     background-color: #374151 !important;
   }
 
-  /* Enhanced theme transition */
+  /* Enhanced theme transition - DISABLED FOR INSTANT SWITCHING */
+  /*
   body, a, button, * {
     transition: background-color var(--theme-transition), 
                 color var(--theme-transition), 
@@ -141,10 +142,10 @@
                 box-shadow var(--theme-transition);
   }
   
-  /* Smooth theme transition animation */
   .theme-transitioning * {
     transition: all 0.3s ease !important;
   }
+  */
   
   /* Ensure dark mode styles are applied immediately */
   .dark {
@@ -158,10 +159,13 @@
     color: #FFFFFF !important;
   }
   
-  /* Ensure all elements get dark mode colors immediately */
+  /* Ensure all elements get dark mode colors immediately - NO TRANSITIONS */
+  /* Transitions are disabled to prevent theme switching issues */
+  /*
   .dark * {
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   }
+  */
   
   /* Override any conflicting styles */
   .dark .bg-white {

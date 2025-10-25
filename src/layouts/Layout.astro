@@ -217,8 +217,15 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
             // Re-attach listeners
             attachLinkListeners();
             
-            // Re-apply theme after SPA transition
-            setupThemeHandling();
+            // Force re-apply theme immediately after SPA transition
+            ensureThemePersistence();
+            
+            // Force style recalculation
+            requestAnimationFrame(() => {
+              ensureThemePersistence();
+              document.body.offsetHeight;
+              console.log('🎨 Theme re-applied after SPA navigation');
+            });
             
             console.log('✅ Transition complete');
             
@@ -311,9 +318,7 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
         const isDark = document.documentElement.classList.contains('dark');
         console.log('🔄 Toggling theme from:', isDark ? 'dark' : 'light');
         
-        // Add transition class for smooth animation
-        document.documentElement.classList.add('theme-transitioning');
-        
+        // Force immediate theme change before any animation
         if (isDark) {
           document.documentElement.classList.remove('dark');
           localStorage.setItem('theme', 'light');
@@ -324,14 +329,17 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
           console.log('🌙 Switched to dark mode');
         }
         
-        // Force reflow to ensure styles are applied
-        document.documentElement.offsetHeight;
+        // Force immediate style recalculation
+        void document.body.offsetHeight;
+        void document.documentElement.offsetHeight;
         
-        // Remove transition class after animation
-        setTimeout(() => {
-          document.documentElement.classList.remove('theme-transitioning');
-          console.log('✅ Theme transition complete');
-        }, 300);
+        // Force CSS recalculation by reading computed styles
+        const bodyStyles = getComputedStyle(document.body);
+        const htmlStyles = getComputedStyle(document.documentElement);
+        console.log('🎨 Background:', bodyStyles.backgroundColor);
+        console.log('🎨 Color:', bodyStyles.color);
+        
+        console.log('✅ Theme transition complete');
       }
       
       // Listen for theme changes
@@ -371,8 +379,16 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
         const theme = localStorage.getItem('theme');
         if (theme === 'dark') {
           document.documentElement.classList.add('dark');
+          // Force styles with inline CSS
+          document.documentElement.style.backgroundColor = '#0F0F0F';
+          document.body.style.backgroundColor = '#0F0F0F';
+          document.body.style.color = '#FFFFFF';
         } else if (theme === 'light') {
           document.documentElement.classList.remove('dark');
+          // Force light mode styles
+          document.documentElement.style.backgroundColor = '';
+          document.body.style.backgroundColor = '';
+          document.body.style.color = '';
         }
       }
       
