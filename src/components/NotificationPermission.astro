@@ -3,30 +3,30 @@
 ---
 
 <div id="notification-permission" class="fixed bottom-4 right-4 z-50 transform translate-y-full transition-transform duration-300">
-  <div class="bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg shadow-lg p-4 max-w-sm">
+  <div class="bg-white dark:bg-brand-surface border border-zinc-200 dark:border-brand-border rounded-lg shadow-lg p-4 max-w-sm">
     <div class="flex items-start gap-3">
       <div class="flex-shrink-0">
-        <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-5 h-5 text-primary-600 dark:text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM4.5 19.5L19.5 4.5M19.5 4.5L14.5 4.5M19.5 4.5L19.5 9.5" />
         </svg>
       </div>
       <div class="flex-1">
-        <h3 class="text-sm font-semibold text-zinc-900 dark:text-zinc-100 mb-1">
+        <h3 class="text-sm font-semibold text-zinc-900 dark:text-brand-text mb-1">
           Notificaciones
         </h3>
-        <p class="text-xs text-zinc-600 dark:text-zinc-400 mb-3">
+        <p class="text-xs text-zinc-600 dark:text-brand-textSecondary mb-3">
           Recibe notificaciones cuando publiquemos nuevos artículos.
         </p>
         <div class="flex gap-2">
           <button 
             id="enable-notifications"
-            class="px-3 py-1.5 bg-primary-600 hover:bg-primary-700 text-white text-xs font-medium rounded transition-colors"
+            class="px-3 py-1.5 bg-primary-600 dark:bg-brand-accentBlue hover:bg-primary-700 text-white text-xs font-medium rounded transition-colors"
           >
             Permitir
           </button>
           <button 
             id="dismiss-notifications"
-            class="px-3 py-1.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-700 dark:hover:bg-zinc-600 text-zinc-700 dark:text-zinc-300 text-xs font-medium rounded transition-colors"
+            class="px-3 py-1.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-brand-border dark:hover:bg-brand-surface text-zinc-700 dark:text-brand-text text-xs font-medium rounded transition-colors"
           >
             Ahora no
           </button>

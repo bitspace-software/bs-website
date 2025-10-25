@@ -112,8 +112,16 @@ module.exports = {
           900: '#78350F',
         },
         brand: {
-          background: '#1A1A1A',
-          text: '#FFFFFF',
+          background: '#1A1C20',  // Main dark background from reference
+          text: '#FFFFFF',        // Primary white text
+          textSecondary: '#A0A3A8', // Secondary light gray text
+          surface: '#2D3035',    // Input field background
+          border: '#4A4D52',     // Subtle borders
+          accent: '#87CEEB',     // Light blue accent (logo, icons)
+          accentDark: '#4B0082', // Dark purple accent
+          accentOrange: '#FFBF00', // Orange accent for highlights
+          accentBlue: '#3B82F6', // Standard blue for buttons
+          black: '#000000',      // Pure black for badges
         },
         // Paleta Minimalista Profesional - Opción 1
         professional: {
