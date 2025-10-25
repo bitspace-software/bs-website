@@ -2,7 +2,6 @@
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import Background from '../components/Background.astro';
-import SearchModal from '../components/SearchModal.astro';
 import OfflineIndicator from '../components/OfflineIndicator.astro';
 import NotificationPermission from '../components/NotificationPermission.astro';
 import SkipLink from '../components/SkipLink.astro';
@@ -76,14 +75,14 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
       /* Critical CSS for above-the-fold content */
       body { margin: 0; font-family: Inter, system-ui, sans-serif; }
       .bg-white { background-color: #ffffff; }
-      .dark\\:bg-brand-background { background-color: #1A1C20; }
+      .dark\\:bg-brand-background { background-color: #0F0F0F; }
       .text-zinc-900 { color: #18181b; }
       .dark\\:text-brand-text { color: #FFFFFF; }
-      .dark\\:text-brand-textSecondary { color: #A0A3A8; }
-      .dark\\:bg-brand-surface { background-color: #2D3035; }
-      .dark\\:border-brand-border { border-color: #4A4D52; }
-      .dark\\:text-brand-accent { color: #87CEEB; }
-      .dark\\:text-brand-accentOrange { color: #FFBF00; }
+      .dark\\:text-brand-textSecondary { color: #9CA3AF; }
+      .dark\\:bg-brand-surface { background-color: #1F2937; }
+      .dark\\:border-brand-border { border-color: #374151; }
+      .dark\\:text-brand-accent { color: #60A5FA; }
+      .dark\\:text-brand-accentOrange { color: #F59E0B; }
       .dark\\:bg-brand-accentBlue { background-color: #3B82F6; }
       .dark\\:bg-brand-black { background-color: #000000; }
       .min-h-screen { min-height: 100vh; }
@@ -169,9 +168,6 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
       </main>
     </div>
     <Footer />
-    
-    <!-- Search Modal -->
-    <SearchModal />
     
     <!-- Offline Indicator -->
     <OfflineIndicator />
@@ -289,23 +285,51 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
       // Theme handling
       function setupThemeHandling() {
         const theme = localStorage.getItem('theme');
+        console.log('🎨 Setting up theme:', theme);
+        
         if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
           document.documentElement.classList.add('dark');
+          console.log('🌙 Dark mode activated');
         } else {
           document.documentElement.classList.remove('dark');
+          console.log('☀️ Light mode activated');
         }
+        
+        // Force style recalculation
+        setTimeout(() => {
+          document.body.style.display = 'none';
+          document.body.offsetHeight; // Trigger reflow
+          document.body.style.display = '';
+          console.log('🔄 Styles recalculated');
+        }, 0);
       }
       
       // Theme toggle functionality
       function toggleTheme() {
         const isDark = document.documentElement.classList.contains('dark');
+        console.log('🔄 Toggling theme from:', isDark ? 'dark' : 'light');
+        
+        // Add transition class for smooth animation
+        document.documentElement.classList.add('theme-transitioning');
+        
         if (isDark) {
           document.documentElement.classList.remove('dark');
           localStorage.setItem('theme', 'light');
+          console.log('☀️ Switched to light mode');
         } else {
           document.documentElement.classList.add('dark');
           localStorage.setItem('theme', 'dark');
+          console.log('🌙 Switched to dark mode');
         }
+        
+        // Force reflow to ensure styles are applied
+        document.documentElement.offsetHeight;
+        
+        // Remove transition class after animation
+        setTimeout(() => {
+          document.documentElement.classList.remove('theme-transitioning');
+          console.log('✅ Theme transition complete');
+        }, 300);
       }
       
       // Listen for theme changes
@@ -324,6 +348,21 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
       
       // Make toggleTheme globally available
       window.toggleTheme = toggleTheme;
+      
+      // Debug function to check theme state
+      window.debugTheme = function() {
+        const isDark = document.documentElement.classList.contains('dark');
+        const storedTheme = localStorage.getItem('theme');
+        const bodyBg = getComputedStyle(document.body).backgroundColor;
+        const bodyColor = getComputedStyle(document.body).color;
+        
+        console.log('🔍 Theme Debug Info:');
+        console.log('- HTML has dark class:', isDark);
+        console.log('- Stored theme:', storedTheme);
+        console.log('- Body background:', bodyBg);
+        console.log('- Body color:', bodyColor);
+        console.log('- System prefers dark:', window.matchMedia('(prefers-color-scheme: dark)').matches);
+      };
       
       document.addEventListener('DOMContentLoaded', setupThemeHandling);
     </script>

@@ -26,53 +26,159 @@
     overflow-x: hidden;
   }
   
-  /* Override dark mode colors */
+  /* Dark mode colors matching Kent C. Dodds website */
   .dark {
-    background-color: #1A1C20;
-    color: #FFFFFF;
+    background-color: #0F0F0F !important;
+    color: #FFFFFF !important;
   }
   
-  .dark .text-zinc-600 {
-    color: #A0A3A8;
+  /* Text colors matching Kent's site */
+  .dark .text-zinc-600,
+  .dark .text-zinc-400,
+  .dark .text-zinc-700,
+  .dark .text-zinc-500 {
+    color: #9CA3AF !important;
   }
   
-  .dark .text-zinc-400 {
-    color: #A0A3A8;
+  .dark .text-zinc-300,
+  .dark .text-zinc-100,
+  .dark .text-white {
+    color: #FFFFFF !important;
   }
   
-  .dark .text-zinc-700 {
-    color: #A0A3A8;
+  /* Background colors matching Kent's site */
+  .dark .bg-zinc-700,
+  .dark .bg-zinc-600 {
+    background-color: #1F2937 !important;
   }
   
-  .dark .text-zinc-300 {
-    color: #FFFFFF;
+  .dark .bg-zinc-900 {
+    background-color: #0F0F0F !important;
   }
   
-  .dark .bg-zinc-800 {
-    background-color: #000000;
+  /* Border colors matching Kent's site */
+  .dark .border-zinc-700,
+  .dark .border-zinc-600 {
+    border-color: #374151 !important;
   }
   
-  .dark .bg-zinc-700 {
-    background-color: #2D3035;
+  /* Accent colors matching Kent's site */
+  .dark .text-primary-600,
+  .dark .text-blue-400 {
+    color: #60A5FA !important;
   }
   
-  .dark .border-zinc-700 {
-    border-color: #4A4D52;
+  .dark .bg-primary-600,
+  .dark .bg-blue-600 {
+    background-color: #3B82F6 !important;
+  }
+  
+  .dark .text-amber-500,
+  .dark .text-orange-400 {
+    color: #F59E0B !important;
+  }
+  
+  /* Header specific colors matching Kent's site */
+  .dark header {
+    background-color: rgba(15, 15, 15, 0.8) !important;
+    backdrop-filter: blur(16px);
+  }
+  
+  /* Navigation active state */
+  .dark .text-zinc-900 {
+    color: #FFFFFF !important;
+  }
+  
+  /* Search input colors matching Kent's site */
+  .dark input[type="text"],
+  .dark input[type="search"] {
+    background-color: #1F2937 !important;
+    border-color: #374151 !important;
+    color: #FFFFFF !important;
+  }
+  
+  /* Brand color classes matching Kent's site */
+  .dark .dark\\:bg-brand-surface {
+    background-color: #1F2937 !important;
+  }
+  
+  .dark .dark\\:border-brand-border {
+    border-color: #374151 !important;
+  }
+  
+  .dark .dark\\:text-brand-textSecondary {
+    color: #9CA3AF !important;
+  }
+  
+  .dark .dark\\:text-brand-text {
+    color: #FFFFFF !important;
+  }
+  
+  .dark .dark\\:text-brand-accent {
+    color: #60A5FA !important;
   }
   
   .dark .dark\\:text-brand-accentOrange {
-    color: #FFBF00;
+    color: #F59E0B !important;
   }
   
   .dark .dark\\:bg-brand-accentBlue {
-    background-color: #3B82F6;
+    background-color: #3B82F6 !important;
+  }
+  
+  .dark .dark\\:bg-brand-black {
+    background-color: #000000 !important;
+  }
+  
+  .dark .dark\\:hover\\:bg-brand-border:hover {
+    background-color: #374151 !important;
   }
 
-  /* Simple theme transition */
-  body, a, button {
+  /* Enhanced theme transition */
+  body, a, button, * {
     transition: background-color var(--theme-transition), 
                 color var(--theme-transition), 
-                border-color var(--theme-transition);
+                border-color var(--theme-transition),
+                box-shadow var(--theme-transition);
+  }
+  
+  /* Smooth theme transition animation */
+  .theme-transitioning * {
+    transition: all 0.3s ease !important;
+  }
+  
+  /* Ensure dark mode styles are applied immediately */
+  .dark {
+    background-color: #0F0F0F !important;
+    color: #FFFFFF !important;
+  }
+  
+  /* Force immediate application of dark mode colors */
+  .dark body {
+    background-color: #0F0F0F !important;
+    color: #FFFFFF !important;
+  }
+  
+  /* Ensure all elements get dark mode colors immediately */
+  .dark * {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  }
+  
+  /* Override any conflicting styles */
+  .dark .bg-white {
+    background-color: #0F0F0F !important;
+  }
+  
+  .dark .text-zinc-900 {
+    color: #FFFFFF !important;
+  }
+  
+  .dark .text-zinc-800 {
+    color: #FFFFFF !important;
+  }
+  
+  .dark .text-zinc-700 {
+    color: #9CA3AF !important;
   }
 }
 
