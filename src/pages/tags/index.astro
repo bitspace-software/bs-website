@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import Layout from '../../layouts/Layout.astro';
 
 // Get all unique tags from blog posts
 const allPosts = await getCollection('blog');
@@ -23,7 +23,7 @@ const tagObjects = tags.map(tag => {
 const sortedTags = [...tagObjects].sort((a, b) => b.count - a.count);
 ---
 
-<BaseLayout title="Explore Tags">
+<Layout title="Explore Tags">
   <div class="w-full mx-auto px-3 sm:px-6 py-6 sm:py-12 md:py-16 theme-transition-all">
     <!-- Enhanced header section with animated elements - improved for mobile -->
     <div class="relative mb-8 sm:mb-12 md:mb-16 text-center theme-transition-element">
@@ -99,7 +99,7 @@ const sortedTags = [...tagObjects].sort((a, b) => b.count - a.count);
       </div>
     )}
   </div>
-</BaseLayout>
+</Layout>
 
 <script>
   // Ultra-reliable responsiveness handling

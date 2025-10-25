@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import Layout from '../../layouts/Layout.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 
 // Add this near the top of the frontmatter section
@@ -49,7 +49,7 @@ const relatedTags = [...new Set(
 )].slice(0, 5);
 ---
 
-<BaseLayout title={`Posts tagged with "${tag}"`}>
+<Layout title={`Posts tagged with "${tag}"`}>
   <div class="max-w-5xl mx-auto px-4 py-10 sm:py-16">
     <!-- Header section với màu zinc thay vì gray -->
     <div class="relative mb-10 sm:mb-16">
@@ -227,7 +227,7 @@ const relatedTags = [...new Set(
       </div>
     )}
   </div>
-</BaseLayout>
+</Layout>
 
 <style>
   /* Grid pattern background */
@@ -402,4 +402,4 @@ const relatedTags = [...new Set(
 </script>
 
 <!-- Add this at the end of your page -->
-</BaseLayout>
+</Layout>

@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import Layout from '../layouts/Layout.astro';
 import { FaJs, FaReact, FaNodeJs, FaPython } from 'react-icons/fa';
 import { SiTypescript, SiAstro } from 'react-icons/si';
 
@@ -37,7 +37,7 @@ const skills = [
   }
 ];
 ---
-<BaseLayout title="About Me" description="Learn more about my background, skills, and experience">
+<Layout title="About Me" description="Learn more about my background, skills, and experience">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 md:py-16 theme-transition-all">
     <!-- Hero Section - Improved mobile layout -->
     <div class="relative mb-12 sm:mb-16 md:mb-20">
@@ -159,7 +159,7 @@ const skills = [
       </a>
     </div>
   </div>
-</BaseLayout>
+</Layout>
 
 <style>
   /* Blob animation */
