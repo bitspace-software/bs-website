@@ -217,6 +217,9 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
             // Re-attach listeners
             attachLinkListeners();
             
+            // Re-apply theme after SPA transition
+            setupThemeHandling();
+            
             console.log('✅ Transition complete');
             
           } catch (error) {
@@ -295,13 +298,12 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
           console.log('☀️ Light mode activated');
         }
         
-        // Force style recalculation
-        setTimeout(() => {
-          document.body.style.display = 'none';
-          document.body.offsetHeight; // Trigger reflow
-          document.body.style.display = '';
+        // Force style recalculation without disrupting layout
+        requestAnimationFrame(() => {
+          // Trigger a reflow to ensure styles are applied
+          document.body.offsetHeight;
           console.log('🔄 Styles recalculated');
-        }, 0);
+        });
       }
       
       // Theme toggle functionality
@@ -363,6 +365,41 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
         console.log('- Body color:', bodyColor);
         console.log('- System prefers dark:', window.matchMedia('(prefers-color-scheme: dark)').matches);
       };
+      
+      // Ensure theme persists during SPA navigation
+      function ensureThemePersistence() {
+        const theme = localStorage.getItem('theme');
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else if (theme === 'light') {
+          document.documentElement.classList.remove('dark');
+        }
+      }
+      
+      // Run theme persistence check periodically
+      setInterval(ensureThemePersistence, 1000);
+      
+      // Observer to detect DOM changes and re-apply theme
+      const themeObserver = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.type === 'childList' && mutation.target.tagName === 'MAIN') {
+            // Main content changed, re-apply theme
+            setTimeout(() => {
+              ensureThemePersistence();
+              console.log('🔄 Theme re-applied after DOM change');
+            }, 50);
+          }
+        });
+      });
+      
+      // Start observing when DOM is ready
+      document.addEventListener('DOMContentLoaded', () => {
+        const mainElement = document.querySelector('main');
+        if (mainElement) {
+          themeObserver.observe(mainElement, { childList: true, subtree: true });
+          console.log('👀 Theme observer started');
+        }
+      });
       
       document.addEventListener('DOMContentLoaded', setupThemeHandling);
     </script>
