@@ -4,10 +4,10 @@
 
 <div class="fixed inset-0 -z-10 overflow-hidden theme-transition-all">
   <!-- Dot pattern background with smooth transition -->
-  <div class="absolute inset-0 bg-grid-pattern bg-[center_top_-1px] [mask-image:radial-gradient(white,transparent_85%)] theme-transition-bg"></div>
+  <div class="absolute inset-0 bg-grid-pattern bg-[center_top_-1px] theme-transition-bg" style="z-index: 1;"></div>
   
   <!-- Wave pattern -->
-  <div class="absolute inset-0 wave-pattern"></div>
+  <div class="absolute inset-0 wave-pattern" style="z-index: 0; mix-blend-mode: overlay;"></div>
   
   <!-- Ambient glow effects with enhanced transitions -->
   <div class="absolute left-1/4 top-1/4 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-zinc-400/30 dark:bg-brand-accent/20 rounded-full blur-3xl opacity-60 animate-glow theme-transition-bg"></div>
@@ -51,12 +51,18 @@
   .bg-grid-pattern {
     background-size: 24px 24px;
     background-image: radial-gradient(circle, rgba(0, 0, 0, 0.18) 1.4px, transparent 1.4px);
-    transition: background-image 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+    transition: background-image 0.7s cubic-bezier(0.65, 0, 0.35, 1), mask-image 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+    -webkit-mask-image: radial-gradient(white, transparent 85%);
+    mask-image: radial-gradient(white, transparent 85%);
+    opacity: 1;
   }
   
-  /* Dark mode version with smooth transition */
+  /* Dark mode version with smooth transition - white dots for maximum visibility */
   :global(.dark) .bg-grid-pattern {
-    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.12) 1.4px, transparent 1.4px);
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.5) 2px, transparent 2px) !important;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+    opacity: 0.8 !important;
   }
   
   /* Wave pattern - Paleta Minimalista Profesional */
