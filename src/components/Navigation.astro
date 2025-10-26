@@ -1,5 +1,7 @@
 ---
 const navItems = [
+  { text: 'ERP', href: '#erp' },
+  { text: 'Bulk Invoice', href: '#bulk-invoice' },
   { text: 'Blog', href: '/blog' },
   // { text: 'Etiquetas', href: '/tags' },
   // { text: 'Acerca de', href: '/about' },
@@ -23,12 +25,13 @@ const currentPath = pathname.slice(1); // remove the first "/"
       <nav class="hidden sm:flex items-center space-x-6">
         {navItems.map(item => {
           const isActive = currentPath === (item.href === '/' ? '' : item.href.slice(1));
+          const isAnchor = item.href.startsWith('#');
           return (
             <a 
               href={item.href} 
               class={`text-sm font-medium ${isActive 
                 ? 'text-zinc-900 dark:text-brand-text' 
-                : 'text-zinc-600 hover:text-zinc-900 dark:text-brand-textSecondary dark:hover:text-brand-text'}`}
+                : 'text-zinc-600 hover:text-zinc-900 dark:text-brand-textSecondary dark:hover:text-brand-text'} ${isAnchor ? 'border-b-2 border-blue-600 dark:border-[#FFBF00]' : ''}`}
             >
               {item.text}
             </a>
@@ -79,12 +82,13 @@ const currentPath = pathname.slice(1); // remove the first "/"
   <nav class="flex-1 flex flex-col items-center justify-center space-y-6 text-center">
     {navItems.map((item, index) => {
       const isActive = currentPath === (item.href === '/' ? '' : item.href.slice(1));
+      const isAnchor = item.href.startsWith('#');
       return (
         <a 
           href={item.href} 
           class={`text-lg font-medium mobile-nav-item opacity-0 translate-y-4 ${isActive 
             ? 'text-zinc-900 dark:text-brand-text' 
-            : 'text-zinc-600 hover:text-zinc-900 dark:text-brand-textSecondary dark:hover:text-brand-text'}`}
+            : 'text-zinc-600 hover:text-zinc-900 dark:text-brand-textSecondary dark:hover:text-brand-text'} ${isAnchor ? 'border-b-2 border-blue-600 dark:border-[#FFBF00]' : ''}`}
           style={`transition-delay: ${index * 0.05}s;`}
         >
           {item.text}
