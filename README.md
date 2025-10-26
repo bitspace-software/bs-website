@@ -172,6 +172,5 @@ SPOTIFY_REFRESH_TOKEN=your_refresh_token
 ---
 
 <p align="center">
-  Made with ❤️ by <a href="https://github.com/williamcachamwri">William Cachamwri</a>
+  Made with ❤️ by <a href="https://github.com/marombeltran">Marlon Beltran</a>
 </p>
-# bs-website
