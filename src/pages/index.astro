@@ -16,7 +16,7 @@ const recentPosts = allPosts
 const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].slice(0, 5);
 ---
 
-<Layout title="Home | Minimal Blog">
+<Layout title="Home | Bitspace Software">
   <!-- Hero Section with improved mobile responsiveness -->
   <section class="py-10 sm:py-16 md:py-20 px-3 sm:px-4 theme-transition-all">
     <div class="max-w-7xl mx-auto relative">
@@ -47,7 +47,7 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
         </div>
         
         <!-- Elegant Services Preview (Right) -->
-        <div class="hidden lg:block lg:relative">
+        <div class="block lg:relative mt-8 lg:mt-0">
           <div class="flex flex-col gap-2 lg:absolute lg:top-0 lg:w-full">
             <!-- Service 1: Development -->
             <div class="service-accordion border border-zinc-200/60 dark:border-zinc-800/40 bg-white/60 dark:bg-white/60 backdrop-blur-[2px] rounded-xl hover:shadow-md transition-all duration-300" data-service="dev">
@@ -168,6 +168,9 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
               <span class="text-xs px-2 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full">Astro</span>
               <span class="text-xs px-2 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full">React</span>
               <span class="text-xs px-2 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full">Vue</span>
+              <span class="text-xs px-2 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full">Next.js</span>
+              <span class="text-xs px-2 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full">TypeScript</span>
+              <span class="text-xs px-2 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full">Tailwind</span>
             </div>
           </div>
         </div>
@@ -185,6 +188,9 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
               <span class="text-xs px-2 py-0.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full">Laravel</span>
               <span class="text-xs px-2 py-0.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full">Django</span>
               <span class="text-xs px-2 py-0.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full">Flask</span>
+              <span class="text-xs px-2 py-0.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full">CodeIgniter</span>
+              <span class="text-xs px-2 py-0.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full">Express</span>
+              <span class="text-xs px-2 py-0.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full">Node.js</span>
             </div>
           </div>
         </div>
@@ -202,6 +208,9 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
               <span class="text-xs px-2 py-0.5 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full">PostgreSQL</span>
               <span class="text-xs px-2 py-0.5 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full">MongoDB</span>
               <span class="text-xs px-2 py-0.5 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full">Redis</span>
+              <span class="text-xs px-2 py-0.5 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full">MySQL</span>
+              <span class="text-xs px-2 py-0.5 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full">SQLite</span>
+              <span class="text-xs px-2 py-0.5 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full">Firebase</span>
             </div>
           </div>
         </div>
@@ -219,6 +228,9 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
               <span class="text-xs px-2 py-0.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 rounded-full">AWS</span>
               <span class="text-xs px-2 py-0.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 rounded-full">Docker</span>
               <span class="text-xs px-2 py-0.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 rounded-full">K8s</span>
+              <span class="text-xs px-2 py-0.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 rounded-full">Vercel</span>
+              <span class="text-xs px-2 py-0.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 rounded-full">GitHub</span>
+              <span class="text-xs px-2 py-0.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 rounded-full">CI/CD</span>
             </div>
           </div>
         </div>
@@ -235,6 +247,9 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
             <div class="flex flex-wrap gap-1 sm:gap-1.5 justify-center">
               <span class="text-xs px-2 py-0.5 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-full">React Native</span>
               <span class="text-xs px-2 py-0.5 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-full">Swift</span>
+              <span class="text-xs px-2 py-0.5 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-full">Flutter</span>
+              <span class="text-xs px-2 py-0.5 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-full">Kotlin</span>
+              <span class="text-xs px-2 py-0.5 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-full">Ionic</span>
             </div>
           </div>
         </div>
@@ -252,6 +267,9 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
               <span class="text-xs px-2 py-0.5 bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 rounded-full">Pandas</span>
               <span class="text-xs px-2 py-0.5 bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 rounded-full">Spark</span>
               <span class="text-xs px-2 py-0.5 bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 rounded-full">Airflow</span>
+              <span class="text-xs px-2 py-0.5 bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 rounded-full">NumPy</span>
+              <span class="text-xs px-2 py-0.5 bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 rounded-full">Matplotlib</span>
+              <span class="text-xs px-2 py-0.5 bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 rounded-full">TensorFlow</span>
             </div>
           </div>
         </div>
@@ -269,6 +287,9 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
               <span class="text-xs px-2 py-0.5 bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded-full">Jest</span>
               <span class="text-xs px-2 py-0.5 bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded-full">Cypress</span>
               <span class="text-xs px-2 py-0.5 bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded-full">Pytest</span>
+              <span class="text-xs px-2 py-0.5 bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded-full">Mocha</span>
+              <span class="text-xs px-2 py-0.5 bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded-full">Chai</span>
+              <span class="text-xs px-2 py-0.5 bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded-full">Selenium</span>
             </div>
           </div>
         </div>
@@ -286,6 +307,9 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
               <span class="text-xs px-2 py-0.5 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-full">OAuth</span>
               <span class="text-xs px-2 py-0.5 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-full">JWT</span>
               <span class="text-xs px-2 py-0.5 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-full">SSL</span>
+              <span class="text-xs px-2 py-0.5 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-full">OWASP</span>
+              <span class="text-xs px-2 py-0.5 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-full">CORS</span>
+              <span class="text-xs px-2 py-0.5 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-full">HTTPS</span>
             </div>
           </div>
         </div>
@@ -750,8 +774,15 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
     
     console.log('Initializing service accordions, found:', accordions.length, 'isDesktop:', isDesktop);
     
-    // On desktop, disable click handlers - use hover only
+    // On desktop, add hover only (click is disabled for hover effect)
     if (isDesktop) {
+      // Remove any existing click handlers to prevent conflicts
+      accordions.forEach((accordion) => {
+        const header = accordion.querySelector('.service-header');
+        if (header) {
+          header.removeEventListener('click', () => {});
+        }
+      });
       return;
     }
     
@@ -1019,10 +1050,32 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
   .service-accordion .service-content.open {
     display: block !important;
     max-height: 300px !important;
-    padding-top: 1rem !important;
-    padding-bottom: 1rem !important;
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
     opacity: 1 !important;
     visibility: visible !important;
+  }
+  
+  /* Mobile specific styling for accordions */
+  @media (max-width: 1023px) {
+    .service-accordion .service-content {
+      position: relative !important;
+      border-radius: 0.75rem !important;
+      background: rgba(255, 255, 255, 1) !important;
+      backdrop-filter: none !important;
+      box-shadow: none !important;
+    }
+    
+    .service-accordion .service-content.open {
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+    }
+    
+    .dark .service-accordion .service-content {
+      background: rgba(255, 255, 255, 1) !important;
+    }
   }
   
   :global(.theme-transition-color) {

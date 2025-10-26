@@ -13,7 +13,7 @@ export interface Props {
   url?: string;
 }
 
-const { title, description = "A minimalist personal blog", image, type = "website", url } = Astro.props;
+const { title, description = "Bitspace Software - Soluciones digitales confiables y escalables", image, type = "website", url } = Astro.props;
 
 // Generate canonical URL
 const canonicalURL = url ? new URL(url) : new URL(Astro.url.pathname, Astro.site || 'https://bitspace.software');

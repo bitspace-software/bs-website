@@ -4,6 +4,10 @@ import react from '@astrojs/react'; // Add this line
 
 // Determine site URL based on environment
 const getSiteURL = () => {
+  // Production URL - Change this to your actual domain
+  if (process.env.NODE_ENV === 'production') {
+    return 'https://bitspace.software';
+  }
   // For Vercel production deployment
   if (process.env.VERCEL_URL) {
     return `https://${process.env.VERCEL_URL}`;

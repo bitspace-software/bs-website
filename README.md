@@ -1,12 +1,12 @@
 
-# ✨ Astro Blog
+# ✨ Bitspace Software
 
 <p align="center">
-  <img src="public/favicon.svg" alt="Astro Blog Logo" width="120" height="120">
+  <img src="public/favicon.svg" alt="Bitspace Software Logo" width="120" height="120">
 </p>
 
 <p align="center">
-  <strong>A modern, minimalist, high-performance blog platform built with Astro.js</strong>
+  <strong>Soluciones digitales confiables y escalables</strong>
 </p>
 
 <p align="center">
@@ -29,7 +29,7 @@
 ## Features
 
 - 🚀 **Maximum Performance** - Built with Astro.js for lightning-fast static sites
-- 🎨 **Minimalist Design** - Clean UI that focuses on content
+- 🎨 **Modern Design** - Clean UI that focuses on content
 - 🌓 **Light/Dark Mode** - Smooth theme switching
 - 📱 **Responsive** - Perfect experience on all devices
 - ⚡ **SPA Transitions** - Smooth page navigation with transition effects
