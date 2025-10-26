@@ -205,9 +205,9 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
     <!-- Background component with dot pattern and ambient glow -->
     <Background />
     
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 w-full flex-grow">
+    <div class="w-full flex-grow">
       <Navigation />
-      <main id="main-content" class="py-12" role="main">
+      <main id="main-content" role="main">
         <slot />
       </main>
     </div>

@@ -132,7 +132,11 @@
   }
   
   .dark .dark\\:text-brand-accentOrange {
-    color: #F59E0B !important;
+    color: #FFBF00 !important;
+  }
+  
+  .dark .dark\\:bg-brand-accentOrange {
+    background-color: #FFBF00 !important;
   }
   
   .dark .dark\\:bg-brand-accentBlue {
@@ -209,6 +213,52 @@
   
   .dark .text-zinc-700 {
     color: #9CA3AF !important;
+  }
+  
+  /* Force orange color in dark mode for underline and rotating words */
+  .dark .dark\\:bg-brand-accentOrange,
+  .dark [class*="bg-brand-accentOrange"] {
+    background-color: #FFBF00 !important;
+  }
+  
+  /* Force orange text in dark mode */
+  .dark .dark\\:text-brand-accentOrange,
+  .dark [class*="text-brand-accentOrange"] {
+    color: #FFBF00 !important;
+  }
+  
+  /* Force orange for all accent orange variations in dark mode */
+  .dark *[style*="bg-brand-accentOrange"],
+  .dark *[class*="accentOrange"] {
+    background-color: #FFBF00 !important;
+  }
+  
+  .dark *[style*="text-brand-accentOrange"] {
+    color: #FFBF00 !important;
+  }
+  
+  /* Force orange for logo in dark mode with maximum specificity */
+  header a[href="/"].dark\\:text-brand-accentOrange,
+  .dark header a[href="/"],
+  html.dark header a,
+  body.dark header a {
+    color: #FFBF00 !important;
+  }
+  
+  /* Additional specificity for logo */
+  .dark header a.heading-enhanced,
+  .dark header .font-bold.text-xl {
+    color: #FFBF00 !important;
+  }
+  
+  /* Force Bitspace to be orange in dark mode */
+  .dark header a[href="/"] span:first-child {
+    color: #FFBF00 !important;
+  }
+  
+  /* Force Software to be white in dark mode */
+  .dark header a[href="/"] span:last-child {
+    color: #FFFFFF !important;
   }
 }
 

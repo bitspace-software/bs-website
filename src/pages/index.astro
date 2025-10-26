@@ -18,48 +18,296 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
 
 <Layout title="Home | Minimal Blog">
   <!-- Hero Section with improved mobile responsiveness -->
-  <section class="py-10 sm:py-16 md:py-20 px-4 sm:px-6 theme-transition-all">
-    <div class="max-w-2xl mx-auto relative">
+  <section class="py-10 sm:py-16 md:py-20 px-3 sm:px-4 theme-transition-all">
+    <div class="max-w-7xl mx-auto relative">
       <!-- Adjusted blob positions and sizes for better mobile appearance -->
       <div class="absolute -top-10 sm:-top-20 -left-10 sm:-left-20 w-40 sm:w-64 h-40 sm:h-64 bg-primary-100 dark:bg-primary-500/20 rounded-full blur-3xl opacity-50 animate-blob theme-transition-bg"></div>
       <div class="absolute -bottom-10 sm:-bottom-20 -right-10 sm:-right-20 w-40 sm:w-64 h-40 sm:h-64 bg-amber-100 dark:bg-amber-500/20 rounded-full blur-3xl opacity-30 animate-blob animation-delay-2000 theme-transition-bg"></div>
       
-      <div class="relative text-center sm:text-left">
-        <h1 class="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-zinc-900 dark:text-brand-text theme-transition-color">
+      <div class="relative grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+        <!-- Hero Text (Left) -->
+        <div class="text-center sm:text-left lg:sticky lg:top-24 self-start">
+          <h1 class="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-zinc-900 dark:text-brand-text theme-transition-color">
           <span class="block">Datos y</span>
-          <span class="block mt-1">
-            software que
-          </span>
+            <span class="block mt-1">
+              software que
+            </span>
           <span class="block mt-1 relative">
             <span class="relative inline-block">
-              generan impacto real
-              <span class="absolute bottom-0 left-0 w-full h-1 bg-primary-500 dark:bg-brand-accentOrange transform origin-left theme-transition-bg" style="bottom: -10px;"></span>
+                generan
+                <span class="ml-2 inline-block">
+                  <span id="rotating-word">valor real</span>
+                </span>.
+                <span class="absolute bottom-0 left-0 w-full h-1 bg-primary-500 dark:bg-brand-accentOrange transform origin-left theme-transition-bg" style="bottom: -10px;"></span>
+              </span>
             </span>
-          </span>
-        </h1>
-        <p class="mt-6 sm:mt-8 md:mt-10 text-base sm:text-lg md:text-xl text-zinc-600 dark:text-brand-textSecondary leading-relaxed theme-transition-color max-w-2xl mx-auto sm:mx-0">
-          Desarrollamos soluciones digitales confiables y escalables que transforman datos en resultados.
-        </p>
+          </h1>
+          <p class="mt-6 sm:mt-8 md:mt-10 text-base sm:text-lg md:text-xl text-zinc-600 dark:text-brand-textSecondary leading-relaxed theme-transition-color max-w-2xl mx-auto sm:mx-0">
+            Desarrollamos soluciones digitales confiables y escalables que transforman datos en resultados.</p>
+        </div>
         
-        <!-- div class="mt-6 sm:mt-8 md:mt-10 flex flex-wrap gap-3 sm:gap-4 md:gap-6 justify-center sm:justify-start">
-          <a 
-            href="/about" 
-            class="group relative inline-flex items-center gap-2 text-sm font-medium text-zinc-900 dark:text-zinc-100 hover:text-zinc-700 dark:hover:text-zinc-300 transition-all duration-300 theme-transition-color min-h-[44px]"
-          >
-            <span>Sobre mí</span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+        <!-- Elegant Services Preview (Right) -->
+        <div class="hidden lg:block lg:relative">
+          <div class="flex flex-col gap-2 lg:absolute lg:top-0 lg:w-full">
+            <!-- Service 1: Development -->
+            <div class="service-accordion border border-zinc-200/60 dark:border-zinc-800/40 bg-white/80 dark:bg-white backdrop-blur-[2px] rounded-xl hover:shadow-md transition-all duration-300" data-service="dev">
+              <button class="service-header w-full flex items-center gap-4 p-4 cursor-pointer group" data-scroll="fade-in" style="animation-delay: 0.1s;">
+                <div class="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg">
+                  <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                </div>
+                <div class="flex-1 min-w-0 text-left">
+                  <h3 class="font-semibold text-sm text-zinc-900 mb-0.5 theme-transition-color">
+                    Desarrollo
+                  </h3>
+                  <p class="text-xs text-zinc-600 theme-transition-color">
+                    Software a medida
+                  </p>
+                </div>
+                <div class="flex-shrink-0">
+                  <svg class="w-5 h-5 text-zinc-400 group-hover:text-zinc-600 transition-transform duration-300 service-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </button>
+              <div class="service-content px-4 pb-4" style="display: none; max-height: 0; opacity: 0; padding-top: 0; padding-bottom: 0;">
+                <p class="text-sm text-zinc-700 leading-relaxed theme-transition-color">
+                  Aplicaciones web y móviles escalables, construidas con las mejores prácticas y tecnologías modernas. Transformamos tus ideas en software robusto y eficiente.
+                </p>
+              </div>
+            </div>
+            
+            <!-- Service 2: Data & AI -->
+            <div class="service-accordion border border-zinc-200/60 dark:border-zinc-800/40 bg-white/80 dark:bg-white backdrop-blur-[2px] rounded-xl hover:shadow-md transition-all duration-300" data-service="data">
+              <button class="service-header w-full flex items-center gap-4 p-4 cursor-pointer group" data-scroll="fade-in" style="animation-delay: 0.2s;">
+                <div class="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center shadow-lg">
+                  <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                </div>
+                <div class="flex-1 min-w-0 text-left">
+                  <h3 class="font-semibold text-sm text-zinc-900 mb-0.5 theme-transition-color">
+                    Datos & IA
+                  </h3>
+                  <p class="text-xs text-zinc-600 theme-transition-color">
+                    Consultoría inteligente
+                  </p>
+                </div>
+                <div class="flex-shrink-0">
+                  <svg class="w-5 h-5 text-zinc-400 group-hover:text-zinc-600 transition-transform duration-300 service-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </button>
+              <div class="service-content px-4 pb-4" style="display: none; max-height: 0; opacity: 0; padding-top: 0; padding-bottom: 0;">
+                <p class="text-sm text-zinc-700 leading-relaxed theme-transition-color">
+                  Modelos, análisis y pipelines inteligentes que convierten datos en decisiones estratégicas. Desbloqueamos el potencial de tus datos.
+                </p>
+              </div>
+            </div>
+            
+            <!-- Service 3: Integration -->
+            <div class="service-accordion border border-zinc-200/60 dark:border-zinc-800/40 bg-white/80 dark:bg-white backdrop-blur-[2px] rounded-xl hover:shadow-md transition-all duration-300" data-service="integration">
+              <button class="service-header w-full flex items-center gap-4 p-4 cursor-pointer group" data-scroll="fade-in" style="animation-delay: 0.3s;">
+                <div class="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg">
+                  <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                  </svg>
+                </div>
+                <div class="flex-1 min-w-0 text-left">
+                  <h3 class="font-semibold text-sm text-zinc-900 mb-0.5 theme-transition-color">
+                    Integraciones
+                  </h3>
+                  <p class="text-xs text-zinc-600 theme-transition-color">
+                    Sistemas conectados
+                  </p>
+                </div>
+                <div class="flex-shrink-0">
+                  <svg class="w-5 h-5 text-zinc-400 group-hover:text-zinc-600 transition-transform duration-300 service-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </button>
+              <div class="service-content px-4 pb-4" style="display: none; max-height: 0; opacity: 0; padding-top: 0; padding-bottom: 0;">
+                <p class="text-sm text-zinc-700 leading-relaxed theme-transition-color">
+                  APIs, automatización y sistemas interconectados que optimizan tus procesos de negocio. Conectamos tu infraestructura tecnológica.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-6 sm:py-8 px-3 sm:px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-4 sm:mb-6">
+        <h2 class="text-lg sm:text-xl font-medium tracking-tight text-zinc-600 dark:text-brand-textSecondary theme-transition-color mb-1">
+          Lo que dicen nuestros clientes
+        </h2>
+      </div>
+      
+      <!-- Testimonials Slider -->
+      <div class="relative">
+        <div class="testimonials-container overflow-hidden">
+          <div class="testimonials-track flex gap-6 transition-transform duration-500 ease-in-out">
+            <!-- Testimonial 1 -->
+            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3">
+              <div class="h-full flex flex-col">
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-medium text-[10px] flex-shrink-0">
+                    JM
+                  </div>
+                  <div>
+                    <div class="font-medium text-xs text-zinc-700 dark:text-brand-text theme-transition-color">Juan Martínez</div>
+                    <div class="text-[10px] text-zinc-500 dark:text-brand-textSecondary theme-transition-color">CEO, StartupTech</div>
+                  </div>
+                </div>
+                <p class="text-xs text-zinc-500 dark:text-brand-textSecondary leading-snug theme-transition-color flex-1">
+                  "El sistema que desarrollaron revolucionó nuestra operación. La capacidad de escalar sin complicaciones nos permitió crecer 3x en menos de un año."
+                </p>
+              </div>
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3">
+              <div class="h-full flex flex-col">
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="w-6 h-6 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white font-medium text-[10px] flex-shrink-0">
+                    SL
+                  </div>
+                  <div>
+                    <div class="font-medium text-xs text-zinc-700 dark:text-brand-text theme-transition-color">Sara López</div>
+                    <div class="text-[10px] text-zinc-500 dark:text-brand-textSecondary theme-transition-color">Directora de Datos, DataCorp</div>
+                  </div>
+                </div>
+                <p class="text-xs text-zinc-500 dark:text-brand-textSecondary leading-snug theme-transition-color flex-1">
+                  "Gracias a su consultoría, ahora tomamos decisiones basadas en datos reales. Los modelos que implementaron nos han generado insights increíbles."
+                </p>
+              </div>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3">
+              <div class="h-full flex flex-col">
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="w-6 h-6 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-medium text-[10px] flex-shrink-0">
+                    CR
+                  </div>
+                  <div>
+                    <div class="font-medium text-xs text-zinc-700 dark:text-brand-text theme-transition-color">Carlos Rodríguez</div>
+                    <div class="text-[10px] text-zinc-500 dark:text-brand-textSecondary theme-transition-color">CTO, InnovateLab</div>
+                  </div>
+                </div>
+                <p class="text-xs text-zinc-500 dark:text-brand-textSecondary leading-snug theme-transition-color flex-1">
+                  "Las integraciones que desarrollaron unificaron nuestros sistemas dispersos. Finalmente tenemos visibilidad completa del negocio."
+                </p>
+              </div>
+            </div>
+
+            <!-- Testimonial 4 -->
+            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3">
+              <div class="h-full flex flex-col">
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="w-6 h-6 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-white font-medium text-[10px] flex-shrink-0">
+                    AG
+                  </div>
+                  <div>
+                    <div class="font-medium text-xs text-zinc-700 dark:text-brand-text theme-transition-color">Ana García</div>
+                    <div class="text-[10px] text-zinc-500 dark:text-brand-textSecondary theme-transition-color">Product Manager, TechFlow</div>
+                  </div>
+                </div>
+                <p class="text-xs text-zinc-500 dark:text-brand-textSecondary leading-snug theme-transition-color flex-1">
+                  "La calidad del código y la atención al detalle en cada funcionalidad nos impresionó. El equipo fue profesional en todo momento."
+                </p>
+              </div>
+            </div>
+
+            <!-- Testimonial 5 -->
+            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3">
+              <div class="h-full flex flex-col">
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="w-6 h-6 rounded-full bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center text-white font-medium text-[10px] flex-shrink-0">
+                    LR
+                  </div>
+                  <div>
+                    <div class="font-medium text-xs text-zinc-700 dark:text-brand-text theme-transition-color">Luis Ramírez</div>
+                    <div class="text-[10px] text-zinc-500 dark:text-brand-textSecondary theme-transition-color">Fundador, DataVenture</div>
+                  </div>
+                </div>
+                <p class="text-xs text-zinc-500 dark:text-brand-textSecondary leading-snug theme-transition-color flex-1">
+                  "Los reportes automatizados que implementaron ahorran 20 horas semanales. La inversión se pagó sola en el primer mes."
+                </p>
+              </div>
+            </div>
+
+            <!-- Testimonial 6 -->
+            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3">
+              <div class="h-full flex flex-col">
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="w-6 h-6 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center text-white font-medium text-[10px] flex-shrink-0">
+                    MJ
+                  </div>
+                  <div>
+                    <div class="font-medium text-xs text-zinc-700 dark:text-brand-text theme-transition-color">María Jiménez</div>
+                    <div class="text-[10px] text-zinc-500 dark:text-brand-textSecondary theme-transition-color">Directora IT, CorpGlobal</div>
+                  </div>
+                </div>
+                <p class="text-xs text-zinc-500 dark:text-brand-textSecondary leading-snug theme-transition-color flex-1">
+                  "La migración de datos se completó sin interrupciones. El equipo fue meticuloso en cada paso del proceso."
+                </p>
+              </div>
+            </div>
+
+            <!-- Testimonial 7 -->
+            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3">
+              <div class="h-full flex flex-col">
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="w-6 h-6 rounded-full bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center text-white font-medium text-[10px] flex-shrink-0">
+                    DS
+                  </div>
+                  <div>
+                    <div class="font-medium text-xs text-zinc-700 dark:text-brand-text theme-transition-color">Diego Silva</div>
+                    <div class="text-[10px] text-zinc-500 dark:text-brand-textSecondary theme-transition-color">COO, BusinessPlus</div>
+                  </div>
+                </div>
+                <p class="text-xs text-zinc-500 dark:text-brand-textSecondary leading-snug theme-transition-color flex-1">
+                  "La solución implementada aumentó nuestra productividad en un 40%. El ROI superó nuestras expectativas."
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation buttons -->
+        <button 
+          id="testimonials-prev" 
+          class="absolute left-0 top-1/2 -translate-y-1/2 bg-white/50 dark:bg-zinc-800/50 border border-zinc-200/30 dark:border-zinc-700/30 rounded-full p-2 shadow-sm hover:bg-white dark:hover:bg-zinc-800 transition-all theme-transition-all z-10 opacity-60 hover:opacity-100"
+          aria-label="Testimonial anterior"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 text-zinc-600 dark:text-brand-text">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+          </svg>
+        </button>
+        <button 
+          id="testimonials-next" 
+          class="absolute right-0 top-1/2 -translate-y-1/2 bg-white/50 dark:bg-zinc-800/50 border border-zinc-200/30 dark:border-zinc-700/30 rounded-full p-2 shadow-sm hover:bg-white dark:hover:bg-zinc-800 transition-all theme-transition-all z-10 opacity-60 hover:opacity-100"
+          aria-label="Testimonial siguiente"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 text-zinc-600 dark:text-brand-text">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
             </svg>
-            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 dark:bg-accent-500 transition-all duration-300 group-hover:w-full theme-transition-bg"></span>
-          </a>
-        </div -->
+        </button>
       </div>
     </div>
   </section>
 
   <!-- Featured Post Section - Improved for mobile -->
-  <section class="py-10 sm:py-12 md:py-16 px-4 sm:px-6 border-t border-zinc-100 dark:border-zinc-700 theme-transition-all">
-    <div class="max-w-3xl mx-auto">
+  <section class="py-10 sm:py-12 md:py-16 px-3 sm:px-4 border-t border-zinc-100 dark:border-zinc-700 theme-transition-all">
+    <div class="max-w-7xl mx-auto">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8 md:mb-12">
         <div class="flex-1">
           <h2 class="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-zinc-900 dark:text-brand-textSecondary theme-transition-color text-center sm:text-left">Posts Recientes</h2>
@@ -404,9 +652,251 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
   
   // Re-initialize when content changes
   document.addEventListener('astro:page-load', initializeHomepage);
+
+  // Rotating words animation
+  let rotationInterval = null;
+  let currentWordIndex = 0;
+  
+  function initializeRotatingWords() {
+    // Clear existing interval if any
+    if (rotationInterval) {
+      clearInterval(rotationInterval);
+      rotationInterval = null;
+    }
+    
+    const rotatingWord = document.getElementById('rotating-word');
+    if (!rotatingWord) {
+      console.log('⏳ Waiting for rotating-word element...');
+      // Retry after a short delay
+      setTimeout(initializeRotatingWords, 100);
+      return;
+    }
+
+    console.log('✅ Rotating word element found, initializing...');
+    const words = ['valor real', 'impacto', 'crecimiento', 'confianza'];
+    
+    // Set initial word
+    rotatingWord.textContent = words[currentWordIndex];
+
+    function rotateWord() {
+      const rotatingWordEl = document.getElementById('rotating-word');
+      if (!rotatingWordEl) return;
+      
+      // Fade out with transform
+      rotatingWordEl.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+      rotatingWordEl.style.opacity = '0';
+      rotatingWordEl.style.transform = 'translateY(-10px)';
+      
+      setTimeout(() => {
+        currentWordIndex = (currentWordIndex + 1) % words.length;
+        rotatingWordEl.textContent = words[currentWordIndex];
+        
+        // Start from below and fade in
+        rotatingWordEl.style.transform = 'translateY(10px)';
+        rotatingWordEl.style.opacity = '0';
+        
+        // Force reflow before animation starts
+        void rotatingWordEl.offsetHeight;
+        
+        // Fade in with transform
+        rotatingWordEl.style.opacity = '1';
+        rotatingWordEl.style.transform = 'translateY(0)';
+      }, 400);
+    }
+
+    // Start rotation after a delay
+    setTimeout(() => {
+      rotationInterval = setInterval(rotateWord, 2500);
+      console.log('🔄 Rotating words started');
+    }, 1000);
+  }
+
+  document.addEventListener('DOMContentLoaded', initializeRotatingWords);
+  document.addEventListener('astro:page-load', initializeRotatingWords);
+  
+  // Also check when SPA transitions complete
+  document.addEventListener('astro:after-swap', initializeRotatingWords);
+  
+  // Service accordion functionality
+  function initializeServiceAccordions() {
+    const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+    const accordions = document.querySelectorAll('.service-accordion');
+    
+    console.log('Initializing service accordions, found:', accordions.length, 'isDesktop:', isDesktop);
+    
+    // On desktop, disable click handlers - use hover only
+    if (isDesktop) {
+      return;
+    }
+    
+    accordions.forEach((accordion, index) => {
+      const header = accordion.querySelector('.service-header');
+      const content = accordion.querySelector('.service-content');
+      const arrow = accordion.querySelector('.service-arrow');
+      
+      console.log(`Accordion ${index}:`, { header: !!header, content: !!content, arrow: !!arrow });
+      
+      if (header && content && arrow) {
+        header.addEventListener('click', () => {
+          console.log('Accordion clicked!');
+          const isOpen = content.classList.contains('open');
+          console.log('Is open:', isOpen);
+          
+          // Close all other accordions
+          accordions.forEach(acc => {
+            if (acc !== accordion) {
+              const otherContent = acc.querySelector('.service-content');
+              const otherArrow = acc.querySelector('.service-arrow');
+              if (otherContent && otherArrow) {
+                otherContent.classList.remove('open');
+                acc.classList.remove('active');
+                otherArrow.style.transform = 'rotate(0deg)';
+                setTimeout(() => {
+                  if (!otherContent.classList.contains('open')) {
+                    otherContent.style.display = 'none';
+                  }
+                }, 400);
+              }
+            }
+          });
+          
+          // Toggle current accordion
+          if (isOpen) {
+            console.log('Closing accordion');
+            content.classList.remove('open');
+            accordion.classList.remove('active');
+            arrow.style.transform = 'rotate(0deg)';
+            // Reset to hidden state
+            setTimeout(() => {
+              if (!content.classList.contains('open')) {
+                content.style.display = 'none';
+              }
+            }, 400);
+          } else {
+            console.log('Opening accordion');
+            content.style.display = 'block';
+            // Force reflow
+            void content.offsetHeight;
+            content.classList.add('open');
+            accordion.classList.add('active');
+            arrow.style.transform = 'rotate(180deg)';
+          }
+        });
+      }
+    });
+  }
+  
+  document.addEventListener('DOMContentLoaded', initializeServiceAccordions);
+  document.addEventListener('astro:page-load', initializeServiceAccordions);
+  document.addEventListener('astro:after-swap', initializeServiceAccordions);
+  
+  // Testimonials slider functionality
+  function initializeTestimonialsSlider() {
+    const track = document.querySelector('.testimonials-track');
+    const slides = document.querySelectorAll('.testimonial-slide');
+    const prevBtn = document.getElementById('testimonials-prev');
+    const nextBtn = document.getElementById('testimonials-next');
+    
+    if (!track || !slides.length || !prevBtn || !nextBtn) return;
+    
+    let currentIndex = 0;
+    
+    // Function to get visible slides based on screen size
+    function getSlidesPerView() {
+      if (window.matchMedia('(min-width: 1024px)').matches) {
+        return 3; // Desktop: show 3 slides
+      } else if (window.matchMedia('(min-width: 768px)').matches) {
+        return 2; // Tablet: show 2 slides
+      }
+      return 1; // Mobile: show 1 slide
+    }
+    
+    function updateSlider() {
+      const slidesPerView = getSlidesPerView();
+      const totalSlides = slides.length;
+      const maxIndex = Math.max(0, totalSlides - slidesPerView);
+      
+      // Clamp current index to valid range
+      if (currentIndex > maxIndex) {
+        currentIndex = maxIndex;
+      }
+      
+      // Calculate translate value
+      const translateX = -(currentIndex * (100 / slidesPerView));
+      track.style.transform = `translateX(${translateX}%)`;
+      
+      // Toggle button visibility
+      prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
+      prevBtn.style.pointerEvents = currentIndex === 0 ? 'none' : 'auto';
+      
+      nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
+      nextBtn.style.pointerEvents = currentIndex >= maxIndex ? 'none' : 'auto';
+    }
+    
+    prevBtn.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateSlider();
+      }
+    });
+    
+    nextBtn.addEventListener('click', () => {
+      const slidesPerView = getSlidesPerView();
+      const totalSlides = slides.length;
+      const maxIndex = Math.max(0, totalSlides - slidesPerView);
+      
+      if (currentIndex < maxIndex) {
+        currentIndex++;
+        updateSlider();
+      }
+    });
+    
+    // Initialize
+    updateSlider();
+    
+    // Update on resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        currentIndex = 0;
+        updateSlider();
+      }, 100);
+    });
+  }
+  
+  document.addEventListener('DOMContentLoaded', initializeTestimonialsSlider);
+  document.addEventListener('astro:page-load', initializeTestimonialsSlider);
+  document.addEventListener('astro:after-swap', initializeTestimonialsSlider);
 </script>
 
 <style>
+  /* Rotating word animation */
+  #rotating-word {
+    display: inline-block;
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                color 0.3s ease;
+    will-change: opacity, transform;
+  }
+
+  /* Rotating word colors - match underline color for each mode */
+  #rotating-word {
+    color: #3B82F6;
+  }
+
+  /* Rotating word colors - dark mode (orange like the underline) */
+  html.dark #rotating-word,
+  .dark #rotating-word {
+    color: #FFBF00 !important;
+  }
+  
+  /* Additional specificity for dark mode */
+  body.dark #rotating-word,
+  html[class="dark"] #rotating-word {
+    color: #FFBF00 !important;
+  }
+
   /* Fix for theme transition issues */
   :global(:root) {
     --theme-transition-duration: 0.5s;
@@ -423,6 +913,166 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
   
   :global(.theme-transition-bg) {
     transition: background-color var(--theme-transition-duration) var(--theme-transition-timing);
+  }
+
+  /* Elegant service cards fade-in animation */
+  [data-scroll="fade-in"] {
+    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Service accordion animations */
+  .service-accordion {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+
+  .service-content {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: 1.6;
+    transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                padding 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.25s ease-in-out;
+  }
+  
+  .service-accordion {
+    transition: margin-bottom 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .service-accordion .service-content.open {
+    max-height: 350px !important;
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.75rem !important;
+    padding-left: 4rem !important;
+    padding-right: 3rem !important;
+    opacity: 1 !important;
+    display: block !important;
+  }
+
+  .service-arrow {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .service-accordion.active .service-arrow {
+    transform: rotate(180deg);
+  }
+
+  /* Testimonials slider styles */
+  .testimonials-container {
+    margin: 0 -12px;
+    padding: 0 12px;
+  }
+  
+  .testimonials-track {
+    display: flex;
+    width: 100%;
+  }
+  
+  .testimonial-slide {
+    padding: 0 0;
+    min-height: 120px;
+  }
+
+  /* Desktop styling for accordion */
+  @media (min-width: 1024px) {
+    .service-accordion {
+      z-index: 1;
+      margin-bottom: 0;
+      transition: margin-bottom 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .service-accordion:hover {
+      z-index: 10;
+      margin-bottom: 5rem;
+    }
+    
+    /* Transparent background when not hovered */
+    .service-accordion {
+      background: rgba(250, 250, 250, 0.7) !important;
+    }
+    
+    .dark .service-accordion {
+      background: rgba(255, 255, 255, 1) !important;
+    }
+    
+    .service-accordion:hover {
+      background: rgba(250, 250, 250, 0.95) !important;
+    }
+    
+    .dark .service-accordion:hover {
+      background: rgba(255, 255, 255, 1) !important;
+    }
+    
+    .service-accordion .service-content {
+      position: absolute;
+      top: calc(100% - 1px);
+      left: 0;
+      right: 0;
+      width: 100%;
+      background: rgba(250, 250, 250, 0.99);
+      backdrop-filter: blur(8px);
+      border-radius: 0 0 0.75rem 0.75rem;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 10px -2px rgba(0, 0, 0, 0.05);
+      border-top: 1px solid transparent;
+    }
+    
+    .dark .service-accordion .service-content {
+      background: rgba(255, 255, 255, 1);
+    }
+    
+    .service-accordion .service-header {
+      border-radius: 0.75rem;
+      transition: border-radius 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .service-accordion:hover .service-header {
+      border-radius: 0.75rem 0.75rem 0 0;
+      background-color: rgba(250, 250, 250, 0.98);
+    }
+    
+    .dark .service-accordion:hover .service-header {
+      background-color: rgba(255, 255, 255, 1);
+    }
+    
+    /* Show on hover instead of click */
+    .service-accordion:hover .service-content {
+      max-height: 350px !important;
+      padding-top: 0.25rem !important;
+      padding-bottom: 0.75rem !important;
+      padding-left: 4rem !important;
+      padding-right: 3rem !important;
+      opacity: 1 !important;
+      display: block !important;
+    }
+    
+    .service-accordion:hover .service-arrow {
+      transform: rotate(180deg);
+    }
+  }
+  
+  /* Show when clicked (open class) - must be after media query */
+  .service-accordion .service-content.open {
+    display: block !important;
+    max-height: 300px !important;
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
   
   :global(.theme-transition-color) {

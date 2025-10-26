@@ -1,6 +1,5 @@
 ---
 const navItems = [
-  { text: 'Inicio', href: '/' },
   { text: 'Blog', href: '/blog' },
   // { text: 'Etiquetas', href: '/tags' },
   // { text: 'Acerca de', href: '/about' },
@@ -13,36 +12,37 @@ const currentPath = pathname.slice(1); // remove the first "/"
 ---
 
 <header class="py-4 fixed top-0 left-0 right-0 z-40 bg-white/60 dark:bg-brand-background/40 backdrop-blur-lg border-b border-zinc-100/30 dark:border-brand-border/30 theme-transition-all">
-  <div class="max-w-3xl mx-auto px-4 flex items-center justify-between">
+  <div class="max-w-7xl mx-auto px-3 sm:px-4 flex items-center justify-between">
         <!-- Logo -->
-        <a href="/" class="font-bold text-xl text-primary-600 dark:text-brand-accent heading-enhanced tracking-tight">
-          Bitspace Software
+        <a href="/" class="font-bold text-xl tracking-tight">
+          <span class="!text-primary-600 dark:!text-[#FFBF00]">Bitspace</span> <span class="!text-black dark:!text-white">Software</span>
         </a>
     
-    <!-- Desktop Navigation -->
-    <nav class="hidden sm:flex items-center space-x-6">
-      {navItems.map(item => {
-        const isActive = currentPath === (item.href === '/' ? '' : item.href.slice(1));
-        return (
-          <a 
-            href={item.href} 
-            class={`text-sm font-medium ${isActive 
-              ? 'text-zinc-900 dark:text-brand-text' 
-              : 'text-zinc-600 hover:text-zinc-900 dark:text-brand-textSecondary dark:hover:text-brand-text'}`}
-          >
-            {item.text}
-          </a>
-        )
-      })}
-    </nav>
-    
-    <!-- Theme Toggle Button -->
-    <button 
-      id="theme-toggle" 
-      class="hidden sm:flex items-center justify-center w-10 h-10 rounded-lg bg-zinc-100 dark:bg-brand-surface hover:bg-zinc-200 dark:hover:bg-brand-border transition-colors" 
-      aria-label="Cambiar tema"
-      onclick="window.toggleTheme()"
-    >
+    <div class="flex items-center gap-4">
+      <!-- Desktop Navigation -->
+      <nav class="hidden sm:flex items-center space-x-6">
+        {navItems.map(item => {
+          const isActive = currentPath === (item.href === '/' ? '' : item.href.slice(1));
+          return (
+            <a 
+              href={item.href} 
+              class={`text-sm font-medium ${isActive 
+                ? 'text-zinc-900 dark:text-brand-text' 
+                : 'text-zinc-600 hover:text-zinc-900 dark:text-brand-textSecondary dark:hover:text-brand-text'}`}
+            >
+              {item.text}
+            </a>
+          )
+        })}
+      </nav>
+      
+      <!-- Theme Toggle Button -->
+      <button 
+        id="theme-toggle" 
+        class="hidden sm:flex items-center justify-center w-10 h-10 rounded-lg bg-zinc-100 dark:bg-brand-surface hover:bg-zinc-200 dark:hover:bg-brand-border transition-colors" 
+        aria-label="Cambiar tema"
+        onclick="window.toggleTheme()"
+      >
       <!-- Sun icon (visible in dark mode) -->
       <svg class="w-5 h-5 text-zinc-600 dark:text-brand-textSecondary dark:block hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -52,21 +52,22 @@ const currentPath = pathname.slice(1); // remove the first "/"
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
       </svg>
     </button>
-
+    
     <!-- Mobile Menu Button -->
     <button id="mobile-menu-button" class="sm:hidden flex items-center" aria-label="Menú">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-zinc-900 dark:text-white">
         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
       </svg>
     </button>
+    </div>
   </div>
 </header>
 
 <!-- Mobile Menu Overlay -->
 <div id="mobile-menu" class="fixed inset-0 z-50 bg-white/80 dark:bg-brand-background/60 backdrop-blur-xl flex flex-col opacity-0 pointer-events-none transition-all duration-300 ease-in-out">
   <div class="flex justify-between items-center p-4 border-b border-zinc-100/30 dark:border-brand-border/30">
-        <a href="/" class="font-bold text-xl text-primary-600 dark:text-brand-accent heading-enhanced tracking-tight">
-          Bitspace Software
+        <a href="/" class="font-bold text-xl tracking-tight">
+          <span class="!text-primary-600 dark:!text-[#FFBF00]">Bitspace</span> <span class="!text-black dark:!text-white">Software</span>
         </a>
     <button id="close-menu-button" class="text-zinc-900 dark:text-brand-text p-2 rounded-md hover:bg-zinc-100 dark:hover:bg-brand-surface transition-colors" aria-label="Cerrar menú">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -93,21 +94,18 @@ const currentPath = pathname.slice(1); // remove the first "/"
     <div class="pt-4 mobile-nav-item opacity-0 translate-y-4" style="transition-delay: 0.25s;">
       <button 
         id="mobile-theme-toggle" 
-        class="flex items-center justify-center py-3 px-6 rounded-lg bg-zinc-100 dark:bg-brand-surface hover:bg-zinc-200 dark:hover:bg-brand-border transition-colors" 
+        class="flex items-center justify-center w-10 h-10 rounded-lg bg-zinc-100 dark:bg-brand-surface hover:bg-zinc-200 dark:hover:bg-brand-border transition-colors" 
         aria-label="Cambiar tema"
         onclick="window.toggleTheme()"
       >
         <!-- Sun icon (visible in dark mode) -->
-        <svg class="w-5 h-5 text-zinc-600 dark:text-brand-textSecondary dark:block hidden mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-5 h-5 text-zinc-600 dark:text-brand-textSecondary dark:block hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
         </svg>
         <!-- Moon icon (visible in light mode) -->
-        <svg class="w-5 h-5 text-zinc-600 dark:text-brand-textSecondary block dark:hidden mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-5 h-5 text-zinc-600 dark:text-brand-textSecondary block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
         </svg>
-        <span class="text-sm font-medium text-zinc-600 dark:text-brand-textSecondary">
-          Cambiar tema
-        </span>
       </button>
     </div>
   </nav>

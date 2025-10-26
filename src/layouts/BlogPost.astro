@@ -68,14 +68,15 @@ if (heroImage) {
   type="article"
   url={canonicalURL.toString()}
 >
-  <!-- Breadcrumbs -->
-  <Breadcrumbs items={[
-    { label: 'Inicio', href: '/' },
-    { label: 'Blog', href: '/blog' },
-    { label: title }
-  ]} />
-  
-  <article class="prose dark:prose-invert prose-zinc lg:prose-lg mx-auto max-w-4xl">
+  <div class="max-w-4xl mx-auto px-3 sm:px-4 pt-20">
+    <!-- Breadcrumbs -->
+    <Breadcrumbs items={[
+      { label: 'Inicio', href: '/' },
+      { label: 'Blog', href: '/blog' },
+      { label: title }
+    ]} />
+    
+    <article class="prose dark:prose-invert prose-zinc lg:prose-lg">
     <div class="mb-12">
       <h1 class="mb-4 text-2xl font-bold tracking-tight text-zinc-900 dark:text-brand-text sm:text-4xl">
         {title}
@@ -126,10 +127,11 @@ if (heroImage) {
     )}
   </article>
   
-  <!-- Comments Section -->
-  <Comments />
-  
-  <slot name="after-article" />
+    <!-- Comments Section -->
+    <Comments />
+    
+    <slot name="after-article" />
+  </div>
   
   <!-- Article Schema.org JSON-LD -->
   <script type="application/ld+json" set:html={JSON.stringify({
