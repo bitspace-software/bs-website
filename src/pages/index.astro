@@ -382,7 +382,7 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
       <!-- Improved grid for better mobile layout -->
       <div class="grid gap-3 sm:gap-5 md:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {recentPosts.map((post, index) => (
-          <article class="group relative flex flex-col items-start hover-3d theme-transition-element max-w-sm mx-auto sm:mx-0 w-full">
+          <article class="group relative flex flex-col items-center sm:items-start hover-3d theme-transition-element max-w-sm mx-auto w-full">
             <div class="absolute -inset-x-4 -inset-y-6 z-0 scale-95 bg-zinc-50 dark:bg-zinc-800/50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 sm:-inset-x-6 sm:rounded-2xl theme-transition-bg"></div>
             
             {post.data.image && (
