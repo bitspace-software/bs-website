@@ -59,10 +59,10 @@
 
 ```bash
 # Clone repository
-git clone https://github.com/marombeltran/astro-blog
+git clone https://github.com/bitspace-software/bs-website
 
 # Navigate to project directory
-cd astro-blog
+cd bs-website
 
 # Install dependencies
 npm install
