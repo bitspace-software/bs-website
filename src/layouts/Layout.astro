@@ -288,6 +288,16 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
               document.dispatchEvent(new Event('astro:page-load'));
               document.dispatchEvent(new Event('astro:after-swap'));
               console.log('📢 Astro events dispatched for re-initialization');
+              
+              // Re-initialize any page-specific scripts
+              const scripts = document.querySelectorAll('script[data-inline]');
+              scripts.forEach(script => {
+                try {
+                  eval(script.textContent);
+                } catch (e) {
+                  console.error('Error re-evaluating script:', e);
+                }
+              });
             }, 50);
             
             console.log('✅ Transition complete');

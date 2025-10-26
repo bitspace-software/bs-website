@@ -500,9 +500,9 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
   )}
 </Layout>
 
-<script>
+<script data-inline>
   // Add hover effect for cards on touch devices
-  document.addEventListener('DOMContentLoaded', () => {
+  function initHomepage() {
     // Check if it's a touch device
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     
@@ -684,7 +684,18 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
       // If loading screen doesn't exist for some reason
       animateContent();
     }
-  });
+  }
+  
+  // Initialize on first load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHomepage);
+  } else {
+    initHomepage();
+  }
+  
+  // Re-initialize when content changes via SPA
+  document.addEventListener('astro:page-load', initHomepage);
+  document.addEventListener('astro:after-swap', initHomepage);
   
   // Homepage specific initialization - let Layout handle SPA transitions
   function initializeHomepage() {
@@ -697,11 +708,19 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
     }
   }
   
-  // Initialize on first load
-  document.addEventListener('DOMContentLoaded', initializeHomepage);
+  // Initialize immediately and on events
+  function setupHomepageInit() {
+    initializeHomepage();
+  }
   
-  // Re-initialize when content changes
-  document.addEventListener('astro:page-load', initializeHomepage);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupHomepageInit);
+  } else {
+    setupHomepageInit();
+  }
+  
+  document.addEventListener('astro:page-load', setupHomepageInit);
+  document.addEventListener('astro:after-swap', setupHomepageInit);
 
   // Rotating words animation
   let rotationInterval = null;
@@ -761,11 +780,18 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
     }, 1000);
   }
 
-  document.addEventListener('DOMContentLoaded', initializeRotatingWords);
-  document.addEventListener('astro:page-load', initializeRotatingWords);
+  function setupRotatingWords() {
+    initializeRotatingWords();
+  }
   
-  // Also check when SPA transitions complete
-  document.addEventListener('astro:after-swap', initializeRotatingWords);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupRotatingWords);
+  } else {
+    setupRotatingWords();
+  }
+  
+  document.addEventListener('astro:page-load', setupRotatingWords);
+  document.addEventListener('astro:after-swap', setupRotatingWords);
   
   // Service accordion functionality
   function initializeServiceAccordions() {
@@ -843,9 +869,18 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
     });
   }
   
-  document.addEventListener('DOMContentLoaded', initializeServiceAccordions);
-  document.addEventListener('astro:page-load', initializeServiceAccordions);
-  document.addEventListener('astro:after-swap', initializeServiceAccordions);
+  function setupServiceAccordions() {
+    initializeServiceAccordions();
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupServiceAccordions);
+  } else {
+    setupServiceAccordions();
+  }
+  
+  document.addEventListener('astro:page-load', setupServiceAccordions);
+  document.addEventListener('astro:after-swap', setupServiceAccordions);
   
 </script>
 
