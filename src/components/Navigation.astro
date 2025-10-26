@@ -11,14 +11,14 @@ const pathname = new URL(Astro.request.url).pathname;
 const currentPath = pathname.slice(1); // remove the first "/"
 ---
 
-<header class="py-4 fixed top-0 left-0 right-0 z-40 bg-white/60 dark:bg-brand-background/40 backdrop-blur-lg border-b border-zinc-100/30 dark:border-brand-border/30 theme-transition-all">
+<header class="py-3 sm:py-4 fixed top-0 left-0 right-0 z-40 bg-white/60 dark:bg-brand-background/40 backdrop-blur-lg border-b border-zinc-100/30 dark:border-brand-border/30 theme-transition-all">
   <div class="max-w-7xl mx-auto px-3 sm:px-4 flex items-center justify-between">
         <!-- Logo -->
-        <a href="/" class="font-bold text-xl tracking-tight">
+        <a href="/" class="font-bold text-lg sm:text-xl tracking-tight overflow-hidden">
           <span class="!text-primary-600 dark:!text-[#FFBF00]">Bitspace</span> <span class="!text-black dark:!text-white">Software</span>
         </a>
     
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-2 sm:gap-4">
       <!-- Desktop Navigation -->
       <nav class="hidden sm:flex items-center space-x-6">
         {navItems.map(item => {
@@ -54,7 +54,7 @@ const currentPath = pathname.slice(1); // remove the first "/"
     </button>
     
     <!-- Mobile Menu Button -->
-    <button id="mobile-menu-button" class="sm:hidden flex items-center" aria-label="Menú">
+    <button id="mobile-menu-button" class="sm:hidden flex items-center justify-center w-10 h-10 min-w-[44px] min-h-[44px] p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Menú">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-zinc-900 dark:text-white">
         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
       </svg>
@@ -66,10 +66,10 @@ const currentPath = pathname.slice(1); // remove the first "/"
 <!-- Mobile Menu Overlay -->
 <div id="mobile-menu" class="fixed inset-0 z-50 bg-white/80 dark:bg-brand-background/60 backdrop-blur-xl flex flex-col opacity-0 pointer-events-none transition-all duration-300 ease-in-out">
   <div class="flex justify-between items-center p-4 border-b border-zinc-100/30 dark:border-brand-border/30">
-        <a href="/" class="font-bold text-xl tracking-tight">
+        <a href="/" class="font-bold text-lg sm:text-xl tracking-tight overflow-hidden">
           <span class="!text-primary-600 dark:!text-[#FFBF00]">Bitspace</span> <span class="!text-black dark:!text-white">Software</span>
         </a>
-    <button id="close-menu-button" class="text-zinc-900 dark:text-brand-text p-2 rounded-md hover:bg-zinc-100 dark:hover:bg-brand-surface transition-colors" aria-label="Cerrar menú">
+    <button id="close-menu-button" class="text-zinc-900 dark:text-brand-text flex items-center justify-center w-10 h-10 min-w-[44px] min-h-[44px] p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-brand-surface transition-colors" aria-label="Cerrar menú">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
       </svg>
@@ -112,7 +112,7 @@ const currentPath = pathname.slice(1); // remove the first "/"
 </div>
 
 <!-- Spacer to prevent content from hiding behind fixed header -->
-<div class="h-16"></div>
+<div class="h-14 sm:h-16"></div>
 
 <script>
   // Enhanced mobile menu toggle with animations
