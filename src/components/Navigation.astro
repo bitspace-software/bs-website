@@ -11,14 +11,14 @@ const pathname = new URL(Astro.request.url).pathname;
 const currentPath = pathname.slice(1); // remove the first "/"
 ---
 
-<header class="py-2 sm:py-4 fixed top-0 left-0 right-0 z-40 bg-transparent dark:bg-brand-background/80 sm:bg-white/60 dark:sm:bg-brand-background/40 backdrop-blur-lg sm:backdrop-blur-lg border-b border-transparent sm:border-zinc-100/30 dark:border-zinc-800 dark:sm:border-brand-border/30 theme-transition-all overflow-x-hidden">
-  <div class="w-full max-w-7xl mx-auto px-2 sm:px-4 flex items-center gap-2">
+<header class="py-3 sm:py-2 fixed top-0 left-0 right-0 z-40 bg-transparent sm:bg-white/60 dark:bg-transparent sm:dark:bg-brand-background/40 backdrop-blur-lg border-b border-transparent sm:border-zinc-100/30 dark:sm:border-brand-border/30 theme-transition-all">
+  <div class="w-full max-w-7xl mx-auto pl-3 pr-2 sm:pl-0 sm:pr-4 flex items-center min-h-[44px] gap-1 sm:gap-4">
         <!-- Logo -->
-        <a href="/" class="font-normal text-xs sm:text-xl tracking-tight flex-shrink-0 overflow-hidden min-w-0">
-          <span class="!text-primary-600 dark:!text-[#FFBF00]">Bitspace</span><span class="hidden min-[370px]:inline"> <span class="!text-black dark:!text-white">Software</span></span>
+        <a href="/" class="font-normal text-sm sm:text-xl tracking-tighter sm:tracking-tight overflow-hidden inline-flex items-center min-w-0 flex-shrink max-w-[70%] sm:max-w-none">
+          <span class="!text-primary-600 dark:!text-[#FFBF00]">Bitspace</span><span class="hidden min-[380px]:inline ml-1"><span class="!text-black dark:!text-white">Software</span></span>
         </a>
     
-    <div class="flex items-center gap-1 sm:gap-4 flex-shrink-0 ml-auto">
+    <div class="flex items-center gap-0.5 sm:gap-4 flex-shrink-0 ml-auto">
       <!-- Desktop Navigation -->
       <nav class="hidden sm:flex items-center space-x-6">
         {navItems.map(item => {
@@ -54,8 +54,8 @@ const currentPath = pathname.slice(1); // remove the first "/"
     </button>
     
     <!-- Mobile Menu Button -->
-    <button id="mobile-menu-button" class="sm:hidden flex items-center justify-center w-8 h-8 min-w-[36px] min-h-[36px] p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Menú">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-zinc-900 dark:text-white">
+    <button id="mobile-menu-button" class="sm:hidden flex items-center justify-center w-10 h-10 min-w-[44px] min-h-[44px] p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Menú">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-zinc-900 dark:text-white">
         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
       </svg>
     </button>
@@ -112,7 +112,7 @@ const currentPath = pathname.slice(1); // remove the first "/"
 </div>
 
 <!-- Spacer to prevent content from hiding behind fixed header -->
-<div class="h-12 sm:h-16"></div>
+<div class="h-14 sm:h-12"></div>
 
 <script>
   // Enhanced mobile menu toggle with animations
