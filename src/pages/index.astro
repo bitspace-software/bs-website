@@ -20,9 +20,9 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
   <!-- Hero Section with improved mobile responsiveness -->
   <section class="py-10 sm:py-16 md:py-20 px-3 sm:px-4 theme-transition-all">
     <div class="max-w-7xl mx-auto relative">
-      <!-- Adjusted blob positions and sizes for better mobile appearance -->
-      <div class="absolute -top-10 sm:-top-20 -left-10 sm:-left-20 w-40 sm:w-64 h-40 sm:h-64 bg-primary-100 dark:bg-primary-500/20 rounded-full blur-3xl opacity-50 animate-blob theme-transition-bg"></div>
-      <div class="absolute -bottom-10 sm:-bottom-20 -right-10 sm:-right-20 w-40 sm:w-64 h-40 sm:h-64 bg-amber-100 dark:bg-amber-500/20 rounded-full blur-3xl opacity-30 animate-blob animation-delay-2000 theme-transition-bg"></div>
+      <!-- Adjusted blob positions and sizes for better mobile appearance with radial gradient -->
+      <div class="absolute -top-10 sm:-top-20 -left-10 sm:-left-20 w-40 sm:w-64 h-40 sm:h-64 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-500 via-blue-400 to-transparent dark:from-blue-600 dark:via-blue-500/80 rounded-full blur-3xl opacity-40 animate-blob theme-transition-bg"></div>
+      <div class="absolute -bottom-10 sm:-bottom-20 -right-10 sm:-right-20 w-40 sm:w-64 h-40 sm:h-64 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-500 via-orange-400 to-transparent dark:from-amber-600 dark:via-orange-500/80 rounded-full blur-3xl opacity-35 animate-blob animation-delay-2000 theme-transition-bg"></div>
       
       <div class="relative grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
         <!-- Hero Text (Left) -->
@@ -58,21 +58,21 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
                   </svg>
                 </div>
                 <div class="flex-1 min-w-0 text-left">
-                  <h3 class="font-semibold text-sm text-zinc-900 mb-0.5 theme-transition-color">
+                  <h3 class="font-semibold text-sm text-zinc-900 dark:text-white mb-0.5 theme-transition-color">
                     Desarrollo
                   </h3>
-                  <p class="text-xs text-zinc-600 theme-transition-color">
+                  <p class="text-xs text-zinc-600 dark:text-zinc-300 theme-transition-color">
                     Software a medida
                   </p>
                 </div>
                 <div class="flex-shrink-0">
-                  <svg class="w-5 h-5 text-zinc-400 group-hover:text-zinc-600 transition-transform duration-300 service-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-5 h-5 text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-transform duration-300 service-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                   </svg>
                 </div>
               </button>
               <div class="service-content px-4 pb-4" style="display: none; max-height: 0; opacity: 0; padding-top: 0; padding-bottom: 0;">
-                <p class="text-sm text-zinc-700 leading-relaxed theme-transition-color">
+                <p class="text-sm text-zinc-700 dark:text-zinc-200 leading-relaxed theme-transition-color">
                   Aplicaciones web y móviles escalables, construidas con las mejores prácticas y tecnologías modernas. Transformamos tus ideas en software robusto y eficiente.
                 </p>
               </div>
@@ -87,21 +87,21 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
                   </svg>
                 </div>
                 <div class="flex-1 min-w-0 text-left">
-                  <h3 class="font-semibold text-sm text-zinc-900 mb-0.5 theme-transition-color">
+                  <h3 class="font-semibold text-sm text-zinc-900 dark:text-white mb-0.5 theme-transition-color">
                     Datos & IA
                   </h3>
-                  <p class="text-xs text-zinc-600 theme-transition-color">
+                  <p class="text-xs text-zinc-600 dark:text-zinc-300 theme-transition-color">
                     Consultoría inteligente
                   </p>
                 </div>
                 <div class="flex-shrink-0">
-                  <svg class="w-5 h-5 text-zinc-400 group-hover:text-zinc-600 transition-transform duration-300 service-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-5 h-5 text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-transform duration-300 service-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                   </svg>
                 </div>
               </button>
               <div class="service-content px-4 pb-4" style="display: none; max-height: 0; opacity: 0; padding-top: 0; padding-bottom: 0;">
-                <p class="text-sm text-zinc-700 leading-relaxed theme-transition-color">
+                <p class="text-sm text-zinc-700 dark:text-zinc-200 leading-relaxed theme-transition-color">
                   Modelos, análisis y pipelines inteligentes que convierten datos en decisiones estratégicas. Desbloqueamos el potencial de tus datos.
                 </p>
               </div>
@@ -116,21 +116,21 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
                   </svg>
                 </div>
                 <div class="flex-1 min-w-0 text-left">
-                  <h3 class="font-semibold text-sm text-zinc-900 mb-0.5 theme-transition-color">
+                  <h3 class="font-semibold text-sm text-zinc-900 dark:text-white mb-0.5 theme-transition-color">
                     Integraciones
                   </h3>
-                  <p class="text-xs text-zinc-600 theme-transition-color">
+                  <p class="text-xs text-zinc-600 dark:text-zinc-300 theme-transition-color">
                     Sistemas conectados
                   </p>
                 </div>
                 <div class="flex-shrink-0">
-                  <svg class="w-5 h-5 text-zinc-400 group-hover:text-zinc-600 transition-transform duration-300 service-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-5 h-5 text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-transform duration-300 service-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                   </svg>
                 </div>
               </button>
               <div class="service-content px-4 pb-4" style="display: none; max-height: 0; opacity: 0; padding-top: 0; padding-bottom: 0;">
-                <p class="text-sm text-zinc-700 leading-relaxed theme-transition-color">
+                <p class="text-sm text-zinc-700 dark:text-zinc-200 leading-relaxed theme-transition-color">
                   APIs, automatización y sistemas interconectados que optimizan tus procesos de negocio. Conectamos tu infraestructura tecnológica.
                 </p>
               </div>
@@ -141,11 +141,52 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
     </div>
   </section>
 
+  <!-- Nuestros Clientes Section -->
+  <section class="py-8 sm:py-12 md:py-16 px-3 sm:px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-8 sm:mb-12">
+        <h2 class="text-lg sm:text-xl md:text-2xl font-bold tracking-tight text-zinc-900 dark:text-brand-text theme-transition-color mb-3">
+          Nuestros Clientes
+        </h2>
+        <p class="text-sm sm:text-base text-zinc-600 dark:text-brand-textSecondary theme-transition-color max-w-2xl mx-auto">
+          Confían en nosotros para transformar sus ideas en realidad
+        </p>
+      </div>
+      
+      <!-- Clients Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 max-w-4xl mx-auto">
+        <!-- Client 1 -->
+        <div class="flex items-center justify-center p-4 sm:p-6">
+          <div class="text-center">
+            <div class="text-lg sm:text-xl font-normal text-blue-600 dark:text-blue-400 mb-1">COSASE</div>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400">Seguridad</p>
+          </div>
+        </div>
+
+        <!-- Client 2 -->
+        <div class="flex items-center justify-center p-4 sm:p-6">
+          <div class="text-center">
+            <div class="text-lg sm:text-xl font-normal text-blue-600 dark:text-blue-400 mb-1">Marenco Ventiladores</div>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400">Ventilación</p>
+          </div>
+        </div>
+
+        <!-- Client 3 -->
+        <div class="flex items-center justify-center p-4 sm:p-6">
+          <div class="text-center">
+            <div class="text-lg sm:text-xl font-normal text-blue-600 dark:text-blue-400 mb-1">Club Rotario</div>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400">El Salvador</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Tech Stack Section -->
   <section class="py-8 sm:py-12 md:py-16 px-3 sm:px-4">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-6 sm:mb-8 md:mb-12">
-        <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-zinc-900 dark:text-brand-text theme-transition-color mb-2 sm:mb-3">
+        <h2 class="text-lg sm:text-xl md:text-2xl font-bold tracking-tight text-zinc-900 dark:text-brand-text theme-transition-color mb-2 sm:mb-3">
           Nuestro Stack Tecnológico
         </h2>
         <p class="text-xs sm:text-sm md:text-base text-zinc-600 dark:text-brand-textSecondary theme-transition-color max-w-2xl mx-auto px-4">
@@ -293,176 +334,12 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
     </div>
   </section>
 
-  <!-- Testimonials Section -->
-  <section class="py-6 sm:py-8 px-3 sm:px-4">
-    <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-4 sm:mb-6">
-        <h2 class="text-lg sm:text-xl font-medium tracking-tight text-zinc-600 dark:text-brand-textSecondary theme-transition-color mb-1">
-          Lo que dicen nuestros clientes
-        </h2>
-      </div>
-      
-      <!-- Testimonials Slider -->
-      <div class="relative">
-        <div class="testimonials-container overflow-hidden">
-          <div class="testimonials-track flex gap-6 transition-transform duration-500 ease-in-out">
-            <!-- Testimonial 1 -->
-            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3">
-              <div class="h-full flex flex-col">
-                <div class="flex items-center gap-2 mb-2">
-                  <div class="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-medium text-[10px] flex-shrink-0">
-                    JM
-                  </div>
-                  <div>
-                    <div class="font-medium text-xs text-zinc-700 dark:text-brand-text theme-transition-color">Juan Martínez</div>
-                    <div class="text-[10px] text-zinc-500 dark:text-brand-textSecondary theme-transition-color">CEO, StartupTech</div>
-                  </div>
-                </div>
-                <p class="text-xs text-zinc-500 dark:text-brand-textSecondary leading-snug theme-transition-color flex-1">
-                  "El sistema que desarrollaron revolucionó nuestra operación. La capacidad de escalar sin complicaciones nos permitió crecer 3x en menos de un año."
-                </p>
-              </div>
-            </div>
-
-            <!-- Testimonial 2 -->
-            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3">
-              <div class="h-full flex flex-col">
-                <div class="flex items-center gap-2 mb-2">
-                  <div class="w-6 h-6 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white font-medium text-[10px] flex-shrink-0">
-                    SL
-                  </div>
-                  <div>
-                    <div class="font-medium text-xs text-zinc-700 dark:text-brand-text theme-transition-color">Sara López</div>
-                    <div class="text-[10px] text-zinc-500 dark:text-brand-textSecondary theme-transition-color">Directora de Datos, DataCorp</div>
-                  </div>
-                </div>
-                <p class="text-xs text-zinc-500 dark:text-brand-textSecondary leading-snug theme-transition-color flex-1">
-                  "Gracias a su consultoría, ahora tomamos decisiones basadas en datos reales. Los modelos que implementaron nos han generado insights increíbles."
-                </p>
-              </div>
-            </div>
-
-            <!-- Testimonial 3 -->
-            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3">
-              <div class="h-full flex flex-col">
-                <div class="flex items-center gap-2 mb-2">
-                  <div class="w-6 h-6 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-medium text-[10px] flex-shrink-0">
-                    CR
-                  </div>
-                  <div>
-                    <div class="font-medium text-xs text-zinc-700 dark:text-brand-text theme-transition-color">Carlos Rodríguez</div>
-                    <div class="text-[10px] text-zinc-500 dark:text-brand-textSecondary theme-transition-color">CTO, InnovateLab</div>
-                  </div>
-                </div>
-                <p class="text-xs text-zinc-500 dark:text-brand-textSecondary leading-snug theme-transition-color flex-1">
-                  "Las integraciones que desarrollaron unificaron nuestros sistemas dispersos. Finalmente tenemos visibilidad completa del negocio."
-                </p>
-              </div>
-            </div>
-
-            <!-- Testimonial 4 -->
-            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3">
-              <div class="h-full flex flex-col">
-                <div class="flex items-center gap-2 mb-2">
-                  <div class="w-6 h-6 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-white font-medium text-[10px] flex-shrink-0">
-                    AG
-                  </div>
-                  <div>
-                    <div class="font-medium text-xs text-zinc-700 dark:text-brand-text theme-transition-color">Ana García</div>
-                    <div class="text-[10px] text-zinc-500 dark:text-brand-textSecondary theme-transition-color">Product Manager, TechFlow</div>
-                  </div>
-                </div>
-                <p class="text-xs text-zinc-500 dark:text-brand-textSecondary leading-snug theme-transition-color flex-1">
-                  "La calidad del código y la atención al detalle en cada funcionalidad nos impresionó. El equipo fue profesional en todo momento."
-                </p>
-              </div>
-            </div>
-
-            <!-- Testimonial 5 -->
-            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3">
-              <div class="h-full flex flex-col">
-                <div class="flex items-center gap-2 mb-2">
-                  <div class="w-6 h-6 rounded-full bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center text-white font-medium text-[10px] flex-shrink-0">
-                    LR
-                  </div>
-                  <div>
-                    <div class="font-medium text-xs text-zinc-700 dark:text-brand-text theme-transition-color">Luis Ramírez</div>
-                    <div class="text-[10px] text-zinc-500 dark:text-brand-textSecondary theme-transition-color">Fundador, DataVenture</div>
-                  </div>
-                </div>
-                <p class="text-xs text-zinc-500 dark:text-brand-textSecondary leading-snug theme-transition-color flex-1">
-                  "Los reportes automatizados que implementaron ahorran 20 horas semanales. La inversión se pagó sola en el primer mes."
-                </p>
-              </div>
-            </div>
-
-            <!-- Testimonial 6 -->
-            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3">
-              <div class="h-full flex flex-col">
-                <div class="flex items-center gap-2 mb-2">
-                  <div class="w-6 h-6 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center text-white font-medium text-[10px] flex-shrink-0">
-                    MJ
-                  </div>
-                  <div>
-                    <div class="font-medium text-xs text-zinc-700 dark:text-brand-text theme-transition-color">María Jiménez</div>
-                    <div class="text-[10px] text-zinc-500 dark:text-brand-textSecondary theme-transition-color">Directora IT, CorpGlobal</div>
-                  </div>
-                </div>
-                <p class="text-xs text-zinc-500 dark:text-brand-textSecondary leading-snug theme-transition-color flex-1">
-                  "La migración de datos se completó sin interrupciones. El equipo fue meticuloso en cada paso del proceso."
-                </p>
-              </div>
-            </div>
-
-            <!-- Testimonial 7 -->
-            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3">
-              <div class="h-full flex flex-col">
-                <div class="flex items-center gap-2 mb-2">
-                  <div class="w-6 h-6 rounded-full bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center text-white font-medium text-[10px] flex-shrink-0">
-                    DS
-                  </div>
-                  <div>
-                    <div class="font-medium text-xs text-zinc-700 dark:text-brand-text theme-transition-color">Diego Silva</div>
-                    <div class="text-[10px] text-zinc-500 dark:text-brand-textSecondary theme-transition-color">COO, BusinessPlus</div>
-                  </div>
-                </div>
-                <p class="text-xs text-zinc-500 dark:text-brand-textSecondary leading-snug theme-transition-color flex-1">
-                  "La solución implementada aumentó nuestra productividad en un 40%. El ROI superó nuestras expectativas."
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Navigation buttons -->
-        <button 
-          id="testimonials-prev" 
-          class="absolute left-0 top-1/2 -translate-y-1/2 bg-white/50 dark:bg-zinc-800/50 border border-zinc-200/30 dark:border-zinc-700/30 rounded-full p-2 shadow-sm hover:bg-white dark:hover:bg-zinc-800 transition-all theme-transition-all z-10 opacity-60 hover:opacity-100"
-          aria-label="Testimonial anterior"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 text-zinc-600 dark:text-brand-text">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-          </svg>
-        </button>
-        <button 
-          id="testimonials-next" 
-          class="absolute right-0 top-1/2 -translate-y-1/2 bg-white/50 dark:bg-zinc-800/50 border border-zinc-200/30 dark:border-zinc-700/30 rounded-full p-2 shadow-sm hover:bg-white dark:hover:bg-zinc-800 transition-all theme-transition-all z-10 opacity-60 hover:opacity-100"
-          aria-label="Testimonial siguiente"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 text-zinc-600 dark:text-brand-text">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-            </svg>
-        </button>
-      </div>
-    </div>
-  </section>
-
   <!-- Featured Post Section - Improved for mobile -->
   <section class="py-10 sm:py-12 md:py-16 px-3 sm:px-4 border-t border-zinc-100 dark:border-zinc-700 theme-transition-all">
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8 md:mb-12">
         <div class="flex-1">
-          <h2 class="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-zinc-900 dark:text-brand-textSecondary theme-transition-color text-center sm:text-left">Posts Recientes</h2>
+          <h2 class="text-lg sm:text-xl md:text-2xl font-bold tracking-tight text-zinc-900 dark:text-brand-textSecondary theme-transition-color text-center sm:text-left">Posts Recientes</h2>
           <p class="mt-2 text-sm text-zinc-600 dark:text-brand-textSecondary text-center sm:text-left">
             Compartiendo ideas sobre datos y desarrollo de software.
           </p>
@@ -942,84 +819,6 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
   document.addEventListener('astro:page-load', initializeServiceAccordions);
   document.addEventListener('astro:after-swap', initializeServiceAccordions);
   
-  // Testimonials slider functionality
-  function initializeTestimonialsSlider() {
-    const track = document.querySelector('.testimonials-track');
-    const slides = document.querySelectorAll('.testimonial-slide');
-    const prevBtn = document.getElementById('testimonials-prev');
-    const nextBtn = document.getElementById('testimonials-next');
-    
-    if (!track || !slides.length || !prevBtn || !nextBtn) return;
-    
-    let currentIndex = 0;
-    
-    // Function to get visible slides based on screen size
-    function getSlidesPerView() {
-      if (window.matchMedia('(min-width: 1024px)').matches) {
-        return 3; // Desktop: show 3 slides
-      } else if (window.matchMedia('(min-width: 768px)').matches) {
-        return 2; // Tablet: show 2 slides
-      }
-      return 1; // Mobile: show 1 slide
-    }
-    
-    function updateSlider() {
-      const slidesPerView = getSlidesPerView();
-      const totalSlides = slides.length;
-      const maxIndex = Math.max(0, totalSlides - slidesPerView);
-      
-      // Clamp current index to valid range
-      if (currentIndex > maxIndex) {
-        currentIndex = maxIndex;
-      }
-      
-      // Calculate translate value
-      const translateX = -(currentIndex * (100 / slidesPerView));
-      track.style.transform = `translateX(${translateX}%)`;
-      
-      // Toggle button visibility
-      prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
-      prevBtn.style.pointerEvents = currentIndex === 0 ? 'none' : 'auto';
-      
-      nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
-      nextBtn.style.pointerEvents = currentIndex >= maxIndex ? 'none' : 'auto';
-    }
-    
-    prevBtn.addEventListener('click', () => {
-      if (currentIndex > 0) {
-        currentIndex--;
-        updateSlider();
-      }
-    });
-    
-    nextBtn.addEventListener('click', () => {
-      const slidesPerView = getSlidesPerView();
-      const totalSlides = slides.length;
-      const maxIndex = Math.max(0, totalSlides - slidesPerView);
-      
-      if (currentIndex < maxIndex) {
-        currentIndex++;
-        updateSlider();
-      }
-    });
-    
-    // Initialize
-    updateSlider();
-    
-    // Update on resize
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        currentIndex = 0;
-        updateSlider();
-      }, 100);
-    });
-  }
-  
-  document.addEventListener('DOMContentLoaded', initializeTestimonialsSlider);
-  document.addEventListener('astro:page-load', initializeTestimonialsSlider);
-  document.addEventListener('astro:after-swap', initializeTestimonialsSlider);
 </script>
 
 <style>
@@ -1124,51 +923,40 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
     transform: rotate(180deg);
   }
 
-  /* Testimonials slider styles */
-  .testimonials-container {
-    margin: 0 -12px;
-    padding: 0 12px;
-  }
-  
-  .testimonials-track {
-    display: flex;
-    width: 100%;
-  }
-  
-  .testimonial-slide {
-    padding: 0 0;
-    min-height: 120px;
-  }
-
-  /* Desktop styling for accordion */
-  @media (min-width: 1024px) {
-    .service-accordion {
-      z-index: 1;
-      margin-bottom: 0;
-      transition: margin-bottom 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    
-    .service-accordion:hover {
-      z-index: 10;
-      margin-bottom: 5rem;
-    }
-    
-    /* Transparent background when not hovered */
-    .service-accordion {
-      background: rgba(250, 250, 250, 0.6) !important;
-    }
-    
-    .dark .service-accordion {
-      background: rgba(255, 255, 255, 0.6) !important;
-    }
-    
-    .service-accordion:hover {
-      background: rgba(255, 255, 255, 1) !important;
-    }
-    
-    .dark .service-accordion:hover {
-      background: rgba(255, 255, 255, 1) !important;
-    }
+    /* Desktop styling for accordion */
+    @media (min-width: 1024px) {
+      .service-accordion {
+        z-index: 1;
+        margin-bottom: 0;
+        transition: margin-bottom 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      
+      .service-accordion:hover {
+        z-index: 10;
+        margin-bottom: 5rem;
+      }
+      
+      /* Transparent background with backdrop-blur when not hovered */
+      .service-accordion {
+        background: rgba(250, 250, 250, 0.4) !important;
+        backdrop-filter: blur(8px);
+      }
+      
+      /* Dark mode: black background when not hovered */
+      .dark .service-accordion {
+        background: rgba(15, 15, 15, 1) !important;
+      }
+      
+      .service-accordion:hover {
+        background: rgba(250, 250, 250, 0.95) !important;
+        backdrop-filter: blur(12px);
+      }
+      
+      /* Dark mode: when hovered (expanded), use the same style as the sun button */
+      .dark .service-accordion:hover {
+        background: rgba(31, 41, 55, 0.4) !important;
+        backdrop-filter: blur(8px);
+      }
     
     .service-accordion .service-content {
       position: absolute;
@@ -1216,6 +1004,17 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
     
     .service-accordion:hover .service-arrow {
       transform: rotate(180deg);
+    }
+    
+    /* Force text colors when hovered (expanded) */
+    .service-accordion:hover .service-header h3,
+    .service-accordion:hover .service-header p {
+      color: #18181b !important; /* zinc-900 */
+    }
+    
+    .dark .service-accordion:hover .service-header h3,
+    .dark .service-accordion:hover .service-header p {
+      color: #18181b !important; /* zinc-900 for dark backgrounds */
     }
   }
   
