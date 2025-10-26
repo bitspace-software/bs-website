@@ -283,6 +283,13 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
               console.log('🎨 Theme re-applied after SPA navigation');
             });
             
+            // Dispatch Astro events to re-initialize page-specific code
+            setTimeout(() => {
+              document.dispatchEvent(new Event('astro:page-load'));
+              document.dispatchEvent(new Event('astro:after-swap'));
+              console.log('📢 Astro events dispatched for re-initialization');
+            }, 50);
+            
             console.log('✅ Transition complete');
             
           } catch (error) {
