@@ -18,13 +18,9 @@
   <a href="#deployment">Deployment</a> •
 </p>
 
-<p align="center">
-  <img src="public/image.png" alt="Astro Blog Screenshot" width="800">
-</p>
-
 ## Demo
 
-[View Live Demo](https://astro-blog-pi-ashen.vercel.app/)
+[View Live Demo](https://bitspace.software/)
 
 ## Features
 
@@ -63,7 +59,7 @@
 
 ```bash
 # Clone repository
-git clone https://github.com/williamcachamwri/astro-blog
+git clone https://github.com/marombeltran/astro-blog
 
 # Navigate to project directory
 cd astro-blog
