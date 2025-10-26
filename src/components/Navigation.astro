@@ -11,7 +11,7 @@ const pathname = new URL(Astro.request.url).pathname;
 const currentPath = pathname.slice(1); // remove the first "/"
 ---
 
-<header class="py-2 sm:py-4 fixed top-0 left-0 right-0 z-40 bg-transparent sm:bg-white/60 dark:sm:bg-brand-background/40 backdrop-blur-lg sm:backdrop-blur-lg border-b border-transparent sm:border-zinc-100/30 dark:sm:border-brand-border/30 theme-transition-all overflow-x-hidden">
+<header class="py-2 sm:py-4 fixed top-0 left-0 right-0 z-40 bg-transparent dark:bg-brand-background/80 sm:bg-white/60 dark:sm:bg-brand-background/40 backdrop-blur-lg sm:backdrop-blur-lg border-b border-transparent sm:border-zinc-100/30 dark:border-zinc-800 dark:sm:border-brand-border/30 theme-transition-all overflow-x-hidden">
   <div class="w-full max-w-7xl mx-auto px-2 sm:px-4 flex items-center justify-between">
         <!-- Logo -->
         <a href="/" class="font-normal text-sm sm:text-xl tracking-tight flex-shrink min-w-0">
