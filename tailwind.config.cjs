@@ -123,7 +123,7 @@ module.exports = {
           accentBlue: '#3B82F6', // Standard blue for buttons
           black: '#000000',      // Pure black for badges
         },
-        // Paleta Minimalista Profesional - Opción 1
+        // Bitspace Brand Palette - Professional Option 1
         professional: {
           primary: '#3B82F6',    // Azul (tu marca)
           secondary: '#64748B',  // Gris azulado
