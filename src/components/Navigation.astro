@@ -13,10 +13,10 @@ const pathname = new URL(Astro.request.url).pathname;
 const currentPath = pathname.slice(1); // remove the first "/"
 ---
 
-<header class="py-3 sm:py-2 fixed top-0 left-0 right-0 z-40 bg-transparent sm:bg-white/60 dark:bg-transparent sm:dark:bg-brand-background/40 backdrop-blur-lg border-b border-transparent sm:border-zinc-100/30 dark:sm:border-brand-border/30 theme-transition-all">
-  <div class="w-full max-w-7xl mx-auto pl-3 pr-2 sm:pl-0 sm:pr-4 flex items-center min-h-[44px] gap-1 sm:gap-4">
+<header class="py-2.5 sm:py-2 fixed top-0 left-0 right-0 z-40 bg-white/50 dark:bg-brand-background/40 backdrop-blur-lg border-b border-zinc-100/50 dark:border-brand-border/40 theme-transition-all safe-area-top">
+  <div class="w-full max-w-7xl mx-auto px-4 sm:pl-0 sm:pr-4 flex items-center min-h-[48px] sm:min-h-[44px] gap-2 sm:gap-4">
         <!-- Logo -->
-        <a href="/" class="font-normal text-sm sm:text-xl tracking-tighter sm:tracking-tight overflow-hidden inline-flex items-center min-w-0 flex-shrink max-w-[70%] sm:max-w-none">
+        <a href="/" class="font-normal text-base sm:text-xl tracking-tighter sm:tracking-tight overflow-hidden inline-flex items-center min-w-0 flex-shrink-0 sm:max-w-none">
           <span class="!text-primary-600 dark:!text-[#FFBF00]">Bitspace</span><span class="hidden min-[380px]:inline ml-1"><span class="!text-black dark:!text-white">Software</span></span>
         </a>
     
@@ -57,8 +57,8 @@ const currentPath = pathname.slice(1); // remove the first "/"
     </button>
     
     <!-- Mobile Menu Button -->
-    <button id="mobile-menu-button" class="sm:hidden flex items-center justify-center w-10 h-10 min-w-[44px] min-h-[44px] p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Menú">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-zinc-900 dark:text-white">
+    <button id="mobile-menu-button" class="sm:hidden flex items-center justify-center w-10 h-10 min-w-[44px] min-h-[44px] rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 active:bg-zinc-200 dark:active:bg-zinc-700 transition-colors -mr-1" aria-label="Menú">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-zinc-900 dark:text-white">
         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
       </svg>
     </button>
@@ -116,7 +116,7 @@ const currentPath = pathname.slice(1); // remove the first "/"
 </div>
 
 <!-- Spacer to prevent content from hiding behind fixed header -->
-<div class="h-14 sm:h-12"></div>
+<div class="h-[56px] sm:h-12 safe-area-spacer"></div>
 
 <script>
   // Enhanced mobile menu toggle with animations
@@ -211,6 +211,22 @@ const currentPath = pathname.slice(1); // remove the first "/"
 </script>
 
 <style>
+  /* Safe area support for mobile devices with notches */
+  .safe-area-top {
+    padding-top: max(0.625rem, env(safe-area-inset-top));
+  }
+  
+  /* Safe area spacer to prevent content overlap on devices with notches */
+  .safe-area-spacer {
+    height: calc(56px + env(safe-area-inset-top));
+  }
+  
+  @media (min-width: 640px) {
+    .safe-area-spacer {
+      height: calc(48px + env(safe-area-inset-top));
+    }
+  }
+  
   /* Smooth animations for mobile navigation */
   .mobile-nav-item {
     transition: opacity 0.5s ease, transform 0.5s ease, color 0.3s ease;
@@ -230,10 +246,30 @@ const currentPath = pathname.slice(1); // remove the first "/"
     transform: scale(1.05);
   }
   
+  #mobile-menu-button:active {
+    transform: scale(0.95);
+  }
+  
   /* Mobile menu transition */
   #mobile-menu {
     transition: opacity 0.3s ease;
     backdrop-filter: blur(4px);
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+  
+  /* Better touch targets on mobile */
+  @media (max-width: 640px) {
+    header .w-full {
+      padding-left: max(1rem, env(safe-area-inset-left));
+      padding-right: max(0.75rem, env(safe-area-inset-right));
+    }
+  }
+  
+  /* Improve logo readability on small screens */
+  @media (max-width: 380px) {
+    header a {
+      font-size: 0.875rem;
+    }
   }
 </style>
 
