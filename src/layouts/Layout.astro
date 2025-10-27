@@ -293,7 +293,11 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
               const scripts = document.querySelectorAll('script[data-inline]');
               scripts.forEach(script => {
                 try {
-                  eval(script.textContent);
+                  // Create and execute script safely without eval
+                  const newScript = document.createElement('script');
+                  newScript.textContent = script.textContent;
+                  document.head.appendChild(newScript);
+                  document.head.removeChild(newScript);
                 } catch (e) {
                   console.error('Error re-evaluating script:', e);
                 }
