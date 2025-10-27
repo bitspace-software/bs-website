@@ -18,7 +18,7 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
 
 <Layout title="Home | Bitspace Software">
   <!-- Hero Section with improved mobile responsiveness -->
-  <section class="py-12 sm:py-16 md:py-20 px-3 sm:px-4 theme-transition-all">
+  <section class="pt-1 pb-3 sm:pt-6 sm:pb-8 md:pt-10 md:pb-12 px-3 sm:px-4 theme-transition-all">
     <div class="max-w-7xl mx-auto relative">
       <!-- Adjusted blob positions and sizes for better mobile appearance with radial gradient -->
       <div class="absolute -top-10 sm:-top-20 -left-10 sm:-left-20 w-40 sm:w-64 h-40 sm:h-64 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-500 via-blue-400 to-transparent dark:from-blue-600 dark:via-blue-500/80 rounded-full blur-3xl opacity-40 animate-blob theme-transition-bg"></div>
@@ -142,7 +142,7 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
   </section>
 
   <!-- Tech Stack Section -->
-  <section class="py-8 sm:py-4 md:py-5 px-3 sm:px-4">
+  <section class="py-4 md:py-8 px-3 sm:px-4">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-3 sm:mb-4">
         <h2 class="text-lg sm:text-xl md:text-2xl font-bold tracking-tight text-zinc-900 dark:text-brand-text theme-transition-color mb-2 sm:mb-3">
@@ -318,7 +318,7 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
   </section>
 
   <!-- Nuestros Clientes Section -->
-  <section class="py-8 sm:py-6 md:py-8 px-3 sm:px-4">
+  <section class="py-4 md:py-8 px-3 sm:px-4">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-3 sm:mb-4">
         <h2 class="text-lg sm:text-xl md:text-2xl font-bold tracking-tight text-zinc-900 dark:text-brand-text theme-transition-color mb-2 sm:mb-3">
@@ -354,30 +354,30 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
       </div>
 
       <!-- CEO Testimonial -->
-      <div class="mt-5 sm:mt-6 max-w-2xl mx-auto">
+      <div class="mt-4 sm:mt-5 max-w-2xl mx-auto">
         <div class="relative group">
           <!-- Decorative background blob -->
           <div class="absolute inset-0 bg-gradient-to-br from-blue-100/50 to-purple-100/50 dark:from-blue-950/30 dark:to-purple-950/30 rounded-2xl blur-xl opacity-50 group-hover:opacity-70 transition-opacity"></div>
           
-          <div class="relative bg-white dark:bg-zinc-900/95 backdrop-blur-md rounded-xl p-5 sm:p-6 border-2 border-zinc-200/60 dark:border-zinc-700/60 shadow-lg theme-transition-all">
-            <div class="text-center space-y-4">
+          <div class="relative bg-white dark:bg-zinc-900/95 backdrop-blur-md rounded-xl p-4 sm:p-5 border-2 border-zinc-200/60 dark:border-zinc-700/60 theme-transition-all">
+            <div class="text-center space-y-3">
               <!-- Quote icon -->
               <div class="flex justify-center">
-                <div class="p-1.5 rounded-full bg-primary-50 dark:bg-purple-950/40">
-                  <svg class="w-4 h-4 text-primary-600 dark:text-purple-400" fill="currentColor" viewBox="0 0 24 24">
+                <div class="p-1 rounded-full bg-primary-50 dark:bg-purple-950/40">
+                  <svg class="w-3.5 h-3.5 text-primary-600 dark:text-purple-400" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
                   </svg>
                 </div>
               </div>
               
               <!-- Quote text -->
-              <blockquote class="text-sm sm:text-base font-medium text-zinc-800 dark:text-zinc-100 italic leading-relaxed theme-transition-color">
+              <blockquote class="text-sm font-medium text-zinc-800 dark:text-zinc-100 italic leading-relaxed theme-transition-color">
                 "En Bitspace, no solo desarrollamos software, creamos soluciones que transforman datos en decisiones estratégicas. Cada proyecto es una oportunidad de generar impacto real para nuestros clientes."
               </blockquote>
               
               <!-- Author -->
-              <div class="flex items-center justify-center gap-2.5 pt-1">
-                <div class="h-10 w-10 rounded-full bg-gradient-to-br from-primary-500 via-purple-500 to-amber-500 flex items-center justify-center text-white font-bold text-sm shadow-md ring-2 ring-white dark:ring-zinc-800">
+              <div class="flex items-center justify-center gap-2">
+                <div class="h-8 w-8 rounded-full bg-gradient-to-br from-primary-500 via-purple-500 to-amber-500 flex items-center justify-center text-white font-bold text-xs ring-2 ring-white dark:ring-zinc-800">
                   MB
                 </div>
                 <div class="text-left">
@@ -393,7 +393,7 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
   </section>
 
   <!-- Featured Post Section - Compact Design with Glass Effect -->
-  <section class="pt-10 sm:pt-12 pb-8 sm:pb-12 px-3 sm:px-4 border-t border-zinc-100 dark:border-zinc-700 theme-transition-all relative overflow-hidden">
+  <section class="py-4 md:py-8 px-3 sm:px-4 border-t border-zinc-100 dark:border-zinc-700 theme-transition-all relative overflow-hidden">
     <!-- Glass background with brand colors -->
     <div class="absolute inset-0 bg-gradient-to-br from-blue-50/40 via-amber-50/30 to-transparent dark:from-blue-950/30 dark:via-amber-950/25 backdrop-blur-sm"></div>
     

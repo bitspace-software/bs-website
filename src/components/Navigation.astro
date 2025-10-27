@@ -13,55 +13,62 @@ const pathname = new URL(Astro.request.url).pathname;
 const currentPath = pathname.slice(1); // remove the first "/"
 ---
 
-<header class="py-2.5 sm:py-2 fixed top-0 left-0 right-0 z-40 bg-white/50 dark:bg-brand-background/40 backdrop-blur-lg border-b border-zinc-100/50 dark:border-brand-border/40 theme-transition-all safe-area-top">
-  <div class="w-full max-w-7xl mx-auto px-4 sm:pl-0 sm:pr-4 flex items-center min-h-[48px] sm:min-h-[44px] gap-2 sm:gap-4">
-        <!-- Logo -->
-        <a href="/" class="font-normal text-base sm:text-xl tracking-tighter sm:tracking-tight overflow-hidden inline-flex items-center min-w-0 flex-shrink-0 sm:max-w-none">
-          <span class="!text-primary-600 dark:!text-[#FFBF00]">Bitspace</span><span class="hidden min-[380px]:inline ml-1"><span class="!text-black dark:!text-white">Software</span></span>
-        </a>
-    
-    <div class="flex items-center gap-0.5 sm:gap-4 flex-shrink-0 ml-auto">
+<header class="sticky top-0 z-40 w-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border-b border-zinc-200 dark:border-zinc-800">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="flex h-16 items-center justify-between">
+      <!-- Logo -->
+      <a href="/" class="flex items-center">
+        <span class="text-xl font-normal tracking-tight">
+          <span class="text-primary-600 dark:text-[#FFBF00]">Bitspace</span>
+          <span class="hidden sm:inline text-zinc-900 dark:text-white ml-1">Software</span>
+        </span>
+      </a>
+      
       <!-- Desktop Navigation -->
-      <nav class="hidden sm:flex items-center space-x-6">
+      <nav class="hidden md:flex md:items-center md:gap-8">
         {navItems.map(item => {
           const isActive = currentPath === (item.href === '/' ? '' : item.href.slice(1));
           const isAnchor = item.href.startsWith('#');
           return (
             <a 
               href={item.href} 
-              class={`text-sm font-medium ${isActive 
-                ? 'text-zinc-900 dark:text-brand-text' 
-                : 'text-zinc-600 hover:text-zinc-900 dark:text-brand-textSecondary dark:hover:text-brand-text'} ${isAnchor ? 'border-b-2 border-blue-600 dark:border-[#FFBF00]' : ''}`}
+              class={`text-sm font-medium transition-colors ${
+                isActive 
+                  ? 'text-zinc-900 dark:text-white' 
+                  : 'text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white'
+              } ${isAnchor ? 'border-b-2 border-blue-600 dark:border-[#FFBF00] pb-0.5' : ''}`}
             >
               {item.text}
             </a>
           )
         })}
+        
+        <!-- Theme Toggle Desktop -->
+        <button 
+          id="theme-toggle" 
+          class="p-2 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white" 
+          aria-label="Cambiar tema"
+          onclick="window.toggleTheme()"
+        >
+          <svg class="w-5 h-5 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+          <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+        </button>
       </nav>
       
-      <!-- Theme Toggle Button -->
+      <!-- Mobile Menu Button -->
       <button 
-        id="theme-toggle" 
-        class="hidden sm:flex items-center justify-center w-10 h-10 rounded-lg bg-zinc-100 dark:bg-brand-surface hover:bg-zinc-200 dark:hover:bg-brand-border transition-colors" 
-        aria-label="Cambiar tema"
-        onclick="window.toggleTheme()"
+        id="mobile-menu-button" 
+        class="md:hidden p-2 text-zinc-900 dark:text-white" 
+        aria-label="Menú"
       >
-      <!-- Sun icon (visible in dark mode) -->
-      <svg class="w-5 h-5 text-zinc-600 dark:text-brand-textSecondary dark:block hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-      </svg>
-      <!-- Moon icon (visible in light mode) -->
-      <svg class="w-5 h-5 text-zinc-600 dark:text-brand-textSecondary block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-      </svg>
-    </button>
-    
-    <!-- Mobile Menu Button -->
-    <button id="mobile-menu-button" class="sm:hidden flex items-center justify-center w-10 h-10 min-w-[44px] min-h-[44px] rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 active:bg-zinc-200 dark:active:bg-zinc-700 transition-colors -mr-1" aria-label="Menú">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-zinc-900 dark:text-white">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-      </svg>
-    </button>
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
     </div>
   </div>
 </header>
@@ -116,7 +123,7 @@ const currentPath = pathname.slice(1); // remove the first "/"
 </div>
 
 <!-- Spacer to prevent content from hiding behind fixed header -->
-<div class="h-[56px] sm:h-12 safe-area-spacer"></div>
+<div class="h-16"></div>
 
 <script>
   // Enhanced mobile menu toggle with animations
@@ -188,88 +195,19 @@ const currentPath = pathname.slice(1); // remove the first "/"
       }
     });
     
-    // Add smooth animation to header on scroll
-    const header = document.querySelector('header');
-    let lastScrollY = window.scrollY;
-    
-    window.addEventListener('scroll', () => {
-      if (!header) return;
-      
-      const currentScrollY = window.scrollY;
-      
-      // Add shadow on scroll
-      if (currentScrollY > 10) {
-        header.classList.add('shadow-sm');
-      } else {
-        header.classList.remove('shadow-sm');
-      }
-      
-      // Update last scroll position
-      lastScrollY = currentScrollY;
-    });
   });
 </script>
 
 <style>
-  /* Safe area support for mobile devices with notches */
-  .safe-area-top {
-    padding-top: max(0.625rem, env(safe-area-inset-top));
-  }
-  
-  /* Safe area spacer to prevent content overlap on devices with notches */
-  .safe-area-spacer {
-    height: calc(56px + env(safe-area-inset-top));
-  }
-  
-  @media (min-width: 640px) {
-    .safe-area-spacer {
-      height: calc(48px + env(safe-area-inset-top));
-    }
-  }
-  
   /* Smooth animations for mobile navigation */
   .mobile-nav-item {
     transition: opacity 0.5s ease, transform 0.5s ease, color 0.3s ease;
-  }
-  
-  /* Header transition */
-  header {
-    transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
-  }
-  
-  /* Mobile menu button hover effect */
-  #mobile-menu-button {
-    transition: transform 0.2s ease;
-  }
-  
-  #mobile-menu-button:hover {
-    transform: scale(1.05);
-  }
-  
-  #mobile-menu-button:active {
-    transform: scale(0.95);
   }
   
   /* Mobile menu transition */
   #mobile-menu {
     transition: opacity 0.3s ease;
     backdrop-filter: blur(4px);
-    padding-bottom: max(1rem, env(safe-area-inset-bottom));
-  }
-  
-  /* Better touch targets on mobile */
-  @media (max-width: 640px) {
-    header .w-full {
-      padding-left: max(1rem, env(safe-area-inset-left));
-      padding-right: max(0.75rem, env(safe-area-inset-right));
-    }
-  }
-  
-  /* Improve logo readability on small screens */
-  @media (max-width: 380px) {
-    header a {
-      font-size: 0.875rem;
-    }
   }
 </style>
 
