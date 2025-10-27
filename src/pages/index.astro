@@ -352,6 +352,43 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
           </div>
         </div>
       </div>
+
+      <!-- CEO Testimonial -->
+      <div class="mt-5 sm:mt-6 max-w-2xl mx-auto">
+        <div class="relative group">
+          <!-- Decorative background blob -->
+          <div class="absolute inset-0 bg-gradient-to-br from-blue-100/50 to-purple-100/50 dark:from-blue-950/30 dark:to-purple-950/30 rounded-2xl blur-xl opacity-50 group-hover:opacity-70 transition-opacity"></div>
+          
+          <div class="relative bg-white dark:bg-zinc-900/95 backdrop-blur-md rounded-xl p-5 sm:p-6 border-2 border-zinc-200/60 dark:border-zinc-700/60 shadow-lg theme-transition-all">
+            <div class="text-center space-y-4">
+              <!-- Quote icon -->
+              <div class="flex justify-center">
+                <div class="p-1.5 rounded-full bg-primary-50 dark:bg-purple-950/40">
+                  <svg class="w-4 h-4 text-primary-600 dark:text-purple-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                  </svg>
+                </div>
+              </div>
+              
+              <!-- Quote text -->
+              <blockquote class="text-sm sm:text-base font-medium text-zinc-800 dark:text-zinc-100 italic leading-relaxed theme-transition-color">
+                "En Bitspace, no solo desarrollamos software, creamos soluciones que transforman datos en decisiones estratégicas. Cada proyecto es una oportunidad de generar impacto real para nuestros clientes."
+              </blockquote>
+              
+              <!-- Author -->
+              <div class="flex items-center justify-center gap-2.5 pt-1">
+                <div class="h-10 w-10 rounded-full bg-gradient-to-br from-primary-500 via-purple-500 to-amber-500 flex items-center justify-center text-white font-bold text-sm shadow-md ring-2 ring-white dark:ring-zinc-800">
+                  MB
+                </div>
+                <div class="text-left">
+                  <p class="font-semibold text-sm text-zinc-900 dark:text-brand-text theme-transition-color">Marlon Beltrán</p>
+                  <p class="text-xs text-zinc-600 dark:text-zinc-400 theme-transition-color">CEO & Founder, Bitspace</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
