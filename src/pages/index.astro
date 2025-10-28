@@ -781,13 +781,11 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
     
     const rotatingWord = document.getElementById('rotating-word');
     if (!rotatingWord) {
-      console.log('⏳ Waiting for rotating-word element...');
       // Retry after a short delay
       setTimeout(initializeRotatingWords, 100);
       return;
     }
 
-    console.log('✅ Rotating word element found, initializing...');
     const words = ['valor real', 'impacto', 'crecimiento', 'confianza', 'resultados', 'eficiencia', 'rentabilidad', 'éxito'];
     
     // Set initial word
@@ -822,7 +820,6 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
     // Start rotation after a delay
     setTimeout(() => {
       rotationInterval = setInterval(rotateWord, 2500);
-      console.log('🔄 Rotating words started');
     }, 1000);
   }
 
@@ -844,8 +841,6 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
     const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
     const accordions = document.querySelectorAll('.service-accordion');
     
-    console.log('Initializing service accordions, found:', accordions.length, 'isDesktop:', isDesktop);
-    
     // On desktop, add hover only (click is disabled for hover effect)
     if (isDesktop) {
       // Remove any existing click handlers to prevent conflicts
@@ -863,13 +858,9 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
       const content = accordion.querySelector('.service-content');
       const arrow = accordion.querySelector('.service-arrow');
       
-      console.log(`Accordion ${index}:`, { header: !!header, content: !!content, arrow: !!arrow });
-      
       if (header && content && arrow) {
         header.addEventListener('click', () => {
-          console.log('Accordion clicked!');
           const isOpen = content.classList.contains('open');
-          console.log('Is open:', isOpen);
           
           // Close all other accordions
           accordions.forEach(acc => {
@@ -891,7 +882,6 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
           
           // Toggle current accordion
           if (isOpen) {
-            console.log('Closing accordion');
             content.classList.remove('open');
             accordion.classList.remove('active');
             arrow.style.transform = 'rotate(0deg)';
@@ -902,7 +892,6 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
               }
             }, 400);
           } else {
-            console.log('Opening accordion');
             content.style.display = 'block';
             // Force reflow
             void content.offsetHeight;
