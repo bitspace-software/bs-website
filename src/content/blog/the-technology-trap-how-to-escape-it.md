@@ -3,7 +3,7 @@ title: "La trampa de la tecnología: cómo escapar del ciclo infinito"
 description: "Cómo escapar de aprender todas las tecnologías y encontrar un enfoque real para el desarrollo de software."
 pubDate: 2025-09-19
 readingTime: "8 min de lectura"
-tags: ["web development", "carreira"]
+tags: ["web development"]
 draft: false
 ---
 
