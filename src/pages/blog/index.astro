@@ -27,29 +27,29 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))];
 <Layout title="Blog">
   <div class="w-full max-w-6xl mx-auto px-4 sm:px-6 pt-0 pb-10 md:pt-4 md:pb-16">
     <!-- Enhanced header with search - improved responsive spacing -->
-    <div class="relative mb-12 sm:mb-20">
+    <div class="relative mb-6 sm:mb-8">
       <!-- Decorative elements - adjusted for better mobile appearance -->
       <div class="absolute -top-10 sm:-top-20 -left-10 sm:-left-20 w-48 sm:w-72 h-48 sm:h-72 bg-primary-100 dark:bg-primary-500/20 rounded-full blur-3xl opacity-30 animate-blob"></div>
       <div class="absolute -bottom-10 sm:-bottom-20 -right-10 sm:-right-20 w-48 sm:w-72 h-48 sm:h-72 bg-amber-100 dark:bg-amber-500/20 rounded-full blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
       
       <div class="relative text-center">
-               <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-brand-text mb-4">
+               <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-brand-text mb-2">
                  Blog
                </h1>
         
-        <p class="text-sm sm:text-base text-zinc-600 dark:text-brand-text/80 mb-6 sm:mb-10 max-w-2xl mx-auto">
+        <p class="text-sm sm:text-base text-zinc-600 dark:text-brand-text/80 mb-3 sm:mb-4 max-w-2xl mx-auto">
           Ideas, pensamientos y exploraciones sobre datos y tecnología.
         </p>
       </div>
     </div>
     
     <!-- Improved grid layout for better mobile experience -->
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6">
       <!-- Featured post (if exists) - improved mobile layout -->
       {sortedPosts.length > 0 && (
-        <div class="md:col-span-12 mb-8 sm:mb-12">
-          <article class="group relative overflow-hidden rounded-none border-b border-zinc-200 dark:border-zinc-800 pb-6 sm:pb-8">            
-            <div class="flex flex-col md:flex-row h-full gap-6 sm:gap-8">
+        <div class="md:col-span-12 mb-4 sm:mb-6">
+          <article class="group relative overflow-hidden rounded-none border-b border-zinc-200 dark:border-zinc-800 pb-3 sm:pb-4">            
+            <div class="flex flex-col md:flex-row h-full gap-4 sm:gap-6">
               {sortedPosts[0].data.heroImage && (
                 <div class="w-full md:w-1/2 h-60 sm:h-80 md:h-96 overflow-hidden mx-auto md:mx-0 max-w-full sm:max-w-md">
                   <img
@@ -135,16 +135,16 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))];
       <!-- Improved post grid for mobile -->
       <div class="md:col-span-9">
         {years.map((year) => (
-          <div id={`year-${year}`} class="mb-12 sm:mb-20 scroll-mt-16">
-            <h2 class="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100 mb-6 sm:mb-8 border-b border-zinc-200 dark:border-zinc-800 pb-3 sm:pb-4 text-center md:text-left">
+          <div id={`year-${year}`} class="mb-6 sm:mb-10 scroll-mt-16">
+            <h2 class="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100 mb-3 sm:mb-4 border-b border-zinc-200 dark:border-zinc-800 pb-2 sm:pb-3 text-center md:text-left">
               {year}
             </h2>
             
-            <div class={`grid grid-cols-1 ${postsByYear[year].length >= 2 ? 'md:grid-cols-2' : 'md:grid-cols-1'} gap-8 sm:gap-12`}>
+            <div class={`grid grid-cols-1 ${postsByYear[year].length >= 2 ? 'md:grid-cols-2' : 'md:grid-cols-1'} gap-4 sm:gap-6`}>
               {postsByYear[year].map((post, index) => (
                 <article class="group relative flex flex-col h-full mx-auto md:mx-0 w-full max-w-sm sm:max-w-md">
                   {post.data.heroImage && (
-                    <div class="h-48 sm:h-56 overflow-hidden mb-4 rounded-lg">
+                    <div class="h-48 sm:h-56 overflow-hidden mb-3 rounded-lg">
                       <img
                         src={post.data.heroImage}
                         alt={post.data.title}
