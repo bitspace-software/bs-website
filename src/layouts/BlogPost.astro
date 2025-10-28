@@ -29,32 +29,22 @@ try {
 
 const slug = Astro.url.pathname.split('/').filter(Boolean).pop() || ''; // Ensure slug is a string
 
-// Xử lý heroImage an toàn hơn - hỗ trợ cả URL tuyệt đối và đường dẫn tương đối
 let heroImageUrl = null;
 if (heroImage) {
   try {
-    // Kiểm tra nếu là URL đầy đủ
     if (heroImage.startsWith('http')) {
       heroImageUrl = heroImage;
-    } 
-    // Kiểm tra nếu là đường dẫn tương đối
-    else if (heroImage.startsWith('/')) {
-      // Nếu Astro.site tồn tại, sử dụng nó làm cơ sở
+    } else if (heroImage.startsWith('/')) {
       if (Astro.site) {
         heroImageUrl = new URL(heroImage, Astro.site).toString();
-      } 
-      // Nếu không, sử dụng đường dẫn tương đối như đã cung cấp
-      else {
+      } else {
         heroImageUrl = heroImage;
       }
-    }
-    // Trường hợp khác
-    else {
+    } else {
       heroImageUrl = heroImage;
     }
   } catch (error) {
     console.error(`Error processing heroImage: ${heroImage}`, error);
-    // Sử dụng đường dẫn gốc nếu có lỗi
     heroImageUrl = heroImage;
   }
 }
