@@ -21,8 +21,8 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))].sli
   <section class="pt-1 pb-3 sm:pt-6 sm:pb-8 md:pt-10 md:pb-12 px-3 sm:px-4 theme-transition-all">
     <div class="max-w-7xl mx-auto relative">
       <!-- Adjusted blob positions and sizes for better mobile appearance with radial gradient -->
-      <div class="absolute -top-10 sm:-top-20 -left-10 sm:-left-20 w-40 sm:w-64 h-40 sm:h-64 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-500 via-blue-400 to-transparent dark:from-blue-600 dark:via-blue-500/80 rounded-full blur-3xl opacity-40 animate-blob theme-transition-bg"></div>
-      <div class="absolute -bottom-10 sm:-bottom-20 -right-10 sm:-right-20 w-40 sm:w-64 h-40 sm:h-64 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-500 via-orange-400 to-transparent dark:from-amber-600 dark:via-orange-500/80 rounded-full blur-3xl opacity-35 animate-blob animation-delay-2000 theme-transition-bg"></div>
+      <div class="absolute -top-10 sm:-top-20 left-0 sm:-left-20 w-40 sm:w-64 h-40 sm:h-64 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-500 via-blue-400 to-transparent dark:from-blue-600 dark:via-blue-500/80 rounded-full blur-3xl opacity-40 animate-blob theme-transition-bg"></div>
+      <div class="absolute -bottom-10 sm:-bottom-20 right-0 sm:-right-20 w-40 sm:w-64 h-40 sm:h-64 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-500 via-orange-400 to-transparent dark:from-amber-600 dark:via-orange-500/80 rounded-full blur-3xl opacity-35 animate-blob animation-delay-2000 theme-transition-bg"></div>
       
       <div class="relative grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
         <!-- Hero Text (Left) -->
