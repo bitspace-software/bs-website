@@ -30,10 +30,6 @@ const socialLinks = [
   }
 ];
 
-// Spotify credentials from environment variables
-const SPOTIFY_CLIENT_ID = import.meta.env.SPOTIFY_CLIENT_ID;
-const SPOTIFY_CLIENT_SECRET = import.meta.env.SPOTIFY_CLIENT_SECRET;
-const REFRESH_TOKEN = import.meta.env.SPOTIFY_REFRESH_TOKEN;
 ---
 
 <footer class="relative overflow-hidden border-t border-zinc-100/50 dark:border-gray-600/30 theme-transition-all backdrop-blur-sm bg-white/80 dark:bg-[#1A1A1A]/60">
@@ -232,8 +228,7 @@ const REFRESH_TOKEN = import.meta.env.SPOTIFY_REFRESH_TOKEN;
       accessToken = data.access_token;
       lastUpdateTime = Date.now();
       return accessToken;
-    } catch (error) {
-      console.error('Error getting access token:', error);
+    } catch {
       return null;
     }
   }
@@ -256,8 +251,7 @@ const REFRESH_TOKEN = import.meta.env.SPOTIFY_REFRESH_TOKEN;
       }
 
       return await response.json();
-    } catch (error) {
-      console.error('Error fetching currently playing:', error);
+    } catch {
       return null;
     }
   }
@@ -306,8 +300,12 @@ const REFRESH_TOKEN = import.meta.env.SPOTIFY_REFRESH_TOKEN;
           container.classList.remove('marquee-active');
           const pElement = container.querySelector('p');
           // Add null check before accessing textContent
-          const originalText = pElement ? pElement.textContent : '';
-          container.innerHTML = `<p class="${textElement.className}">${originalText}</p>`;
+          const originalText = pElement ? pElement.textContent ?? '' : '';
+          container.innerHTML = '';
+          const restoredP = document.createElement('p');
+          restoredP.className = textElement.className;
+          restoredP.textContent = originalText;
+          container.appendChild(restoredP);
         }
       }
     });
@@ -452,8 +450,8 @@ const REFRESH_TOKEN = import.meta.env.SPOTIFY_REFRESH_TOKEN;
 
       const currentlyPlaying = await getCurrentlyPlaying(token);
       updateNowPlayingUI(currentlyPlaying);
-    } catch (error) {
-      console.error('Error updating Spotify now playing:', error);
+    } catch {
+      // silently fail
     }
   }
 

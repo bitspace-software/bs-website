@@ -28,16 +28,10 @@ export async function getStaticPaths() {
 const { tag } = Astro.params as { tag: string }; // Explicitly type tag as string
 const { posts = [] } = Astro.props;
 
-// Kiểm tra và log số lượng bài viết để debug
-console.log(`Tag: ${tag}, Number of posts: ${posts.length}`);
-
 // Sort posts by date (only if posts array exists and has items)
-const sortedPosts = posts && posts.length > 0 
+const sortedPosts = posts && posts.length > 0
   ? [...posts].sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   : [];
-
-// Log sau khi sắp xếp để kiểm tra
-console.log(`Sorted posts length: ${sortedPosts.length}`);
 
 // Generate a consistent but random-looking hue for the tag
 const tagHue = Math.abs(tag.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % 360);

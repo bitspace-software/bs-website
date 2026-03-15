@@ -76,8 +76,8 @@ const encodedUrl = encodeURIComponent(url);
               tooltip.classList.remove('opacity-100');
             }, 2000);
           }
-        }).catch(err => {
-          console.error('Failed to copy: ', err);
+        }).catch(() => {
+          // Clipboard write failed silently
         });
       });
     });
@@ -113,12 +113,4 @@ const encodedUrl = encodeURIComponent(url);
     document.dispatchEvent(new CustomEvent('share-action-complete'));
   }
   
-  // Add analytics tracking for share actions if needed
-  function trackShareAction(platform) {
-    // You can implement analytics tracking here
-    console.log(`Shared on ${platform}`);
-    
-    // Notify other components that share action is complete
-    notifyShareComplete();
-  }
 </script>

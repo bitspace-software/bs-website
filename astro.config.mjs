@@ -27,14 +27,6 @@ export default defineConfig({
     tailwind(),
     react(),
   ],
-  vite: {
-    // Ensure environment variables are passed to client
-    define: {
-      'import.meta.env.SPOTIFY_CLIENT_ID': JSON.stringify(process.env.SPOTIFY_CLIENT_ID),
-      'import.meta.env.SPOTIFY_CLIENT_SECRET': JSON.stringify(process.env.SPOTIFY_CLIENT_SECRET),
-      'import.meta.env.SPOTIFY_REFRESH_TOKEN': JSON.stringify(process.env.SPOTIFY_REFRESH_TOKEN),
-    },
-  },
   // Security headers
   security: {
     checkOrigin: true,

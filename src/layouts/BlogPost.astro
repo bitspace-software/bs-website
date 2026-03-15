@@ -22,8 +22,7 @@ const { title, description, pubDate, updatedDate, heroImage, readingTime = '5 mi
 let canonicalURL;
 try {
   canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://example.com');
-} catch (error) {
-  console.error('Error creating canonical URL:', error);
+} catch {
   canonicalURL = new URL('https://example.com');
 }
 
@@ -43,8 +42,7 @@ if (heroImage) {
     } else {
       heroImageUrl = heroImage;
     }
-  } catch (error) {
-    console.error(`Error processing heroImage: ${heroImage}`, error);
+  } catch {
     heroImageUrl = heroImage;
   }
 }

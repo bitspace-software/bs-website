@@ -63,19 +63,16 @@ export const GET: APIRoute = async ({ request, url }) => {
 
     const data = await response.json();
 
+    // Log the refresh token to server logs only (never expose in HTTP response)
+    // eslint-disable-next-line no-console
+    console.log(`SPOTIFY_REFRESH_TOKEN=${data.refresh_token}`);
+
     return new Response(`
       <html>
         <body>
           <h1>Authorization Successful!</h1>
-          <h2>Your Refresh Token:</h2>
-          <code style="background: #f0f0f0; padding: 10px; display: block; word-break: break-all;">
-            ${data.refresh_token}
-          </code>
-          <p>Copy this refresh token and add it to your .env file as:</p>
-          <code style="background: #f0f0f0; padding: 5px;">
-            SPOTIFY_REFRESH_TOKEN=${data.refresh_token}
-          </code>
-          <p>Then restart your development server.</p>
+          <p>The refresh token has been logged to the server console.</p>
+          <p>Copy it from there and add it to your .env file as <code>SPOTIFY_REFRESH_TOKEN</code>, then restart the server.</p>
           <a href="/">Back to blog</a>
         </body>
       </html>
@@ -86,7 +83,6 @@ export const GET: APIRoute = async ({ request, url }) => {
       },
     });
   } catch (error) {
-    console.error('Spotify callback error:', error);
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return new Response(`
       <html>

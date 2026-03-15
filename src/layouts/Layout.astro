@@ -65,7 +65,7 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
     <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
     <!-- Critical CSS inline - Complete dark mode support -->
@@ -140,37 +140,29 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
     <!-- Service Worker Unregistration -->
     <script>
       if ('serviceWorker' in navigator) {
-        // Unregister any existing service workers
         navigator.serviceWorker.getRegistrations().then(function(registrations) {
           for(let registration of registrations) {
             registration.unregister();
-            console.log('Service worker unregistered');
           }
         });
-        
-        // Clear all caches
         if ('caches' in window) {
           caches.keys().then(function(cacheNames) {
-            return Promise.all(
-              cacheNames.map(function(cacheName) {
-                return caches.delete(cacheName);
-              })
-            );
-          }).then(function() {
-            console.log('All caches cleared');
+            return Promise.all(cacheNames.map(function(cacheName) {
+              return caches.delete(cacheName);
+            }));
           });
         }
       }
     </script>
     
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <!-- Google Analytics: replace GA_MEASUREMENT_ID with your actual ID (e.g. G-XXXXXXXXXX) -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'GA_MEASUREMENT_ID');
-    </script>
+    </script> -->
     
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
@@ -216,110 +208,105 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
     
     
     <script>
-      // Early theme application - before DOM is ready
+      // Apply theme before first paint to avoid flash
       (function() {
         const theme = localStorage.getItem('theme');
         const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         const shouldBeDark = theme === 'dark' || (!theme && systemPrefersDark);
-        
         if (shouldBeDark) {
           document.documentElement.classList.add('dark');
           document.documentElement.style.backgroundColor = '#0F0F0F';
-          console.log('🌙 Early dark mode applied');
-        } else {
-          document.documentElement.classList.remove('dark');
-          console.log('☀️ Early light mode applied');
         }
       })();
-      
-      // Simplified and robust SPA transition system
+
+      // Apply theme from localStorage/system preference
+      function applyTheme() {
+        const theme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const shouldBeDark = theme === 'dark' || (!theme && systemPrefersDark);
+        if (shouldBeDark) {
+          document.documentElement.classList.add('dark');
+          document.documentElement.style.backgroundColor = '#0F0F0F';
+          document.body.style.backgroundColor = '#0F0F0F';
+        } else {
+          document.documentElement.classList.remove('dark');
+          document.documentElement.style.backgroundColor = '';
+          document.body.style.backgroundColor = '';
+        }
+      }
+
+      // Toggle between dark and light mode
+      function toggleTheme() {
+        const isDark = document.documentElement.classList.contains('dark');
+        localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        applyTheme();
+      }
+
+      // Make toggleTheme globally available for the navigation buttons
+      window.toggleTheme = toggleTheme;
+
+      // Listen for system theme changes (only when no manual preference is set)
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if (!localStorage.getItem('theme')) {
+          applyTheme();
+        }
+      });
+
+      // Sync theme across tabs
+      window.addEventListener('storage', (e) => {
+        if (e.key === 'theme') {
+          applyTheme();
+        }
+      });
+
+      // SPA navigation system
       document.addEventListener('DOMContentLoaded', () => {
-        console.log('🚀 SPA system initializing...');
-        
         const mainContent = document.querySelector('main');
-        
-        // SPA transition function
+
         async function loadContent(url) {
           try {
-            console.log('🔄 Loading:', url);
-            
-            // Fetch new content
             const response = await fetch(url);
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
-            
+
             const html = await response.text();
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
-            
-            // Extract new content
+
             const newContent = doc.querySelector('main');
             const newTitle = doc.querySelector('title');
-            
+
             if (!newContent) throw new Error('No main content found');
-            
-            // Update title first
-            if (newTitle) {
-              document.title = newTitle.textContent;
-            }
-            
-            // Replace content
-            if (mainContent) {
-              mainContent.innerHTML = newContent.innerHTML;
-            }
-            
-            // Scroll to top
+
+            if (newTitle) document.title = newTitle.textContent;
+            if (mainContent) mainContent.innerHTML = newContent.innerHTML;
+
             window.scrollTo({ top: 0, behavior: 'instant' });
-            
-            // Re-attach listeners
             attachLinkListeners();
-            
-            // Force re-apply theme immediately after SPA transition
-            ensureThemePersistence();
-            
-            // Force style recalculation
-            requestAnimationFrame(() => {
-              ensureThemePersistence();
-              document.body.offsetHeight;
-              console.log('🎨 Theme re-applied after SPA navigation');
-            });
-            
-            // Dispatch Astro events to re-initialize page-specific code
+            applyTheme();
+
             setTimeout(() => {
               document.dispatchEvent(new Event('astro:page-load'));
               document.dispatchEvent(new Event('astro:after-swap'));
-              console.log('📢 Astro events dispatched for re-initialization');
-              
-              // Re-initialize any page-specific scripts
-              const scripts = document.querySelectorAll('script[data-inline]');
-              scripts.forEach(script => {
+
+              document.querySelectorAll('script[data-inline]').forEach(script => {
                 try {
-                  // Create and execute script safely without eval
                   const newScript = document.createElement('script');
                   newScript.textContent = script.textContent;
                   document.head.appendChild(newScript);
                   document.head.removeChild(newScript);
-                } catch (e) {
-                  console.error('Error re-evaluating script:', e);
+                } catch {
+                  // ignore script re-evaluation errors
                 }
               });
             }, 50);
-            
-            console.log('✅ Transition complete');
-            
-          } catch (error) {
-            console.error('❌ SPA Error:', error);
-            
-            // Fallback to normal navigation
+
+          } catch {
             window.location.href = url;
           }
         }
-        
-        // Attach link listeners
+
         function attachLinkListeners() {
-          const links = document.querySelectorAll('a:not([data-spa-handled])');
-          
-          links.forEach(link => {
-            // Skip external links, anchors, and special links
+          document.querySelectorAll('a:not([data-spa-handled])').forEach(link => {
             if (
               !link.href.startsWith(window.location.origin) ||
               link.href.includes('#') ||
@@ -329,285 +316,39 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
             ) {
               return;
             }
-            
+
             link.setAttribute('data-spa-handled', 'true');
-            
             link.addEventListener('click', (e) => {
-              // Skip if modifier keys pressed
-              if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) {
-                return;
-              }
-              
+              if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
               const targetHref = link.href;
-              
-              // Skip if same page
-              if (targetHref === window.location.href) {
-                return;
-              }
-              
+              if (targetHref === window.location.href) return;
               e.preventDefault();
-              console.log('🖱️ Navigating to:', targetHref);
-              
-              // Update history
               window.history.pushState({ path: targetHref }, '', targetHref);
-              
-              // Load content
               loadContent(targetHref);
             });
           });
         }
-        
-        // Initial setup
+
         attachLinkListeners();
-        
-        // Handle browser navigation
+
         window.addEventListener('popstate', (e) => {
-          const path = e.state?.path || window.location.href;
-          loadContent(path);
+          loadContent(e.state?.path || window.location.href);
         });
-        
-        console.log('✅ SPA system ready');
-      });
-      
-      // Theme handling
-      function setupThemeHandling() {
-        const theme = localStorage.getItem('theme');
-        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const shouldBeDark = theme === 'dark' || (!theme && systemPrefersDark);
-        
-        console.log('🎨 Setting up theme:', { theme, systemPrefersDark, shouldBeDark });
 
-        // Apply theme class immediately
-        if (shouldBeDark) {
-          document.documentElement.classList.add('dark');
-          // Force immediate styles
-          document.documentElement.style.backgroundColor = '#0F0F0F';
-          document.body.style.backgroundColor = '#0F0F0F';
-          document.body.style.color = '#FFFFFF';
-          console.log('🌙 Dark mode activated');
-        } else {
-          document.documentElement.classList.remove('dark');
-          // Force light mode styles
-          document.documentElement.style.backgroundColor = '';
-          document.body.style.backgroundColor = '';
-          document.body.style.color = '';
-          console.log('☀️ Light mode activated');
+        // Re-apply theme after SPA navigation replaces DOM content
+        const themeObserver = new MutationObserver((mutations) => {
+          const hasMainChange = mutations.some(
+            m => m.type === 'childList' && (m.target as Element).tagName === 'MAIN'
+          );
+          if (hasMainChange) applyTheme();
+        });
+
+        if (mainContent) {
+          themeObserver.observe(mainContent, { childList: true, subtree: false });
         }
 
-        // Force style recalculation
-        requestAnimationFrame(() => {
-          document.body.offsetHeight;
-          document.documentElement.offsetHeight;
-          console.log('🔄 Styles recalculated');
-        });
-      }
-      
-      // Enhanced theme toggle functionality
-      function toggleTheme() {
-        const isDark = document.documentElement.classList.contains('dark');
-        console.log('🔄 Toggling theme from:', isDark ? 'dark' : 'light');
-        
-        // Force immediate theme change
-        if (isDark) {
-          document.documentElement.classList.remove('dark');
-          localStorage.setItem('theme', 'light');
-          
-          // Force light mode styles immediately
-          document.documentElement.style.backgroundColor = '';
-          document.body.style.backgroundColor = '';
-          document.body.style.color = '';
-          
-          // Reset all inline styles for light mode
-          const allElements = document.querySelectorAll('*');
-          allElements.forEach(el => {
-            if (el.classList.contains('bg-white')) {
-              el.style.backgroundColor = '';
-            }
-            if (el.classList.contains('text-zinc-900') || el.classList.contains('text-zinc-800')) {
-              el.style.color = '';
-            }
-            if (el.classList.contains('text-zinc-600') || el.classList.contains('text-zinc-500') || el.classList.contains('text-zinc-400')) {
-              el.style.color = '';
-            }
-          });
-          
-          console.log('☀️ Switched to light mode');
-        } else {
-          document.documentElement.classList.add('dark');
-          localStorage.setItem('theme', 'dark');
-          
-          // Force dark mode styles immediately
-          document.documentElement.style.backgroundColor = '#0F0F0F';
-          document.body.style.backgroundColor = '#0F0F0F';
-          document.body.style.color = '#FFFFFF';
-          
-          // Force all elements to use dark mode colors
-          const allElements = document.querySelectorAll('*');
-          allElements.forEach(el => {
-            if (el.classList.contains('bg-white')) {
-              el.style.backgroundColor = '#0F0F0F';
-            }
-            if (el.classList.contains('text-zinc-900') || el.classList.contains('text-zinc-800')) {
-              el.style.color = '#FFFFFF';
-            }
-            if (el.classList.contains('text-zinc-600') || el.classList.contains('text-zinc-500') || el.classList.contains('text-zinc-400')) {
-              el.style.color = '#9CA3AF';
-            }
-          });
-          
-          console.log('🌙 Switched to dark mode');
-        }
-        
-        // Force immediate style recalculation
-        void document.body.offsetHeight;
-        void document.documentElement.offsetHeight;
-        
-        // Force CSS recalculation by reading computed styles
-        const bodyStyles = getComputedStyle(document.body);
-        const htmlStyles = getComputedStyle(document.documentElement);
-        console.log('🎨 Background:', bodyStyles.backgroundColor);
-        console.log('🎨 Color:', bodyStyles.color);
-        
-        console.log('✅ Theme transition complete');
-      }
-      
-      // Listen for theme changes
-      window.addEventListener('storage', (e) => {
-        if (e.key === 'theme') {
-          setupThemeHandling();
-        }
+        applyTheme();
       });
-      
-      // Listen for system theme changes
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-        if (!localStorage.getItem('theme')) {
-          setupThemeHandling();
-        }
-      });
-      
-      // Make toggleTheme globally available
-      window.toggleTheme = toggleTheme;
-      
-      // Debug function to check theme state
-      window.debugTheme = function() {
-        const isDark = document.documentElement.classList.contains('dark');
-        const storedTheme = localStorage.getItem('theme');
-        const bodyBg = getComputedStyle(document.body).backgroundColor;
-        const bodyColor = getComputedStyle(document.body).color;
-        
-        console.log('🔍 Theme Debug Info:');
-        console.log('- HTML has dark class:', isDark);
-        console.log('- Stored theme:', storedTheme);
-        console.log('- Body background:', bodyBg);
-        console.log('- Body color:', bodyColor);
-        console.log('- System prefers dark:', window.matchMedia('(prefers-color-scheme: dark)').matches);
-      };
-      
-      // Ensure theme persists during SPA navigation - Enhanced version
-      function ensureThemePersistence() {
-        const theme = localStorage.getItem('theme');
-        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const shouldBeDark = theme === 'dark' || (!theme && systemPrefersDark);
-        
-        // Apply theme class
-        if (shouldBeDark) {
-          document.documentElement.classList.add('dark');
-          // Force immediate dark mode styles
-          document.documentElement.style.backgroundColor = '#0F0F0F';
-          document.body.style.backgroundColor = '#0F0F0F';
-          document.body.style.color = '#FFFFFF';
-          
-          // Force all elements to use dark mode colors
-          const allElements = document.querySelectorAll('*');
-          allElements.forEach(el => {
-            if (el.classList.contains('bg-white')) {
-              el.style.backgroundColor = '#0F0F0F';
-            }
-            if (el.classList.contains('text-zinc-900') || el.classList.contains('text-zinc-800')) {
-              el.style.color = '#FFFFFF';
-            }
-            if (el.classList.contains('text-zinc-600') || el.classList.contains('text-zinc-500') || el.classList.contains('text-zinc-400')) {
-              el.style.color = '#9CA3AF';
-            }
-          });
-        } else {
-          document.documentElement.classList.remove('dark');
-          // Force light mode styles
-          document.documentElement.style.backgroundColor = '';
-          document.body.style.backgroundColor = '';
-          document.body.style.color = '';
-          
-          // Reset inline styles for light mode
-          const allElements = document.querySelectorAll('*');
-          allElements.forEach(el => {
-            if (el.classList.contains('bg-white')) {
-              el.style.backgroundColor = '';
-            }
-            if (el.classList.contains('text-zinc-900') || el.classList.contains('text-zinc-800')) {
-              el.style.color = '';
-            }
-            if (el.classList.contains('text-zinc-600') || el.classList.contains('text-zinc-500') || el.classList.contains('text-zinc-400')) {
-              el.style.color = '';
-            }
-          });
-        }
-        
-        console.log('🔄 Theme persistence applied:', shouldBeDark ? 'dark' : 'light');
-      }
-      
-      // Run theme persistence check periodically
-      setInterval(ensureThemePersistence, 1000);
-      
-      // Enhanced Observer to detect DOM changes and re-apply theme
-      const themeObserver = new MutationObserver((mutations) => {
-        let shouldReapply = false;
-        
-        mutations.forEach((mutation) => {
-          // Check if main content changed
-          if (mutation.type === 'childList' && mutation.target.tagName === 'MAIN') {
-            shouldReapply = true;
-          }
-          // Check if any child elements were added
-          if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-            shouldReapply = true;
-          }
-        });
-        
-        if (shouldReapply) {
-          // Apply theme immediately
-          ensureThemePersistence();
-          
-          // Also apply after a short delay to catch any async content
-          setTimeout(() => {
-            ensureThemePersistence();
-            console.log('🔄 Theme re-applied after DOM change');
-          }, 100);
-        }
-      });
-      
-      // Start observing when DOM is ready
-      document.addEventListener('DOMContentLoaded', () => {
-        const mainElement = document.querySelector('main');
-        if (mainElement) {
-          themeObserver.observe(mainElement, { 
-            childList: true, 
-            subtree: true,
-            attributes: false,
-            characterData: false
-          });
-          console.log('👀 Enhanced theme observer started');
-        }
-        
-        // Also observe the entire document for any theme-related changes
-        themeObserver.observe(document.documentElement, {
-          childList: true,
-          subtree: true,
-          attributes: true,
-          attributeFilter: ['class']
-        });
-      });
-      
-      document.addEventListener('DOMContentLoaded', setupThemeHandling);
     </script>
   </body>
 </html>
