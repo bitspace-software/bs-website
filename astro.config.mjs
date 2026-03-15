@@ -1,7 +1,6 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
-import node from '@astrojs/node';
 
 // Determine site URL based on environment
 const getSiteURL = () => {
@@ -28,13 +27,8 @@ export default defineConfig({
     tailwind(),
     react(),
   ],
-  adapter: node({ mode: 'standalone' }),
-  // Security headers
-  security: {
-    checkOrigin: true,
-  },
-  // Output configuration — server: SSR with adapter, individual pages can use prerender = true
-  output: 'server',
+  // Output configuration — static: fully pre-rendered, served directly by Apache
+  output: 'static',
   // Build configuration
   build: {
     assets: '_astro',
