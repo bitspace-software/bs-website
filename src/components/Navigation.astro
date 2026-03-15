@@ -18,6 +18,7 @@ const pathname = new URL(Astro.request.url).pathname;
       <nav class="hidden md:flex md:items-center md:gap-7">
 
         <a href="/#servicios"
+          data-scroll-to="servicios"
           class="text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors">
           Servicios
         </a>
@@ -32,14 +33,14 @@ const pathname = new URL(Astro.request.url).pathname;
           </button>
           <div class="absolute top-full -left-2 pt-1 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50">
             <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl shadow-lg overflow-hidden">
-              <a href="/financial-os"
-                class="flex flex-col px-4 py-3 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
+              <a href="#" data-subscribe-modal="Financial OS"
+                class="flex flex-col px-4 py-3 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors cursor-pointer">
                 <span class="text-sm font-medium text-zinc-900 dark:text-white">Financial OS</span>
                 <span class="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">Gestión financiera operacional</span>
               </a>
               <div class="border-t border-zinc-100 dark:border-zinc-800"></div>
-              <a href="/bulk-invoice"
-                class="flex flex-col px-4 py-3 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
+              <a href="#" data-subscribe-modal="Bulk Invoice"
+                class="flex flex-col px-4 py-3 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors cursor-pointer">
                 <span class="text-sm font-medium text-zinc-900 dark:text-white">Bulk Invoice</span>
                 <span class="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">Facturación masiva automatizada</span>
               </a>
@@ -69,7 +70,7 @@ const pathname = new URL(Astro.request.url).pathname;
 
         <!-- CTA Button -->
         <a
-          href="https://wa.me/50578410264"
+          href="https://wa.me/50378410264"
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center gap-2 px-4 py-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-semibold rounded-lg hover:bg-zinc-700 dark:hover:bg-zinc-100 transition-colors"
@@ -124,15 +125,15 @@ const pathname = new URL(Astro.request.url).pathname;
   </div>
 
   <nav class="flex-1 flex flex-col px-6 py-6 space-y-1 overflow-y-auto">
-    <a href="/#servicios" class="mobile-nav-item opacity-0 translate-y-4 py-3.5 text-lg font-medium text-zinc-900 dark:text-white border-b border-zinc-100 dark:border-zinc-800">
+    <a href="/#servicios" data-scroll-to="servicios" class="mobile-nav-item opacity-0 translate-y-4 py-3.5 text-lg font-medium text-zinc-900 dark:text-white border-b border-zinc-100 dark:border-zinc-800">
       Servicios
     </a>
 
     <div class="mobile-nav-item opacity-0 translate-y-4 border-b border-zinc-100 dark:border-zinc-800 pb-3">
       <p class="py-3.5 text-lg font-medium text-zinc-900 dark:text-white">Productos</p>
       <div class="pl-4 space-y-2">
-        <a href="/financial-os" class="block py-1.5 text-base text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Financial OS</a>
-        <a href="/bulk-invoice" class="block py-1.5 text-base text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Bulk Invoice</a>
+        <a href="#" data-subscribe-modal="Financial OS" class="block py-1.5 text-base text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Financial OS</a>
+        <a href="#" data-subscribe-modal="Bulk Invoice" class="block py-1.5 text-base text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Bulk Invoice</a>
       </div>
     </div>
 
@@ -142,7 +143,7 @@ const pathname = new URL(Astro.request.url).pathname;
 
     <div class="mobile-nav-item opacity-0 translate-y-4 pt-6">
       <a
-        href="https://wa.me/50578410264"
+        href="https://wa.me/50378410264"
         target="_blank"
         rel="noopener noreferrer"
         class="flex items-center justify-center gap-2 w-full py-3.5 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-semibold rounded-xl transition-colors"

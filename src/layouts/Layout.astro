@@ -80,7 +80,6 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
       
       /* Dark mode critical styles - applied immediately */
       .dark {
-        background-color: #0F0F0F !important;
         color: #FFFFFF !important;
       }
       
@@ -193,7 +192,30 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
   <body class="bg-white dark:bg-brand-background text-zinc-900 dark:text-brand-text min-h-screen flex flex-col">
     <!-- Skip to content link -->
     <SkipLink />
-    
+
+    <!-- Subscribe Modal -->
+    <div id="subscribe-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200">
+      <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="subscribe-modal-backdrop"></div>
+      <div class="relative w-full max-w-md bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl border border-zinc-200 dark:border-zinc-700 p-7">
+        <button id="subscribe-modal-close" class="absolute top-4 right-4 p-1.5 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+        <div class="mb-5">
+          <span id="modal-product-badge" class="inline-block text-xs font-semibold px-2.5 py-1 rounded-full mb-3 bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 ring-1 ring-blue-200 dark:ring-blue-800"></span>
+          <h3 class="text-xl font-bold text-zinc-900 dark:text-white">Sé el primero en saberlo</h3>
+          <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-1">Te avisamos cuando esté disponible. Sin spam.</p>
+        </div>
+        <div class="flex flex-col gap-3">
+          <input id="modal-name" type="text" placeholder="Tu nombre" class="w-full px-4 py-2.5 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500/40"/>
+          <input id="modal-email" type="email" placeholder="Tu correo electrónico" class="w-full px-4 py-2.5 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500/40"/>
+          <button id="modal-submit" class="w-full py-2.5 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-semibold rounded-xl hover:bg-zinc-700 dark:hover:bg-zinc-100 transition-colors">Notifícame</button>
+          <p id="modal-msg" class="hidden text-sm text-center font-medium"></p>
+        </div>
+      </div>
+    </div>
+
     <!-- Background component with dot pattern and ambient glow -->
     <Background />
     
@@ -226,7 +248,7 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
         const shouldBeDark = theme === 'dark' || (!theme && systemPrefersDark);
         if (shouldBeDark) {
           document.documentElement.classList.add('dark');
-          document.documentElement.style.backgroundColor = '#0F0F0F';
+          document.documentElement.style.backgroundColor = '';
           document.body.style.backgroundColor = '#0F0F0F';
         } else {
           document.documentElement.classList.remove('dark');
@@ -258,6 +280,108 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
           applyTheme();
         }
       });
+
+      // ── Subscribe Modal ─────────────────────────────────────────────────
+      const modal = document.getElementById('subscribe-modal')!;
+      const modalClose = document.getElementById('subscribe-modal-close')!;
+      const modalBackdrop = document.getElementById('subscribe-modal-backdrop')!;
+      const modalBadge = document.getElementById('modal-product-badge')!;
+      const modalName = document.getElementById('modal-name') as HTMLInputElement;
+      const modalEmail = document.getElementById('modal-email') as HTMLInputElement;
+      const modalSubmit = document.getElementById('modal-submit') as HTMLButtonElement;
+      const modalMsg = document.getElementById('modal-msg')!;
+      let currentProduct = '';
+
+      function openModal(product: string) {
+        currentProduct = product;
+        modalBadge.textContent = product;
+        modalName.value = '';
+        modalEmail.value = '';
+        modalMsg.classList.add('hidden');
+        modalSubmit.disabled = false;
+        modalSubmit.textContent = 'Notifícame';
+        modalSubmit.classList.remove('hidden');
+        modal.classList.remove('pointer-events-none', 'opacity-0');
+        modal.classList.add('pointer-events-auto', 'opacity-100');
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => modalName.focus(), 100);
+      }
+
+      function closeModal() {
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        modal.classList.remove('opacity-100', 'pointer-events-auto');
+        document.body.style.overflow = '';
+      }
+
+      modalClose.addEventListener('click', closeModal);
+      modalBackdrop.addEventListener('click', closeModal);
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+      modalSubmit.addEventListener('click', async () => {
+        const name = modalName.value.trim();
+        const email = modalEmail.value.trim();
+        if (!name || !email) {
+          modalMsg.textContent = 'Por favor completa nombre y correo.';
+          modalMsg.className = 'text-sm text-center text-red-500 font-medium';
+          modalMsg.classList.remove('hidden');
+          return;
+        }
+        modalSubmit.disabled = true;
+        modalSubmit.textContent = 'Enviando...';
+        try {
+          const res = await fetch('/api/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, product: currentProduct }),
+          });
+          const data = await res.json();
+          if (res.ok && data.success) {
+            modalMsg.textContent = '¡Listo! Te avisamos cuando esté disponible.';
+            modalMsg.className = 'text-sm text-center text-green-600 dark:text-green-400 font-medium';
+            modalMsg.classList.remove('hidden');
+            modalSubmit.classList.add('hidden');
+          } else throw new Error(data.error ?? 'Error');
+        } catch (err: any) {
+          modalMsg.textContent = err.message ?? 'Ocurrió un error. Intenta de nuevo.';
+          modalMsg.className = 'text-sm text-center text-red-500 font-medium';
+          modalMsg.classList.remove('hidden');
+          modalSubmit.disabled = false;
+          modalSubmit.textContent = 'Notifícame';
+        }
+      });
+
+      function attachModalTriggers() {
+        document.querySelectorAll('[data-subscribe-modal]').forEach(el => {
+          if (el.dataset.modalHandled) return;
+          el.dataset.modalHandled = 'true';
+          el.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal((el as HTMLElement).dataset.subscribeModal!);
+          });
+        });
+      }
+      document.addEventListener('DOMContentLoaded', attachModalTriggers);
+      document.addEventListener('astro:page-load', attachModalTriggers);
+      document.addEventListener('astro:after-swap', attachModalTriggers);
+
+      // ── Smooth scroll for data-scroll-to links ──────────────────────────
+      function attachScrollHandlers() {
+        document.querySelectorAll('[data-scroll-to]').forEach(el => {
+          if (el.dataset.scrollHandled) return;
+          el.dataset.scrollHandled = 'true';
+          el.addEventListener('click', (e) => {
+            const id = (el as HTMLElement).dataset.scrollTo!;
+            const target = document.getElementById(id);
+            if (target) {
+              e.preventDefault();
+              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          });
+        });
+      }
+      document.addEventListener('DOMContentLoaded', attachScrollHandlers);
+      document.addEventListener('astro:page-load', attachScrollHandlers);
+      document.addEventListener('astro:after-swap', attachScrollHandlers);
 
       // SPA navigation system
       document.addEventListener('DOMContentLoaded', () => {

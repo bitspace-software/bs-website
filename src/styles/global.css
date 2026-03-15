@@ -34,9 +34,14 @@
   
   .dark body {
     background-color: #0F0F0F !important;
+    background-image:
+      radial-gradient(circle, rgba(255, 255, 255, 0.15) 1.4px, transparent 1.4px),
+      radial-gradient(ellipse at -5% 5%, rgba(59, 130, 246, 0.25) 0%, transparent 50%),
+      radial-gradient(ellipse at 108% 40%, rgba(245, 158, 11, 0.18) 0%, transparent 50%) !important;
+    background-size: 24px 24px, 100% 100%, 100% 100% !important;
     color: #FFFFFF !important;
   }
-  
+
   /* Text colors matching Kent's site - Enhanced specificity */
   .dark .text-zinc-600,
   .dark .text-zinc-400,
@@ -187,6 +192,11 @@
   /* Force immediate application of dark mode colors */
   .dark body {
     background-color: #0F0F0F !important;
+    background-image:
+      radial-gradient(circle, rgba(255, 255, 255, 0.15) 1.4px, transparent 1.4px),
+      radial-gradient(ellipse at -5% 5%, rgba(59, 130, 246, 0.25) 0%, transparent 50%),
+      radial-gradient(ellipse at 108% 40%, rgba(245, 158, 11, 0.18) 0%, transparent 50%) !important;
+    background-size: 24px 24px, 100% 100%, 100% 100% !important;
     color: #FFFFFF !important;
   }
   
@@ -251,6 +261,11 @@
     color: #FFBF00 !important;
   }
   
+  /* Hero accent text matches logo color */
+  .dark .hero-accent {
+    color: #FFBF00 !important;
+  }
+
   /* Force Bitspace to be orange in dark mode */
   .dark header a[href="/"] span:first-child {
     color: #FFBF00 !important;
