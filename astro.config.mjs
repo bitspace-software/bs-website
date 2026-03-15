@@ -33,8 +33,8 @@ export default defineConfig({
   security: {
     checkOrigin: true,
   },
-  // Output configuration — hybrid: pages are static, API routes are server-rendered
-  output: 'hybrid',
+  // Output configuration — server: SSR with adapter, individual pages can use prerender = true
+  output: 'server',
   // Build configuration
   build: {
     assets: '_astro',
