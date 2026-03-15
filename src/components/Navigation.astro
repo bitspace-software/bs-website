@@ -1,21 +1,11 @@
 ---
-const navItems = [
-  { text: 'ERP', href: '#erp' },
-  { text: 'Bulk Invoice', href: '#bulk-invoice' },
-  { text: 'Blog', href: '/blog' },
-  // { text: 'Etiquetas', href: '/tags' },
-  // { text: 'Acerca de', href: '/about' },
-  { text: 'RSS', href: '/rss.xml' },
-];
-
-// Get current path for active link highlighting
 const pathname = new URL(Astro.request.url).pathname;
-const currentPath = pathname.slice(1); // remove the first "/"
 ---
 
-<header class="sticky top-0 z-40 w-full md:bg-white/80 md:dark:bg-zinc-900/80 md:backdrop-blur-sm">
+<header class="sticky top-0 z-40 w-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border-b border-zinc-100/50 dark:border-zinc-800/50">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="flex h-16 items-center justify-between">
+
       <!-- Logo -->
       <a href="/" class="flex items-center">
         <span class="text-xl font-normal tracking-tight">
@@ -23,30 +13,49 @@ const currentPath = pathname.slice(1); // remove the first "/"
           <span class="hidden sm:inline text-zinc-900 dark:text-white ml-1">Software</span>
         </span>
       </a>
-      
+
       <!-- Desktop Navigation -->
-      <nav class="hidden md:flex md:items-center md:gap-8">
-        {navItems.map(item => {
-          const isActive = currentPath === (item.href === '/' ? '' : item.href.slice(1));
-          const isAnchor = item.href.startsWith('#');
-          return (
-            <a 
-              href={item.href} 
-              class={`text-sm font-medium transition-colors ${
-                isActive 
-                  ? 'text-zinc-900 dark:text-white' 
-                  : 'text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white'
-              } ${isAnchor ? 'border-b-2 border-blue-600 dark:border-[#FFBF00] pb-0.5' : ''}`}
-            >
-              {item.text}
-            </a>
-          )
-        })}
-        
-        <!-- Theme Toggle Desktop -->
-        <button 
-          id="theme-toggle" 
-          class="p-2 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white" 
+      <nav class="hidden md:flex md:items-center md:gap-7">
+
+        <a href="/#servicios"
+          class="text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors">
+          Servicios
+        </a>
+
+        <!-- Productos Dropdown -->
+        <div class="relative group">
+          <button class="flex items-center gap-1 text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors py-5">
+            Productos
+            <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="absolute top-full -left-2 pt-1 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50">
+            <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl shadow-lg overflow-hidden">
+              <a href="/financial-os"
+                class="flex flex-col px-4 py-3 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
+                <span class="text-sm font-medium text-zinc-900 dark:text-white">Financial OS</span>
+                <span class="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">Gestión financiera operacional</span>
+              </a>
+              <div class="border-t border-zinc-100 dark:border-zinc-800"></div>
+              <a href="/bulk-invoice"
+                class="flex flex-col px-4 py-3 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
+                <span class="text-sm font-medium text-zinc-900 dark:text-white">Bulk Invoice</span>
+                <span class="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">Facturación masiva automatizada</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <a href="/blog"
+          class={`text-sm font-medium transition-colors ${pathname.startsWith('/blog') ? 'text-zinc-900 dark:text-white' : 'text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white'}`}>
+          Blog
+        </a>
+
+        <!-- Theme Toggle -->
+        <button
+          id="theme-toggle"
+          class="p-2 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
           aria-label="Cambiar tema"
           onclick="window.toggleTheme()"
         >
@@ -57,120 +66,119 @@ const currentPath = pathname.slice(1); // remove the first "/"
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
           </svg>
         </button>
+
+        <!-- CTA Button -->
+        <a
+          href="https://wa.me/50578410264"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-semibold rounded-lg hover:bg-zinc-700 dark:hover:bg-zinc-100 transition-colors"
+        >
+          Contacto
+        </a>
+
       </nav>
-      
-      <!-- Mobile Menu Button -->
-      <button 
-        id="mobile-menu-button" 
-        class="md:hidden p-2 text-zinc-900 dark:text-white" 
-        aria-label="Menú"
-      >
-        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
+
+      <!-- Mobile: theme + hamburger -->
+      <div class="flex items-center gap-1 md:hidden">
+        <button
+          id="mobile-theme-toggle"
+          class="p-2 text-zinc-600 dark:text-zinc-400"
+          aria-label="Cambiar tema"
+          onclick="window.toggleTheme()"
+        >
+          <svg class="w-5 h-5 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+          <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+        </button>
+        <button
+          id="mobile-menu-button"
+          class="p-2 text-zinc-900 dark:text-white"
+          aria-label="Menú"
+        >
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+
     </div>
   </div>
 </header>
 
 <!-- Mobile Menu Overlay -->
-<div id="mobile-menu" class="fixed inset-0 z-50 bg-white/80 dark:bg-brand-background/60 backdrop-blur-xl flex flex-col opacity-0 pointer-events-none transition-all duration-300 ease-in-out">
-  <div class="flex justify-between items-center p-4 border-b border-zinc-100/30 dark:border-brand-border/30">
-        <a href="/" class="font-normal text-lg sm:text-xl tracking-tight overflow-hidden">
-          <span class="!text-primary-600 dark:!text-[#FFBF00]">Bitspace</span> <span class="!text-black dark:!text-white">Software</span>
-        </a>
-    <button id="close-menu-button" class="text-zinc-900 dark:text-brand-text flex items-center justify-center w-10 h-10 min-w-[44px] min-h-[44px] p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-brand-surface transition-colors" aria-label="Cerrar menú">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+<div id="mobile-menu" class="fixed inset-0 z-50 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl flex flex-col opacity-0 pointer-events-none transition-all duration-300">
+  <div class="flex justify-between items-center px-6 py-4 border-b border-zinc-100 dark:border-zinc-800">
+    <a href="/" class="text-xl font-normal tracking-tight">
+      <span class="text-primary-600 dark:text-[#FFBF00]">Bitspace</span>
+      <span class="text-zinc-900 dark:text-white ml-1">Software</span>
+    </a>
+    <button id="close-menu-button" class="p-2 text-zinc-900 dark:text-white rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Cerrar menú">
+      <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
   </div>
-  
-  <nav class="flex-1 flex flex-col items-center justify-center space-y-6 text-center">
-    {navItems.map((item, index) => {
-      const isActive = currentPath === (item.href === '/' ? '' : item.href.slice(1));
-      const isAnchor = item.href.startsWith('#');
-      return (
-        <a 
-          href={item.href} 
-          class={`text-lg font-medium mobile-nav-item opacity-0 translate-y-4 ${isActive 
-            ? 'text-zinc-900 dark:text-brand-text' 
-            : 'text-zinc-600 hover:text-zinc-900 dark:text-brand-textSecondary dark:hover:text-brand-text'} ${isAnchor ? 'border-b-2 border-blue-600 dark:border-[#FFBF00]' : ''}`}
-          style={`transition-delay: ${index * 0.05}s;`}
-        >
-          {item.text}
-        </a>
-      )
-    })}
-    <div class="pt-4 mobile-nav-item opacity-0 translate-y-4" style="transition-delay: 0.25s;">
-      <button 
-        id="mobile-theme-toggle" 
-        class="flex items-center justify-center w-10 h-10 rounded-lg bg-zinc-100 dark:bg-brand-surface hover:bg-zinc-200 dark:hover:bg-brand-border transition-colors" 
-        aria-label="Cambiar tema"
-        onclick="window.toggleTheme()"
+
+  <nav class="flex-1 flex flex-col px-6 py-6 space-y-1 overflow-y-auto">
+    <a href="/#servicios" class="mobile-nav-item opacity-0 translate-y-4 py-3.5 text-lg font-medium text-zinc-900 dark:text-white border-b border-zinc-100 dark:border-zinc-800">
+      Servicios
+    </a>
+
+    <div class="mobile-nav-item opacity-0 translate-y-4 border-b border-zinc-100 dark:border-zinc-800 pb-3">
+      <p class="py-3.5 text-lg font-medium text-zinc-900 dark:text-white">Productos</p>
+      <div class="pl-4 space-y-2">
+        <a href="/financial-os" class="block py-1.5 text-base text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Financial OS</a>
+        <a href="/bulk-invoice" class="block py-1.5 text-base text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Bulk Invoice</a>
+      </div>
+    </div>
+
+    <a href="/blog" class="mobile-nav-item opacity-0 translate-y-4 py-3.5 text-lg font-medium text-zinc-900 dark:text-white border-b border-zinc-100 dark:border-zinc-800">
+      Blog
+    </a>
+
+    <div class="mobile-nav-item opacity-0 translate-y-4 pt-6">
+      <a
+        href="https://wa.me/50578410264"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center justify-center gap-2 w-full py-3.5 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-semibold rounded-xl transition-colors"
       >
-        <!-- Sun icon (visible in dark mode) -->
-        <svg class="w-5 h-5 text-zinc-600 dark:text-brand-textSecondary dark:block hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-        </svg>
-        <!-- Moon icon (visible in light mode) -->
-        <svg class="w-5 h-5 text-zinc-600 dark:text-brand-textSecondary block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-        </svg>
-      </button>
+        Contacto por WhatsApp
+      </a>
     </div>
   </nav>
 </div>
 
-<!-- Spacer to prevent content from hiding behind fixed header -->
-<div class="h-10 md:h-12"></div>
 
 <script>
-  // Enhanced mobile menu toggle with animations
   document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const closeMenuButton = document.getElementById('close-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
     const navItems = document.querySelectorAll('.mobile-nav-item');
-    
-    // Open menu with animations
-    mobileMenuButton?.addEventListener('click', () => {
+
+    const openMenu = () => {
       if (!mobileMenu) return;
-      
-      // Prevent body scrolling
       document.body.style.overflow = 'hidden';
-      
-      // Show menu with fade in
       mobileMenu.classList.remove('pointer-events-none');
       mobileMenu.classList.add('pointer-events-auto');
-      
-      // Animate opacity
       setTimeout(() => {
         mobileMenu.style.opacity = '1';
-        
-        // Animate each nav item with staggered delay
         navItems.forEach(item => {
-          setTimeout(() => {
-            item.classList.remove('opacity-0', 'translate-y-4');
-          }, 150);
+          setTimeout(() => item.classList.remove('opacity-0', 'translate-y-4'), 150);
         });
       }, 50);
-    });
-    
-    // Close menu with animations
+    };
+
     const closeMenu = () => {
       if (!mobileMenu) return;
-      
-      // Fade out nav items first
-      navItems.forEach(item => {
-        item.classList.add('opacity-0', 'translate-y-4');
-      });
-      
-      // Then fade out the menu
+      navItems.forEach(item => item.classList.add('opacity-0', 'translate-y-4'));
       setTimeout(() => {
         mobileMenu.style.opacity = '0';
-        
-        // After animation completes, hide menu and restore scrolling
         setTimeout(() => {
           mobileMenu.classList.remove('pointer-events-auto');
           mobileMenu.classList.add('pointer-events-none');
@@ -178,36 +186,21 @@ const currentPath = pathname.slice(1); // remove the first "/"
         }, 300);
       }, 100);
     };
-    
-    // Close button event
+
+    mobileMenuButton?.addEventListener('click', openMenu);
     closeMenuButton?.addEventListener('click', closeMenu);
-    
-    // Close menu when clicking a link
-    const mobileLinks = mobileMenu?.querySelectorAll('a');
-    mobileLinks?.forEach(link => {
-      link.addEventListener('click', closeMenu);
-    });
-    
-    // Close menu on escape key
+    mobileMenu?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && mobileMenu?.classList.contains('pointer-events-auto')) {
-        closeMenu();
-      }
+      if (e.key === 'Escape' && mobileMenu?.classList.contains('pointer-events-auto')) closeMenu();
     });
-    
   });
 </script>
 
 <style>
-  /* Smooth animations for mobile navigation */
   .mobile-nav-item {
-    transition: opacity 0.5s ease, transform 0.5s ease, color 0.3s ease;
+    transition: opacity 0.4s ease, transform 0.4s ease;
   }
-  
-  /* Mobile menu transition */
   #mobile-menu {
     transition: opacity 0.3s ease;
-    backdrop-filter: blur(4px);
   }
 </style>
-
