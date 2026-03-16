@@ -71,10 +71,10 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
     <!-- Critical CSS inline - Complete dark mode support -->
     <style>
       /* Critical CSS for above-the-fold content */
-      body { 
-        margin: 0; 
-        font-family: Inter, system-ui, sans-serif; 
-        background-color: #ffffff;
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, sans-serif;
+        background-color: #f4f4f5;
         color: #18181b;
       }
       
@@ -89,7 +89,7 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
       }
       
       /* Essential Tailwind classes for dark mode */
-      .bg-white { background-color: #ffffff; }
+      .bg-white { background-color: #ffffff; } /* cards stay pure white */
       .dark\\:bg-brand-background { background-color: #0F0F0F !important; }
       .text-zinc-900 { color: #18181b; }
       .dark\\:text-brand-text { color: #FFFFFF !important; }

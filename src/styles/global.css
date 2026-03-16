@@ -24,6 +24,7 @@
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    background-color: #f4f4f5;
   }
   
   /* Dark mode colors matching Kent C. Dodds website - Enhanced */
