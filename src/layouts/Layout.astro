@@ -21,6 +21,8 @@ const {
   url,
 } = Astro.props;
 
+const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
+
 // Canonical + social image URLs
 const canonicalURL = url ? new URL(url) : new URL(Astro.url.pathname, Astro.site || 'https://bitspace.software');
 const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software') : new URL('/placeholder.jpg', Astro.site || 'https://bitspace.software');
@@ -111,29 +113,49 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
     <Background />
 
     <Navigation />
-    <main id="main-content" role="main" class="flex-grow">
+    <main id="main-content" role="main" class="flex-grow" style={isHome ? undefined : 'padding-top:66px;'}>
       <slot />
     </main>
     <Footer />
 
-    <!-- Theme toggle (exposed globally for nav buttons) -->
+    <!-- Floating theme toggle (matches design) -->
+    <button
+      id="bs-theme-toggle"
+      type="button"
+      aria-label="Cambiar tema"
+      style="position:fixed;z-index:60;right:22px;bottom:22px;display:inline-flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--border-2);color:var(--text);padding:10px 15px;border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.04em;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,0.25);"
+    >
+      <span style="width:9px;height:9px;border-radius:50%;background:var(--accent);"></span>
+      Tema: <span id="bs-theme-label">Dark</span>
+    </button>
+
+    <!-- Theme toggle logic (exposed globally) -->
     <script is:inline>
       (function () {
+        function currentTheme() {
+          return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+        }
+        function syncLabel() {
+          var el = document.getElementById('bs-theme-label');
+          if (el) el.textContent = currentTheme() === 'dark' ? 'Dark' : 'Light';
+        }
         function applyTheme(theme) {
           var root = document.documentElement;
           root.setAttribute('data-theme', theme);
           root.classList.toggle('dark', theme === 'dark');
+          syncLabel();
         }
         window.toggleTheme = function () {
-          var current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-          var next = current === 'dark' ? 'light' : 'dark';
+          var next = currentTheme() === 'dark' ? 'light' : 'dark';
           try { localStorage.setItem('theme', next); } catch (e) {}
           applyTheme(next);
         };
-        // Sync across tabs
+        var btn = document.getElementById('bs-theme-toggle');
+        if (btn) btn.addEventListener('click', window.toggleTheme);
         window.addEventListener('storage', function (e) {
           if (e.key === 'theme' && (e.newValue === 'light' || e.newValue === 'dark')) applyTheme(e.newValue);
         });
+        syncLabel();
       })();
     </script>
   </body>

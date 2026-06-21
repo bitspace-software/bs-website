@@ -52,7 +52,7 @@ const stack = [
 
 <Layout title="Bitspace Software — Automatización operacional y software a medida">
   <!-- ===== HERO ===== -->
-  <section id="top" data-r="hero" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:84px 24px 88px;display:grid;grid-template-columns:1.06fr 0.94fr;gap:60px;align-items:center;">
+  <section id="top" data-r="hero" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:142px 24px 96px;display:grid;grid-template-columns:1.06fr 0.94fr;gap:60px;align-items:center;">
     <div>
       <div style="display:inline-flex;align-items:center;gap:9px;border:1px solid var(--border-2);background:var(--surface);border-radius:100px;padding:6px 13px;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-2);">
         <span style="width:7px;height:7px;border-radius:50%;background:#2FCB72;box-shadow:0 0 10px #2FCB72;animation:bsPulse 1.8s ease-in-out infinite;"></span>
@@ -207,7 +207,7 @@ const stack = [
           </div>
           <div style="display:flex;align-items:center;gap:12px;margin-top:26px;padding-top:20px;border-top:1px solid var(--border);">
             <span style="display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent-text);background:var(--accent-soft);border:1px solid var(--accent-border);padding:5px 10px;border-radius:100px;">◷ Próximamente</span>
-            <a href={WA} target="_blank" rel="noopener noreferrer" style="font-size:13px;color:var(--text-3);text-decoration:underline;text-underline-offset:3px;">Escríbenos para una demo</a>
+            <span style="font-size:13px;color:var(--text-3);">Suscríbete para ser notificado</span>
           </div>
         </div>
         <div style="position:relative;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:32px;overflow:hidden;">
@@ -227,7 +227,7 @@ const stack = [
           </div>
           <div style="display:flex;align-items:center;gap:12px;margin-top:26px;padding-top:20px;border-top:1px solid var(--border);">
             <span style="display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--orange-text);background:rgba(255,106,44,0.12);border:1px solid rgba(255,106,44,0.25);padding:5px 10px;border-radius:100px;">◷ Próximamente</span>
-            <a href={WA} target="_blank" rel="noopener noreferrer" style="font-size:13px;color:var(--text-3);text-decoration:underline;text-underline-offset:3px;">Escríbenos para una demo</a>
+            <span style="font-size:13px;color:var(--text-3);">Suscríbete para ser notificado</span>
           </div>
         </div>
       </div>
@@ -313,20 +313,16 @@ const stack = [
           </div>
           <a href="/blog" style="display:inline-flex;align-items:center;gap:7px;font-size:14px;color:var(--text-2);font-weight:500;white-space:nowrap;">Ver todos <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg></a>
         </div>
-        <div data-r="grid2" style="display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:32px;">
-          {recentPosts.map((post) => (
-            <a href={`/blog/${post.slug}/`} style="display:block;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:26px;">
-              <div style="display:flex;align-items:center;gap:12px;font-size:12px;color:var(--text-3);">
-                <span style="font-family:'JetBrains Mono',monospace;">{fmtDate(post.data.pubDate)}</span>
-                {post.data.tags && post.data.tags[0] && (
-                  <span style="background:var(--accent-soft);border:1px solid var(--accent-border);color:var(--accent-text);padding:3px 9px;border-radius:100px;font-size:11px;">{post.data.tags[0]}</span>
-                )}
-              </div>
-              <h3 style="margin:14px 0 8px;font-weight:700;font-size:18px;letter-spacing:-0.01em;color:var(--text);">{post.data.title}</h3>
-              <p style="margin:0;font-size:14px;line-height:1.6;color:var(--text-2);">{post.data.description}</p>
-            </a>
-          ))}
-        </div>
+        <a href={`/blog/${recentPosts[0].slug}/`} style="display:block;margin-top:32px;max-width:560px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:26px;">
+          <div style="display:flex;align-items:center;gap:12px;font-size:12px;color:var(--text-3);">
+            <span style="font-family:'JetBrains Mono',monospace;">{fmtDate(recentPosts[0].data.pubDate)}</span>
+            {recentPosts[0].data.tags && recentPosts[0].data.tags[0] && (
+              <span style="background:var(--accent-soft);border:1px solid var(--accent-border);color:var(--accent-text);padding:3px 9px;border-radius:100px;font-size:11px;">{recentPosts[0].data.tags[0]}</span>
+            )}
+          </div>
+          <h3 style="margin:14px 0 8px;font-weight:700;font-size:18px;letter-spacing:-0.01em;color:var(--text);">{recentPosts[0].data.title}</h3>
+          <p style="margin:0;font-size:14px;line-height:1.6;color:var(--text-2);">{recentPosts[0].data.description}</p>
+        </a>
       </div>
     </section>
   )}
@@ -375,7 +371,7 @@ const stack = [
 <style is:global>
   /* Homepage responsive rules (target the design's data-r hooks) */
   @media (max-width: 980px) {
-    [data-r="hero"] { grid-template-columns: 1fr !important; gap: 44px !important; padding-top: 56px !important; padding-bottom: 64px !important; }
+    [data-r="hero"] { grid-template-columns: 1fr !important; gap: 44px !important; padding-top: 114px !important; padding-bottom: 72px !important; }
   }
   @media (max-width: 900px) {
     [data-r="grid3"] { grid-template-columns: repeat(2, 1fr) !important; }
