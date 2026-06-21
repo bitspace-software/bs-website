@@ -22,7 +22,7 @@ echo "▶ Publicando dist/ → $TARGET"
 # --delete elimina en el servidor archivos que ya no existen en dist/.
 # Quita --delete si el docroot contiene otros archivos que debas conservar.
 rsync -avz --delete \
-  --exclude '.git' --exclude '.well-known' --exclude '.htaccess' \
+  --exclude '.git' --exclude '.well-known' \
   dist/ "${TARGET%/}/"
 
 echo "✓ Publicado. Verifica con:"

@@ -1,0 +1,9 @@
+# Bitspace Software — Apache config for the static build
+ErrorDocument 404 /404.html
+
+# Long-cache fingerprinted build assets (filenames change on every build)
+<IfModule mod_headers.c>
+  <FilesMatch "^.*\.(css|js|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
