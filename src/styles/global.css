@@ -1,413 +1,150 @@
-/* Remove all the complex mobile menu styles and keep only what's necessary */
+/* ============================================================================
+   Bitspace Software — Design system
+   Dark-first theme driven by CSS variables. Light theme via [data-theme="light"]
+   on <html>. The `.dark` class is mirrored onto <html> so Tailwind `dark:`
+   utilities used across blog/secondary pages stay coherent with this palette.
+   ============================================================================ */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  /* ---- Design tokens — dark (default) ---- */
   :root {
-    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    --bg: #08090A;
+    --bg-alt: #0B0C0F;
+    --surface: #121317;
+    --surface-2: #15171C;
+    --border: #1C1D22;
+    --border-2: #23252D;
+    --hair: #14151A;
+    --text: #F4F4F5;
+    --text-2: #9295A0;
+    --text-3: #7C7F89;
+    --text-faint: #5E616B;
+    --accent: #4D6CFF;
+    --accent-text: #6E86FF;
+    --accent-soft: rgba(77, 108, 255, 0.12);
+    --accent-border: rgba(77, 108, 255, 0.25);
+    --green: #2FCB72;
+    --orange: #FF6A2C;
+    --orange-text: #FF8A56;
+    --logo: #A7AAB3;
+    --nav-bg: rgba(8, 9, 10, 0.72);
+    --glow: rgba(77, 108, 255, 0.20);
+
+    color-scheme: dark;
+    font-family: "Archivo", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-    font-variant-ligatures: common-ligatures;
-    --theme-transition: 0.3s ease;
+  }
+
+  /* ---- Design tokens — light ---- */
+  html[data-theme="light"] {
+    --bg: #FBFBF9;
+    --bg-alt: #F3F3EF;
+    --surface: #FFFFFF;
+    --surface-2: #FFFFFF;
+    --border: #E7E7E1;
+    --border-2: #E2E2DA;
+    --hair: #ECECE5;
+    --text: #14151A;
+    --text-2: #5B5E68;
+    --text-3: #797C86;
+    --text-faint: #9DA0A9;
+    --accent: #3A57E8;
+    --accent-text: #3A57E8;
+    --accent-soft: rgba(58, 87, 232, 0.08);
+    --accent-border: rgba(58, 87, 232, 0.22);
+    --green: #1F9E58;
+    --orange: #E0561D;
+    --orange-text: #C2531F;
+    --logo: #6B6E78;
+    --nav-bg: rgba(251, 251, 249, 0.82);
+    --glow: rgba(77, 108, 255, 0.10);
+
+    color-scheme: light;
   }
 
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
+    background-color: var(--bg);
   }
 
   body {
-    @apply min-h-screen text-zinc-900 dark:text-white;
     margin: 0;
     padding: 0;
+    min-height: 100vh;
     overflow-x: hidden;
-    background-color: #f4f4f5;
-    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.15) 1.4px, transparent 1.4px);
-    background-size: 24px 24px;
-    background-attachment: fixed;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: "Archivo", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
-  /* Dark mode colors matching Kent C. Dodds website - Enhanced */
-  .dark {
-    background-color: #0F0F0F !important;
-    color: #FFFFFF !important;
-  }
-
-  .dark body {
-    background-color: #0F0F0F !important;
-    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.15) 1.4px, transparent 1.4px) !important;
-    background-size: 24px 24px !important;
-    background-attachment: fixed !important;
-    color: #FFFFFF !important;
-  }
-
-  /* Text colors matching Kent's site - Enhanced specificity */
-  .dark .text-zinc-600,
-  .dark .text-zinc-400,
-  .dark .text-zinc-700,
-  .dark .text-zinc-500 {
-    color: #9CA3AF !important;
-  }
-  
-  .dark .text-zinc-300,
-  .dark .text-zinc-100,
-  .dark .text-white {
-    color: #FFFFFF !important;
-  }
-  
-  .dark .text-zinc-900,
-  .dark .text-zinc-800 {
-    color: #FFFFFF !important;
-  }
-  
-  /* Background colors matching Kent's site */
-  .dark .bg-zinc-700,
-  .dark .bg-zinc-600 {
-    background-color: #1F2937 !important;
-  }
-  
-  .dark .bg-zinc-900 {
-    background-color: #0F0F0F !important;
-  }
-  
-  .dark .bg-white {
-    background-color: #0F0F0F !important;
-  }
-  
-  /* Border colors matching Kent's site */
-  .dark .border-zinc-700,
-  .dark .border-zinc-600 {
-    border-color: #374151 !important;
-  }
-  
-  /* Accent colors matching Kent's site */
-  .dark .text-primary-600,
-  .dark .text-blue-400 {
-    color: #60A5FA !important;
-  }
-  
-  .dark .bg-primary-600,
-  .dark .bg-blue-600 {
-    background-color: #3B82F6 !important;
-  }
-  
-  .dark .text-amber-500,
-  .dark .text-orange-400 {
-    color: #F59E0B !important;
-  }
-  
-  /* Header specific colors matching Kent's site */
-  .dark header {
-    background-color: rgba(15, 15, 15, 0.8) !important;
-    backdrop-filter: blur(16px);
-  }
-  
-  /* Navigation active state */
-  .dark .text-zinc-900 {
-    color: #FFFFFF !important;
-  }
-  
-  /* Text input colors matching Kent's site */
-  .dark input[type="text"] {
-    background-color: #1F2937 !important;
-    border-color: #374151 !important;
-    color: #FFFFFF !important;
-  }
-  
-  /* Brand color classes matching Kent's site */
-  .dark .dark\\:bg-brand-surface {
-    background-color: #1F2937 !important;
-  }
-  
-  .dark .dark\\:border-brand-border {
-    border-color: #374151 !important;
-  }
-  
-  .dark .dark\\:text-brand-textSecondary {
-    color: #9CA3AF !important;
-  }
-  
-  .dark .dark\\:text-brand-text {
-    color: #FFFFFF !important;
-  }
-  
-  .dark .dark\\:text-brand-accent {
-    color: #60A5FA !important;
-  }
-  
-  .dark .dark\\:text-brand-accentOrange {
-    color: #FFBF00 !important;
-  }
-  
-  .dark .dark\\:bg-brand-accentOrange {
-    background-color: #FFBF00 !important;
-  }
-  
-  .dark .dark\\:bg-brand-accentBlue {
-    background-color: #3B82F6 !important;
-  }
-  
-  .dark .dark\\:bg-brand-black {
-    background-color: #000000 !important;
-  }
-  
-  .dark .dark\\:hover\\:bg-brand-border:hover {
-    background-color: #374151 !important;
-  }
-  
-  /* Force dark mode on all elements */
-  .dark * {
-    color: inherit;
-  }
-  
-  .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
-    color: #FFFFFF !important;
-  }
-  
-  .dark p, .dark span, .dark div {
-    color: inherit;
-  }
-
-  /* Enhanced theme transition - DISABLED FOR INSTANT SWITCHING */
-  /*
-  body, a, button, * {
-    transition: background-color var(--theme-transition), 
-                color var(--theme-transition), 
-                border-color var(--theme-transition),
-                box-shadow var(--theme-transition);
-  }
-  
-  .theme-transitioning * {
-    transition: all 0.3s ease !important;
-  }
-  */
-  
-  /* Ensure dark mode styles are applied immediately */
-  .dark {
-    background-color: #0F0F0F !important;
-    color: #FFFFFF !important;
-  }
-  
-  /* Force immediate application of dark mode colors */
-  .dark body {
-    background-color: #0F0F0F !important;
-    color: #FFFFFF !important;
-  }
-  
-  /* Ensure all elements get dark mode colors immediately - NO TRANSITIONS */
-  /* Transitions are disabled to prevent theme switching issues */
-  /*
-  .dark * {
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-  }
-  */
-  
-  /* Override any conflicting styles */
-  .dark .bg-white {
-    background-color: #0F0F0F !important;
-  }
-  
-  .dark .text-zinc-900 {
-    color: #FFFFFF !important;
-  }
-  
-  .dark .text-zinc-800 {
-    color: #FFFFFF !important;
-  }
-  
-  .dark .text-zinc-700 {
-    color: #9CA3AF !important;
-  }
-  
-  /* Force orange color in dark mode for underline and rotating words */
-  .dark .dark\\:bg-brand-accentOrange,
-  .dark [class*="bg-brand-accentOrange"] {
-    background-color: #FFBF00 !important;
-  }
-  
-  /* Force orange text in dark mode */
-  .dark .dark\\:text-brand-accentOrange,
-  .dark [class*="text-brand-accentOrange"] {
-    color: #FFBF00 !important;
-  }
-  
-  /* Force orange for all accent orange variations in dark mode */
-  .dark *[style*="bg-brand-accentOrange"],
-  .dark *[class*="accentOrange"] {
-    background-color: #FFBF00 !important;
-  }
-  
-  .dark *[style*="text-brand-accentOrange"] {
-    color: #FFBF00 !important;
-  }
-  
-  /* Force orange for logo in dark mode with maximum specificity */
-  header a[href="/"].dark\\:text-brand-accentOrange,
-  .dark header a[href="/"],
-  html.dark header a,
-  body.dark header a {
-    color: #FFBF00 !important;
-  }
-  
-  /* Additional specificity for logo */
-  .dark header a.heading-enhanced,
-  .dark header .font-bold.text-xl {
-    color: #FFBF00 !important;
-  }
-  
-  /* Hero accent text matches logo color */
-  .dark .hero-accent {
-    color: #FFBF00 !important;
-  }
-
-  /* Force Bitspace to be orange in dark mode */
-  .dark header a[href="/"] span:first-child {
-    color: #FFBF00 !important;
-  }
-  
-  /* Force Software to be white in dark mode */
-  .dark header a[href="/"] span:last-child {
-    color: #FFFFFF !important;
+  ::selection {
+    background: #4D6CFF;
+    color: #fff;
   }
 }
 
-/* Minimal responsive styles */
-@media (max-width: 640px) {
-  html {
-    scroll-padding-top: 4rem;
-  }
-  
-  /* Better touch targets on mobile */
-  button, a {
-    @apply min-h-[44px];
-  }
+/* ---- Keyframes used by the design ---- */
+@keyframes bsPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.82); }
+}
+@keyframes bsScan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(220%); }
+}
+@keyframes bsFadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
+/* ============================================================================
+   Secondary pages (blog, about, tags, 404) still use Tailwind `dark:` utility
+   classes. They are dark-mode-aware already; the overrides below align their
+   neutral grays and accents with the Bitspace palette so the whole site reads
+   as one cohesive product. Light mode keeps Tailwind's default light palette.
+   ============================================================================ */
+@layer base {
+  /* Map the blue/amber accents used in markup to the new accent colors */
+  .text-primary-600, .text-primary-500 { color: var(--accent); }
+  .dark .text-primary-600, .dark .text-primary-500,
+  .dark .text-blue-400, .dark .text-blue-500 { color: var(--accent-text) !important; }
+  .dark .text-amber-400, .dark .text-amber-500, .dark .text-orange-400 { color: var(--orange-text) !important; }
+  .dark .bg-primary-600, .dark .bg-blue-600 { background-color: var(--accent) !important; }
 
-/* Add smooth animations */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  /* Surfaces / borders in dark mode follow the design tokens */
+  .dark .bg-white { background-color: var(--surface) !important; }
+  .dark .bg-zinc-900, .dark .bg-zinc-900\/60, .dark .bg-zinc-900\/50,
+  .dark .bg-zinc-800\/50 { background-color: var(--surface) !important; }
+  .dark .border-zinc-800, .dark .border-zinc-700 { border-color: var(--border-2) !important; }
+
+  /* Text grays in dark mode */
+  .dark .text-zinc-900, .dark .text-zinc-800, .dark .text-zinc-100, .dark .text-white { color: var(--text) !important; }
+  .dark .text-zinc-700, .dark .text-zinc-600, .dark .text-zinc-500, .dark .text-zinc-400 { color: var(--text-2) !important; }
 }
 
-@keyframes slideUp {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
+/* ---- Helper animations (kept from prior site, still referenced) ---- */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.animate-fade-in { animation: fadeIn 0.6s ease forwards; }
+.animate-slide-up { animation: slideUp 0.6s ease forwards; }
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
 
-@keyframes slideDown {
-  from { transform: translateY(-20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes scaleIn {
-  from { transform: scale(0.95); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-/* Apply animations to elements */
-.animate-fade-in {
-  animation: fadeIn 0.6s ease forwards;
-}
-
-.animate-slide-up {
-  animation: slideUp 0.6s ease forwards;
-}
-
-.animate-slide-down {
-  animation: slideDown 0.6s ease forwards;
-}
-
-.animate-scale-in {
-  animation: scaleIn 0.6s ease forwards;
-}
-
-/* Staggered animation delays */
-.delay-100 {
-  animation-delay: 0.1s;
-}
-
-.delay-200 {
-  animation-delay: 0.2s;
-}
-
-.delay-300 {
-  animation-delay: 0.3s;
-}
-
-.delay-400 {
-  animation-delay: 0.4s;
-}
-
-/* Smooth hover transitions */
-a, button {
-  transition: all 0.2s ease;
-}
-
-a:hover, button:hover {
-  transform: translateY(-1px);
-}
-
-/* Smooth page transitions */
-.page-transition {
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.page-entering {
-  opacity: 0;
-  transform: translateY(10px);
-}
-
-.page-entered {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Advanced Typography Enhancements */
 @layer utilities {
-  /* Enhanced text rendering for better readability */
-  .text-enhanced {
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+  .font-mono { font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+  .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
+}
 
-  /* Improved heading styles */
-  .heading-enhanced {
-    font-weight: 600;
-    letter-spacing: -0.025em;
-    line-height: 1.2;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-  }
-
-  /* Optimized body text */
-  .body-enhanced {
-    font-weight: 400;
-    letter-spacing: 0.01em;
-    line-height: 1.6;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-  }
-
-  /* Code font optimization */
-  .code-enhanced {
-    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    font-feature-settings: "liga" 0;
-    font-variant-ligatures: none;
-  }
-
-  /* Improved link styles */
-  .link-enhanced {
-    text-decoration: underline;
-    text-decoration-color: transparent;
-    text-underline-offset: 2px;
-    transition: text-decoration-color 0.2s ease;
-  }
-
-  .link-enhanced:hover {
-    text-decoration-color: currentColor;
-  }
+/* Better touch targets on mobile */
+@media (max-width: 640px) {
+  html { scroll-padding-top: 4rem; }
 }

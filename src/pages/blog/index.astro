@@ -25,20 +25,20 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))];
 ---
 
 <Layout title="Blog">
-  <div class="w-full max-w-6xl mx-auto px-4 sm:px-6 pt-0 pb-10 md:pt-4 md:pb-16">
-    <!-- Enhanced header with search - improved responsive spacing -->
-    <div class="relative mb-6 sm:mb-8">
-      <!-- Decorative elements - adjusted for better mobile appearance -->
-      <div class="absolute -top-10 sm:-top-20 -left-10 sm:-left-20 w-48 sm:w-72 h-48 sm:h-72 bg-primary-100 dark:bg-primary-500/20 rounded-full blur-3xl opacity-30 animate-blob"></div>
-      <div class="absolute -bottom-10 sm:-bottom-20 -right-10 sm:-right-20 w-48 sm:w-72 h-48 sm:h-72 bg-amber-100 dark:bg-amber-500/20 rounded-full blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
-      
-      <div class="relative text-center">
-               <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-brand-text mb-2">
-                 Blog
-               </h1>
-        
-        <p class="text-sm sm:text-base text-zinc-600 dark:text-brand-text/80 mb-3 sm:mb-4 max-w-2xl mx-auto">
-          Ideas, pensamientos y exploraciones sobre datos y tecnología.
+  <div class="w-full max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-10 md:pt-20 md:pb-16">
+    <!-- Section header — matches homepage style -->
+    <div class="relative mb-10 sm:mb-14">
+      <!-- Subtle accent blobs — low opacity, must not wash out text -->
+      <div class="absolute -top-10 sm:-top-20 -left-10 sm:-left-20 w-48 sm:w-72 h-48 sm:h-72 rounded-full blur-3xl pointer-events-none" style="background:var(--glow);opacity:0.6;"></div>
+      <div class="absolute -bottom-10 sm:-bottom-20 -right-10 sm:-right-20 w-48 sm:w-72 h-48 sm:h-72 rounded-full blur-3xl pointer-events-none" style="background:var(--glow);opacity:0.45;"></div>
+
+      <div class="relative text-center max-w-2xl mx-auto">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent-text);font-weight:500;">Blog</div>
+        <h1 style="margin:16px 0 0;font-weight:700;font-size:clamp(30px,4vw,46px);line-height:1.05;letter-spacing:-0.025em;color:var(--text);">
+          Ideas sobre operaciones y tecnología
+        </h1>
+        <p style="margin:18px 0 0;font-size:17px;line-height:1.6;color:var(--text-2);">
+          Notas, aprendizajes y exploraciones sobre automatización, datos y software operacional.
         </p>
       </div>
     </div>
@@ -48,7 +48,7 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))];
       <!-- Featured post (if exists) - improved mobile layout -->
       {sortedPosts.length > 0 && (
         <div class="md:col-span-12 mb-4 sm:mb-6">
-          <article class="group relative overflow-hidden rounded-none border-b border-zinc-200 dark:border-zinc-800 pb-3 sm:pb-4">            
+          <article class="group relative overflow-hidden rounded-none pb-6 sm:pb-8" style="border-bottom:1px solid var(--hair);">
             <div class="flex flex-col md:flex-row h-full gap-4 sm:gap-6">
               {sortedPosts[0].data.heroImage && (
                 <div class="w-full md:w-1/2 h-60 sm:h-80 md:h-96 overflow-hidden mx-auto md:mx-0 max-w-full sm:max-w-md">
@@ -62,42 +62,42 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))];
               )}
               
               <div class="flex-1 flex flex-col justify-center">
-                <div class="flex items-center text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 gap-2 mb-3 justify-center md:justify-start">
-                  <span class="font-medium uppercase tracking-wider">Destacados</span>
-                  <span class="h-px w-6 sm:w-8 bg-zinc-300 dark:bg-zinc-700"></span>
+                <div class="flex items-center gap-3 mb-3 justify-center md:justify-start" style="font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-3);">
+                  <span style="color:var(--accent-text);font-weight:500;">Destacado</span>
+                  <span style="height:1px;width:24px;background:var(--border-2);"></span>
                   {sortedPosts[0].data.pubDate && (
                     <time datetime={sortedPosts[0].data.pubDate.toISOString()}>
-                      {sortedPosts[0].data.pubDate.toLocaleDateString('es-ES', { 
-                        year: 'numeric', 
-                        month: 'long', 
-                        day: 'numeric' 
+                      {sortedPosts[0].data.pubDate.toLocaleDateString('es-ES', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
                       })}
                     </time>
                   )}
                 </div>
-                
-                <h2 class="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-3 sm:mb-4 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors text-center md:text-left">
+
+                <h2 class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4 transition-colors text-center md:text-left" style="color:var(--text);letter-spacing:-0.02em;">
                   <a href={`/blog/${sortedPosts[0].slug}/`} class="before:absolute before:inset-0">
                     {sortedPosts[0].data.title}
                   </a>
                 </h2>
                 
-                <p class="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 mb-4 sm:mb-6 line-clamp-3 text-center md:text-left">
+                <p class="text-sm sm:text-base mb-4 sm:mb-6 line-clamp-3 text-center md:text-left" style="color:var(--text-2);line-height:1.6;">
                   {sortedPosts[0].data.description}
                 </p>
-                
+
                 <!-- Improved mobile layout for featured post metadata -->
                 <div class="flex items-center gap-3 sm:gap-4 justify-center md:justify-start flex-wrap">
-                  <div class="flex items-center text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">
+                  <div class="flex items-center" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-3);">
                     <span class="inline-flex items-center">
                       {sortedPosts[0].data.readingTime || "5 min de lectura"}
                     </span>
                   </div>
-                  
+
                   {sortedPosts[0].data.tags && (
                     <div class="flex flex-wrap gap-2 justify-center md:justify-start">
                       {sortedPosts[0].data.tags.slice(0, 2).map((tag) => (
-                        <span class="px-2 sm:px-3 py-1 text-xs uppercase tracking-wider border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">
+                        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.04em;background:var(--accent-soft);border:1px solid var(--accent-border);color:var(--accent-text);padding:4px 11px;border-radius:100px;">
                           {tag}
                         </span>
                       ))}
@@ -113,17 +113,18 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))];
       <!-- Improved sidebar for mobile -->
       <div class="md:col-span-3 relative">
         <div class="md:sticky md:top-24 space-y-4 mb-8 md:mb-0">
-          <h3 class="text-lg font-medium text-zinc-900 dark:text-zinc-100 mb-4 uppercase tracking-wider text-center md:text-left">Archivados</h3>
-          
+          <h3 class="mb-4 text-center md:text-left" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-faint);font-weight:500;">Archivo</h3>
+
           <!-- Horizontal scrollable archive on mobile, vertical on desktop -->
           <div class="flex md:flex-col overflow-x-auto md:overflow-visible pb-4 md:pb-0 hide-scrollbar">
             {years.map((year, index) => (
-              <a 
+              <a
                 href={`#year-${year}`}
-                class={`flex items-center py-2 md:py-3 px-4 md:px-0 mr-3 md:mr-0 border-b border-zinc-100 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors md:w-full whitespace-nowrap md:whitespace-normal rounded-full md:rounded-none ${index === 0 ? 'bg-zinc-50 dark:bg-zinc-800/50' : ''}`}
+                class="year-link flex items-center py-2 md:py-3 px-4 md:px-3 mr-3 md:mr-0 transition-colors md:w-full whitespace-nowrap md:whitespace-normal rounded-full md:rounded-lg"
+                style={`border:1px solid ${index === 0 ? 'var(--border)' : 'transparent'};background:${index === 0 ? 'var(--surface)' : 'transparent'};`}
               >
-                <span class="text-base md:text-lg font-medium text-zinc-900 dark:text-zinc-100">{year}</span>
-                <span class="ml-2 md:ml-auto text-xs md:text-sm text-zinc-500 dark:text-zinc-400">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;color:var(--text);">{year}</span>
+                <span class="ml-2 md:ml-auto" style="font-size:12px;color:var(--text-3);">
                   {postsByYear[year].length} artículo{postsByYear[year].length !== 1 ? 's' : ''}
                 </span>
               </a>
@@ -136,15 +137,15 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))];
       <div class="md:col-span-9">
         {years.map((year) => (
           <div id={`year-${year}`} class="mb-6 sm:mb-10 scroll-mt-16">
-            <h2 class="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100 mb-3 sm:mb-4 border-b border-zinc-200 dark:border-zinc-800 pb-2 sm:pb-3 text-center md:text-left">
+            <h2 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-5 pb-3 text-center md:text-left" style="color:var(--text);letter-spacing:-0.02em;border-bottom:1px solid var(--hair);">
               {year}
             </h2>
             
             <div class={`grid grid-cols-1 ${postsByYear[year].length >= 2 ? 'md:grid-cols-2' : 'md:grid-cols-1'} gap-4 sm:gap-6`}>
               {postsByYear[year].map((post, index) => (
-                <article class="group relative flex flex-col h-full mx-auto md:mx-0 w-full max-w-sm sm:max-w-md">
+                <article class="blog-card group relative flex flex-col h-full mx-auto md:mx-0 w-full max-w-sm sm:max-w-md overflow-hidden" style="background:var(--surface);border:1px solid var(--border);border-radius:14px;">
                   {post.data.heroImage && (
-                    <div class="h-48 sm:h-56 overflow-hidden mb-3 rounded-lg">
+                    <div class="h-44 sm:h-52 overflow-hidden">
                       <img
                         src={post.data.heroImage}
                         alt={post.data.title}
@@ -153,43 +154,46 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))];
                       />
                     </div>
                   )}
-                  
-                  <div class="flex-1 flex flex-col">
-                    <div class="flex items-center text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 gap-3 sm:gap-4 mb-2 sm:mb-3 justify-center md:justify-start flex-wrap">
+
+                  <div class="flex-1 flex flex-col p-6">
+                    <div class="flex items-center gap-3 mb-3 justify-center md:justify-start flex-wrap" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-3);">
                       {post.data.pubDate && (
                         <time datetime={post.data.pubDate.toISOString()} class="flex items-center">
-                          {post.data.pubDate.toLocaleDateString('es-ES', { 
-                            month: 'short', 
-                            day: 'numeric' 
+                          {post.data.pubDate.toLocaleDateString('es-ES', {
+                            month: 'short',
+                            day: 'numeric'
                           })}
                         </time>
                       )}
                       {post.data.readingTime && (
-                        <span class="flex items-center">
-                          {post.data.readingTime}
-                        </span>
+                        <>
+                          <span style="color:var(--border-2);">/</span>
+                          <span class="flex items-center">
+                            {post.data.readingTime}
+                          </span>
+                        </>
                       )}
                     </div>
-                    
-                    <h3 class="text-lg sm:text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-2 sm:mb-3 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors text-center md:text-left">
+
+                    <h3 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 transition-colors text-center md:text-left" style="color:var(--text);letter-spacing:-0.01em;">
                       <a href={`/blog/${post.slug}/`} class="before:absolute before:inset-0">
                         {post.data.title}
                       </a>
                     </h3>
-                    
-                    <p class="text-sm text-zinc-600 dark:text-zinc-400 mb-4 line-clamp-2 flex-grow text-center md:text-left">
+
+                    <p class="text-sm mb-4 line-clamp-2 flex-grow text-center md:text-left" style="color:var(--text-2);line-height:1.6;">
                       {post.data.description}
                     </p>
-                    
+
                     {post.data.tags && (
                       <div class="flex flex-wrap gap-2 mt-auto justify-center md:justify-start">
                         {post.data.tags.slice(0, 2).map((tag) => (
-                          <span class="px-2 sm:px-3 py-1 text-xs uppercase tracking-wider border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">
+                          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.04em;background:var(--accent-soft);border:1px solid var(--accent-border);color:var(--accent-text);padding:4px 11px;border-radius:100px;">
                             {tag}
                           </span>
                         ))}
                         {post.data.tags.length > 2 && (
-                          <span class="px-2 sm:px-3 py-1 text-xs uppercase tracking-wider border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">
+                          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.04em;border:1px solid var(--border);color:var(--text-3);padding:4px 11px;border-radius:100px;">
                             +{post.data.tags.length - 2}
                           </span>
                         )}
@@ -207,6 +211,13 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))];
 </Layout>
 
 <style>
+  /* Card + archive hover states aligned with design tokens */
+  .blog-card { transition: border-color 0.25s ease, transform 0.25s ease; }
+  @media (hover: hover) {
+    .blog-card:hover { border-color: var(--border-2) !important; transform: translateY(-2px); }
+    .year-link:hover { background: var(--surface) !important; border-color: var(--border) !important; }
+  }
+
   /* Blob animation */
   .animate-blob {
     animation: blob-bounce 8s infinite ease;

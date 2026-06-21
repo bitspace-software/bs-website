@@ -28,3 +28,7 @@ pnpm-debug.log*
 .astro/
 
 .vercel
+
+# Design source assets (local only)
+Mejora profesional de website.zip
+_mejora_website/

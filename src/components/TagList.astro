@@ -10,12 +10,19 @@ const { tags = [], class: className = '' } = Astro.props;
 {tags.length > 0 && (
   <div class={`flex flex-wrap gap-2 mt-3 ${className}`}>
     {tags.map(tag => (
-      <a 
-        href={`/tag/${tag}`}
-        class="inline-flex items-center rounded-full bg-zinc-100 px-2.5 py-0.5 text-xs font-medium text-zinc-800 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
+      <a
+        href={`/tags/${tag}`}
+        class="taglist-pill inline-flex items-center"
+        style="font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.02em;background:var(--accent-soft);border:1px solid var(--accent-border);color:var(--accent-text);padding:5px 12px;border-radius:100px;transition:border-color 0.2s ease;"
       >
         {tag}
       </a>
     ))}
   </div>
 )}
+
+<style>
+  @media (hover: hover) {
+    .taglist-pill:hover { border-color: var(--accent-text); }
+  }
+</style>
