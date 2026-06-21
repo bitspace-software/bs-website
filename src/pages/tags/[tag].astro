@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
 
 export const prerender = true;
 
@@ -9,13 +8,13 @@ export async function getStaticPaths() {
   const allPosts = await getCollection('blog');
 
   // Get all unique tags
-  const uniqueTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))];
+  const uniqueTags = [...new Set(allPosts.flatMap((post) => post.data.tags || []))];
 
   // Create a path for each tag
-  return uniqueTags.map(tag => {
+  return uniqueTags.map((tag) => {
     // Make tag matching case-insensitive
-    const filteredPosts = allPosts.filter(post =>
-      post.data.tags?.some(t => t.toLowerCase() === (tag as string).toLowerCase())
+    const filteredPosts = allPosts.filter((post) =>
+      post.data.tags?.some((t) => t.toLowerCase() === (tag as string).toLowerCase())
     );
     return {
       params: { tag },
@@ -27,168 +26,65 @@ export async function getStaticPaths() {
 const { tag } = Astro.params as { tag: string };
 const { posts = [] } = Astro.props;
 
-// Sort posts by date
+// Sort posts by date (most recent first)
 const sortedPosts = posts && posts.length > 0
   ? [...posts].sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   : [];
 
-// Related tags (tags that appear together with the current tag)
-const relatedTags = [...new Set(
-  sortedPosts.flatMap(post => post.data.tags || [])
-    .filter(t => t !== tag)
-)].slice(0, 5);
+const fmtDate = (d: Date) =>
+  d.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
 
 <Layout title={`Artículos sobre "${tag}"`}>
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 pt-12 pb-16 md:pt-20 md:pb-24">
-    <!-- Section header — matches homepage style -->
-    <div class="relative mb-10 sm:mb-14">
-      <div class="absolute -top-12 -left-12 w-56 sm:w-72 h-56 sm:h-72 rounded-full blur-3xl pointer-events-none" style="background:var(--glow);opacity:0.5;"></div>
+  <section style="position:relative;z-index:1;max-width:860px;margin:0 auto;padding:60px 24px 90px;">
+    <a href="/tags" class="back-link" style="display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3);transition:color 0.2s ease;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      Todas las etiquetas
+    </a>
 
-      <div class="relative">
-        <a href="/tags" class="back-link inline-flex items-center gap-2 mb-6" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-3);transition:color 0.2s ease;">
-          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-4 h-4">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-          </svg>
-          <span>Todos los temas</span>
-        </a>
-
-        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent-text);font-weight:500;">Tema</div>
-        <h1 style="margin:14px 0 0;font-weight:700;font-size:clamp(30px,4vw,46px);line-height:1.05;letter-spacing:-0.025em;color:var(--text);">
-          #{tag}
-        </h1>
-        <p style="margin:16px 0 0;font-size:17px;line-height:1.6;color:var(--text-2);">
-          {sortedPosts.length} artículo{sortedPosts.length !== 1 ? 's' : ''} con el tema <span style="color:var(--text);font-weight:600;">"{tag}"</span>.
-        </p>
-      </div>
+    <div style="margin-top:30px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent-text);font-weight:500;">Etiqueta</div>
+      <h2 style="margin:14px 0 0;font-weight:700;font-size:clamp(30px,4vw,46px);line-height:1.05;letter-spacing:-0.025em;color:var(--text);">{tag}</h2>
+      <p style="margin:16px 0 0;font-size:17px;line-height:1.6;color:var(--text-2);">
+        {sortedPosts.length} artículo{sortedPosts.length !== 1 ? 's' : ''} con la etiqueta <span style="color:var(--text);font-weight:600;">"{tag}"</span>.
+      </p>
     </div>
 
-    <!-- Related tags -->
-    {relatedTags.length > 0 && (
-      <div class="mb-10 sm:mb-12">
-        <h2 style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-faint);font-weight:500;margin-bottom:14px;">Temas relacionados</h2>
-        <div class="flex flex-wrap gap-2.5">
-          {relatedTags.map(relatedTag => (
-            <a
-              href={`/tags/${relatedTag}`}
-              class="tag-pill inline-flex items-center"
-              style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:0.02em;background:var(--accent-soft);border:1px solid var(--accent-border);color:var(--accent-text);padding:7px 13px;border-radius:100px;transition:border-color 0.2s ease;"
-            >
-              #{relatedTag}
-            </a>
-          ))}
-        </div>
+    {sortedPosts.length === 0 ? (
+      <div style="text-align:center;margin-top:50px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:44px 30px;">
+        <h3 style="margin:0;font-size:20px;font-weight:600;color:var(--text);">No hay artículos</h3>
+        <p style="margin:8px 0 0;font-size:14px;line-height:1.6;color:var(--text-3);">Todavía no hay artículos con esta etiqueta.</p>
+        <a href="/blog" style="display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--accent-soft);border:1px solid var(--accent-border);color:var(--accent-text);padding:9px 16px;border-radius:100px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          Ver todos los artículos
+        </a>
       </div>
-    )}
-
-    <!-- Posts list -->
-    <div class="space-y-5 sm:space-y-6">
-      {sortedPosts.map((post) => (
-        <article class="blog-card group relative flex flex-col overflow-hidden" style="background:var(--surface);border:1px solid var(--border);border-radius:14px;">
-          <div class="flex flex-col sm:flex-row gap-5 sm:gap-6 p-6 sm:p-7">
-            {post.data.image && (
-              <div class="flex-shrink-0 w-full sm:w-56 h-40 rounded-xl overflow-hidden">
-                <img
-                  src={post.data.image}
-                  alt={post.data.title}
-                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                />
-              </div>
-            )}
-
-            <div class="flex-1">
-              <div class="flex flex-wrap items-center gap-3 mb-3" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-3);">
-                {post.data.pubDate && (
-                  <time datetime={post.data.pubDate.toISOString()}>
-                    <FormattedDate date={post.data.pubDate} />
-                  </time>
-                )}
-                {post.data.readingTime && (
-                  <>
-                    <span style="color:var(--border-2);">/</span>
-                    <span>{post.data.readingTime}</span>
-                  </>
-                )}
-              </div>
-
-              <h2 class="text-xl sm:text-2xl font-semibold mb-2 sm:mb-3 transition-colors" style="color:var(--text);letter-spacing:-0.01em;">
-                <a href={`/blog/${post.slug}/`} class="before:absolute before:inset-0">
-                  {post.data.title}
-                </a>
-              </h2>
-
-              <p class="text-sm sm:text-base line-clamp-2 sm:line-clamp-3" style="color:var(--text-2);line-height:1.6;">
-                {post.data.description}
-              </p>
-
-              {post.data.tags && post.data.tags.length > 0 && (
-                <div class="flex flex-wrap gap-2 mt-4">
-                  {post.data.tags.slice(0, 3).map(postTag => (
-                    <span
-                      style={postTag === tag
-                        ? "font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.04em;background:var(--accent-soft);border:1px solid var(--accent-text);color:var(--accent-text);padding:4px 11px;border-radius:100px;"
-                        : "font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.04em;border:1px solid var(--border);color:var(--text-3);padding:4px 11px;border-radius:100px;"}
-                    >
-                      #{postTag}
-                    </span>
-                  ))}
-                  {post.data.tags.length > 3 && (
-                    <span style="font-family:'JetBrains Mono',monospace;font-size:11px;border:1px solid var(--border);color:var(--text-3);padding:4px 11px;border-radius:100px;">
-                      +{post.data.tags.length - 3}
-                    </span>
-                  )}
-                </div>
+    ) : (
+      <div style="display:flex;flex-direction:column;gap:18px;margin-top:50px;">
+        {sortedPosts.map((post) => (
+          <a href={`/blog/${post.slug}/`} class="blog-card" style="display:block;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:26px;transition:border-color 0.25s ease,transform 0.25s ease;">
+            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-3);">
+              <time datetime={post.data.pubDate.toISOString()}>{fmtDate(post.data.pubDate)}</time>
+              {post.data.readingTime && (
+                <>
+                  <span style="color:var(--border-2);">/</span>
+                  <span>{post.data.readingTime}</span>
+                </>
               )}
             </div>
-          </div>
-        </article>
-      ))}
-    </div>
-
-    <!-- Empty state -->
-    {sortedPosts.length === 0 && (
-      <div class="text-center py-16" style="background:var(--surface);border:1px solid var(--border);border-radius:14px;">
-        <h2 style="font-size:20px;font-weight:600;color:var(--text);margin-bottom:8px;">No hay artículos</h2>
-        <p style="color:var(--text-3);">Todavía no hay artículos con este tema.</p>
-        <a href="/blog" class="inline-flex items-center gap-2 mt-6" style="font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--accent-soft);border:1px solid var(--accent-border);color:var(--accent-text);padding:9px 16px;border-radius:100px;">
-          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-4 h-4">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
-          </svg>
-          <span>Ver todos los artículos</span>
-        </a>
+            <h3 style="margin:14px 0 8px;font-weight:700;font-size:20px;letter-spacing:-0.01em;color:var(--text);">{post.data.title}</h3>
+            <p style="margin:0;font-size:14.5px;line-height:1.6;color:var(--text-2);">{post.data.description}</p>
+          </a>
+        ))}
       </div>
     )}
-  </div>
+  </section>
 </Layout>
 
 <style>
   .blog-card { transition: border-color 0.25s ease, transform 0.25s ease; }
   @media (hover: hover) {
     .blog-card:hover { border-color: var(--border-2); transform: translateY(-2px); }
-    .tag-pill:hover { border-color: var(--accent-text); }
     .back-link:hover { color: var(--text); }
-  }
-
-  /* Line clamp for descriptions */
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  @media (min-width: 640px) {
-    .sm\:line-clamp-3 {
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
   }
 </style>

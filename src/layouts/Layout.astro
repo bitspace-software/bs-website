@@ -64,7 +64,7 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
     <meta name="theme-color" content="#08090A" />
 
     <!-- Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.spotify.com https://accounts.spotify.com; frame-src 'none';" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-src 'none';" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
 
@@ -106,14 +106,14 @@ const imageURL = image ? new URL(image, Astro.site || 'https://bitspace.software
       }
     })} />
   </head>
-  <body class="min-h-screen flex flex-col">
+  <body style="min-height:100vh;display:flex;flex-direction:column;">
     <SkipLink />
 
     <!-- Ambient background glow -->
     <Background />
 
     <Navigation />
-    <main id="main-content" role="main" class="flex-grow" style={isHome ? undefined : 'padding-top:66px;'}>
+    <main id="main-content" role="main" style={`flex:1 0 auto;${isHome ? '' : 'padding-top:66px;'}`}>
       <slot />
     </main>
     <Footer />

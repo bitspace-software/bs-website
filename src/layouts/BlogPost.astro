@@ -3,7 +3,6 @@ import Layout from './Layout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import ShareButtons from '../components/ShareButtons.astro';
 import TagList from '../components/TagList.astro';
-import Comments from '../components/Comments.astro';
 import { Image } from 'astro:assets';
 import './styles/markdown.css';
 export interface Props {
@@ -55,14 +54,13 @@ if (heroImage) {
   type="article"
   url={canonicalURL.toString()}
 >
-  <div class="max-w-4xl mx-auto px-3 sm:px-4 pt-0 md:pt-4">
-    <article class="prose dark:prose-invert prose-zinc lg:prose-lg">
-    <div class="mb-12">
-      <h1 class="mb-4 text-2xl font-bold sm:text-4xl" style="color:var(--text);letter-spacing:-0.025em;line-height:1.08;">
+  <article style="max-width:760px;margin:0 auto;padding:40px 24px;">
+    <header style="margin-bottom:36px;">
+      <h1 style="margin:0;color:var(--text);font-weight:800;font-size:clamp(28px,4vw,44px);letter-spacing:-0.02em;line-height:1.08;">
         {title}
       </h1>
 
-      <div class="flex items-center gap-x-3 mb-6" style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--text-3);">
+      <div style="display:flex;align-items:center;gap:10px;margin-top:18px;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--text-3);">
         <FormattedDate date={pubDate} />
         {readingTime && (
           <>
@@ -73,51 +71,42 @@ if (heroImage) {
       </div>
 
       <TagList tags={tags} class="mt-2" />
-    </div>
-    
-    <!-- Hero image with improved styling -->
+    </header>
+
+    <!-- Hero image -->
     {heroImage && (
-      <div class="relative mb-8 sm:mb-12 overflow-hidden rounded-xl shadow-lg">
-        <div class="aspect-[16/9] w-full">
-          <Image 
-            src={heroImageUrl} 
-            alt={title}
-            width={800}
-            height={450}
-            class="w-full h-full object-cover"
-            loading="eager"
-            formats={['avif', 'webp', 'png']}
-            quality={85}
-          />
-        </div>
-        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+      <div style="margin:0 0 36px;overflow:hidden;border-radius:14px;border:1px solid var(--border);aspect-ratio:16/9;">
+        <Image
+          src={heroImageUrl}
+          alt={title}
+          width={800}
+          height={450}
+          style="width:100%;height:100%;object-fit:cover;"
+          loading="eager"
+          formats={['avif', 'webp', 'png']}
+          quality={85}
+        />
       </div>
     )}
-    
+
     <div class="markdown-content">
       <slot />
     </div>
-    
+
     <!-- Share / footer -->
-    <div class="mt-12 pt-8" style="border-top:1px solid var(--hair);">
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
-        <ShareButtons url={canonicalURL.toString()} title={title} />
-      </div>
+    <div style="margin-top:48px;padding-top:32px;border-top:1px solid var(--hair);">
+      <ShareButtons url={canonicalURL.toString()} title={title} />
     </div>
 
     {updatedDate && (
-      <div class="mt-8 text-sm italic" style="color:var(--text-3);">
+      <div style="margin-top:28px;font-size:13.5px;font-style:italic;color:var(--text-3);">
         Última actualización <FormattedDate date={updatedDate} />
       </div>
     )}
-  </article>
-  
-    <!-- Comments Section -->
-    <Comments />
-    
+
     <slot name="after-article" />
-  </div>
-  
+  </article>
+
   <!-- Article Schema.org JSON-LD -->
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
@@ -165,50 +154,8 @@ if (heroImage) {
       }, 1000);
     }
     
-    // Ensure consistent code block styling
-    function updateCodeBlockStyles() {
-      document.querySelectorAll('pre').forEach(pre => {
-        // Force the background color with !important for both light and dark mode
-        pre.setAttribute('style', 'background-color: #1e293b !important');
-        
-        // Also apply to any nested code elements
-        const codeElements = pre.querySelectorAll('code');
-        codeElements.forEach(code => {
-          code.setAttribute('style', 'background-color: transparent !important; color: #e5e7eb !important;');
-        });
-      });
-    }
-    
-    // Initial application
-    updateCodeBlockStyles();
-    
-    // Watch for theme changes
-    const observer = new MutationObserver(() => {
-      updateCodeBlockStyles();
-    });
-    
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-    
-    // Also run on any content changes that might add new code blocks
-    const contentObserver = new MutationObserver((mutations) => {
-      for (const mutation of mutations) {
-        if (mutation.addedNodes.length) {
-          updateCodeBlockStyles();
-          break;
-        }
-      }
-    });
-    
-    contentObserver.observe(document.body, { childList: true, subtree: true });
-    
-    // Clean up observers when navigating away
-    document.addEventListener('spa-navigation-start', () => {
-      observer.disconnect();
-      contentObserver.disconnect();
-    });
-    
-    // Remove the parallax effect for hero image
-    
+    // Code block surfaces are fully styled in markdown.css via tokens.
+
     // Handle prev/next navigation links
     const navLinks = document.querySelectorAll('.blog-nav-link');
     navLinks.forEach(link => {
@@ -423,22 +370,11 @@ if (heroImage) {
 </script>
 
 <style>
-  /* Enhanced hero image styling */
-  article img:first-of-type {
-    border-radius: 1rem;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-  }
-  
-  article img:first-of-type:hover {
-    transform: scale(1.01);
-  }
-  
   /* Article entrance animation */
   .article-entering {
-    animation: article-fade-in 0.8s ease-out forwards;
+    animation: article-fade-in 0.6s ease-out forwards;
   }
-  
+
   @keyframes article-fade-in {
     from {
       opacity: 0;
@@ -449,7 +385,5 @@ if (heroImage) {
       transform: translateY(0);
     }
   }
-  
-  /* Rest of the styles remain unchanged... */
 </style>
 

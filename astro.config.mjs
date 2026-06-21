@@ -1,35 +1,26 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
-import react from '@astrojs/react';
 
 // Determine site URL based on environment
 const getSiteURL = () => {
-  // Production URL - Change this to your actual domain
   if (process.env.NODE_ENV === 'production') {
     return 'https://bitspace.software';
   }
-  // For Vercel production deployment
   if (process.env.VERCEL_URL) {
     return `https://${process.env.VERCEL_URL}`;
   }
-  // For Vercel preview deployment
   if (process.env.VERCEL_BRANCH_URL) {
     return `https://${process.env.VERCEL_BRANCH_URL}`;
   }
-  // For local development
   return 'http://localhost:4321';
 };
 
 // https://astro.build/config
 export default defineConfig({
   site: getSiteURL(),
-  integrations: [
-    tailwind(),
-    react(),
-  ],
-  // Output configuration — static: fully pre-rendered, served directly by Apache
+  // No UI framework, no Tailwind — the site is a self-contained
+  // CSS-variable design system rendered to static HTML.
+  integrations: [],
   output: 'static',
-  // Build configuration
   build: {
     assets: '_astro',
   },

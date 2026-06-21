@@ -1,150 +1,101 @@
 /* ============================================================================
-   Bitspace Software — Design system
-   Dark-first theme driven by CSS variables. Light theme via [data-theme="light"]
-   on <html>. The `.dark` class is mirrored onto <html> so Tailwind `dark:`
-   utilities used across blog/secondary pages stay coherent with this palette.
+   Bitspace Software — Design system (self-contained, no framework)
+   Dark-first. Light theme via html[data-theme="light"].
    ============================================================================ */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
-@layer base {
-  /* ---- Design tokens — dark (default) ---- */
-  :root {
-    --bg: #08090A;
-    --bg-alt: #0B0C0F;
-    --surface: #121317;
-    --surface-2: #15171C;
-    --border: #1C1D22;
-    --border-2: #23252D;
-    --hair: #14151A;
-    --text: #F4F4F5;
-    --text-2: #9295A0;
-    --text-3: #7C7F89;
-    --text-faint: #5E616B;
-    --accent: #4D6CFF;
-    --accent-text: #6E86FF;
-    --accent-soft: rgba(77, 108, 255, 0.12);
-    --accent-border: rgba(77, 108, 255, 0.25);
-    --green: #2FCB72;
-    --orange: #FF6A2C;
-    --orange-text: #FF8A56;
-    --logo: #A7AAB3;
-    --nav-bg: rgba(8, 9, 10, 0.72);
-    --glow: rgba(77, 108, 255, 0.20);
-
-    color-scheme: dark;
-    font-family: "Archivo", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-  }
-
-  /* ---- Design tokens — light ---- */
-  html[data-theme="light"] {
-    --bg: #FBFBF9;
-    --bg-alt: #F3F3EF;
-    --surface: #FFFFFF;
-    --surface-2: #FFFFFF;
-    --border: #E7E7E1;
-    --border-2: #E2E2DA;
-    --hair: #ECECE5;
-    --text: #14151A;
-    --text-2: #5B5E68;
-    --text-3: #797C86;
-    --text-faint: #9DA0A9;
-    --accent: #3A57E8;
-    --accent-text: #3A57E8;
-    --accent-soft: rgba(58, 87, 232, 0.08);
-    --accent-border: rgba(58, 87, 232, 0.22);
-    --green: #1F9E58;
-    --orange: #E0561D;
-    --orange-text: #C2531F;
-    --logo: #6B6E78;
-    --nav-bg: rgba(251, 251, 249, 0.82);
-    --glow: rgba(77, 108, 255, 0.10);
-
-    color-scheme: light;
-  }
-
-  html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 5rem;
-    background-color: var(--bg);
-  }
-
-  body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    overflow-x: hidden;
-    background-color: var(--bg);
-    color: var(--text);
-    font-family: "Archivo", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-
-  ::selection {
-    background: #4D6CFF;
-    color: #fff;
-  }
+/* ---- Design tokens — dark (default) ---- */
+:root {
+  --bg: #08090A;
+  --bg-alt: #0B0C0F;
+  --surface: #121317;
+  --surface-2: #15171C;
+  --border: #1C1D22;
+  --border-2: #23252D;
+  --hair: #14151A;
+  --text: #F4F4F5;
+  --text-2: #9295A0;
+  --text-3: #7C7F89;
+  --text-faint: #5E616B;
+  --accent: #4D6CFF;
+  --accent-text: #6E86FF;
+  --accent-soft: rgba(77, 108, 255, 0.12);
+  --accent-border: rgba(77, 108, 255, 0.25);
+  --green: #2FCB72;
+  --orange: #FF6A2C;
+  --orange-text: #FF8A56;
+  --logo: #A7AAB3;
+  --nav-bg: rgba(8, 9, 10, 0.72);
+  --glow: rgba(77, 108, 255, 0.20);
+  color-scheme: dark;
 }
 
-/* ---- Keyframes used by the design ---- */
-@keyframes bsPulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.35; transform: scale(0.82); }
-}
-@keyframes bsScan {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(220%); }
-}
-@keyframes bsFadeUp {
-  from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ============================================================================
-   Secondary pages (blog, about, tags, 404) still use Tailwind `dark:` utility
-   classes. They are dark-mode-aware already; the overrides below align their
-   neutral grays and accents with the Bitspace palette so the whole site reads
-   as one cohesive product. Light mode keeps Tailwind's default light palette.
-   ============================================================================ */
-@layer base {
-  /* Map the blue/amber accents used in markup to the new accent colors */
-  .text-primary-600, .text-primary-500 { color: var(--accent); }
-  .dark .text-primary-600, .dark .text-primary-500,
-  .dark .text-blue-400, .dark .text-blue-500 { color: var(--accent-text) !important; }
-  .dark .text-amber-400, .dark .text-amber-500, .dark .text-orange-400 { color: var(--orange-text) !important; }
-  .dark .bg-primary-600, .dark .bg-blue-600 { background-color: var(--accent) !important; }
-
-  /* Surfaces / borders in dark mode follow the design tokens */
-  .dark .bg-white { background-color: var(--surface) !important; }
-  .dark .bg-zinc-900, .dark .bg-zinc-900\/60, .dark .bg-zinc-900\/50,
-  .dark .bg-zinc-800\/50 { background-color: var(--surface) !important; }
-  .dark .border-zinc-800, .dark .border-zinc-700 { border-color: var(--border-2) !important; }
-
-  /* Text grays in dark mode */
-  .dark .text-zinc-900, .dark .text-zinc-800, .dark .text-zinc-100, .dark .text-white { color: var(--text) !important; }
-  .dark .text-zinc-700, .dark .text-zinc-600, .dark .text-zinc-500, .dark .text-zinc-400 { color: var(--text-2) !important; }
+/* ---- Design tokens — light ---- */
+html[data-theme="light"] {
+  --bg: #FBFBF9;
+  --bg-alt: #F3F3EF;
+  --surface: #FFFFFF;
+  --surface-2: #FFFFFF;
+  --border: #E7E7E1;
+  --border-2: #E2E2DA;
+  --hair: #ECECE5;
+  --text: #14151A;
+  --text-2: #5B5E68;
+  --text-3: #797C86;
+  --text-faint: #9DA0A9;
+  --accent: #3A57E8;
+  --accent-text: #3A57E8;
+  --accent-soft: rgba(58, 87, 232, 0.08);
+  --accent-border: rgba(58, 87, 232, 0.22);
+  --green: #1F9E58;
+  --orange: #E0561D;
+  --orange-text: #C2531F;
+  --logo: #6B6E78;
+  --nav-bg: rgba(251, 251, 249, 0.82);
+  --glow: rgba(77, 108, 255, 0.10);
+  color-scheme: light;
 }
 
-/* ---- Helper animations (kept from prior site, still referenced) ---- */
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-.animate-fade-in { animation: fadeIn 0.6s ease forwards; }
-.animate-slide-up { animation: slideUp 0.6s ease forwards; }
-.delay-100 { animation-delay: 0.1s; }
-.delay-200 { animation-delay: 0.2s; }
-.delay-300 { animation-delay: 0.3s; }
+/* ---- Reset ---- */
+*, *::before, *::after { box-sizing: border-box; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  background-color: var(--bg);
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: "Archivo", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+h1, h2, h3, h4, h5, h6, p, figure, blockquote, ul, ol { margin: 0; }
+a { color: inherit; text-decoration: none; }
+img, svg, video { display: block; max-width: 100%; }
+button { font-family: inherit; }
+::selection { background: #4D6CFF; color: #fff; }
 
-@layer utilities {
-  .font-mono { font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
-  .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-  .hide-scrollbar::-webkit-scrollbar { display: none; }
+/* ---- Keyframes ---- */
+@keyframes bsPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.35; transform: scale(0.82); } }
+@keyframes bsScan { 0% { transform: translateY(-100%); } 100% { transform: translateY(220%); } }
+@keyframes bsFadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ---- Helpers ---- */
+.font-mono { font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
 }
 
-/* Better touch targets on mobile */
 @media (max-width: 640px) {
   html { scroll-padding-top: 4rem; }
 }
