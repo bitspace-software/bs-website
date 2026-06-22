@@ -57,6 +57,9 @@
     [data-r="pad"]{padding-top:84px!important;padding-bottom:84px!important;}
     [data-r="footer"]{flex-direction:column!important;align-items:flex-start!important;gap:24px!important;}
   }
+  .client-logo{height:23px;width:auto;display:block;filter:brightness(0) invert(1);opacity:.5;transition:opacity .2s ease;}
+  .client-logo:hover{opacity:.92;}
+  html[data-theme="light"] .client-logo{filter:brightness(0);opacity:.55;}
 </style>
 <script>
   (function(){try{var s=localStorage.getItem('bitspace-theme');var t=(s==='light'||s==='dark')?s:'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
@@ -91,7 +94,7 @@
       Automatización operacional
     </div>
     <h1 style="margin:24px 0 0;font-weight:800;font-size:clamp(38px,5.6vw,66px);line-height:1.02;letter-spacing:-0.04em;color:var(--text);">
-      Automatizamos los procesos que <span style="color:var(--accent-2);">no deberían ser manuales.</span>
+      Automatizamos los procesos que <span id="hero-rotate" style="color:var(--accent-2);transition:opacity .4s ease;">no deberían ser manuales.</span>
     </h1>
     <p style="margin:26px 0 0;font-size:19px;line-height:1.6;color:var(--text-2);max-width:480px;">
       Software a medida, automatizaciones e integraciones para empresas que ya no pueden seguir creciendo con hojas de cálculo.
@@ -105,10 +108,10 @@
     </div>
     <div style="margin-top:46px;">
       <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--faint);">Confían en nosotros</span>
-      <div style="margin-top:18px;display:flex;align-items:center;gap:30px;flex-wrap:wrap;">
-        <div style="display:flex;align-items:center;gap:9px;color:var(--text-3);"><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><path d="M3 18 9 8l4 5 3-4 5 9" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;letter-spacing:0.005em;color:var(--text-2);">Marenco</span></div>
-        <div style="display:flex;align-items:center;gap:9px;color:var(--text-3);"><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.4" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="2.8" stroke="currentColor" stroke-width="1.7"/><path d="M12 3.6v3.2M12 17.2v3.2M3.6 12h3.2M17.2 12h3.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;letter-spacing:0.005em;color:var(--text-2);">Rotary</span></div>
-        <div style="display:flex;align-items:center;gap:9px;color:var(--text-3);"><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><rect x="3.5" y="3.5" width="11" height="11" rx="2.2" stroke="currentColor" stroke-width="1.7"/><rect x="9.5" y="9.5" width="11" height="11" rx="2.2" stroke="currentColor" stroke-width="1.7"/></svg><span style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;letter-spacing:0.005em;color:var(--text-2);">Cosase</span></div>
+      <div style="margin-top:18px;display:flex;align-items:center;gap:34px;flex-wrap:wrap;">
+        <img class="client-logo" src="/logos/marenco-logo.png" alt="Marenco" loading="lazy" style="height:26px;" />
+        <img class="client-logo" src="/logos/club-rotario-logo.png" alt="Club Rotario" loading="lazy" style="height:30px;" />
+        <img class="client-logo" src="/logos/cosase-logo.svg" alt="Cosase" loading="lazy" style="height:24px;" />
       </div>
     </div>
   </div>
@@ -348,6 +351,27 @@
     function apply(t){root.setAttribute('data-theme',t);try{localStorage.setItem('bitspace-theme',t);}catch(e){}sync();}
     document.getElementById('bs-theme-toggle').addEventListener('click',function(){apply(cur()==='dark'?'light':'dark');});
     sync();
+  })();
+
+  // Rotating hero phrase
+  (function(){
+    var el=document.getElementById('hero-rotate');
+    if(!el)return;
+    var phrases=[
+      'no deberían ser manuales.',
+      'frenan tu operación.',
+      'te roban horas cada día.',
+      'generan errores costosos.',
+      'impiden que escales.',
+      'duplican el trabajo de tu equipo.'
+    ];
+    var i=0;
+    if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    setInterval(function(){
+      i=(i+1)%phrases.length;
+      el.style.opacity='0';
+      setTimeout(function(){el.textContent=phrases[i];el.style.opacity='1';},400);
+    },2800);
   })();
 </script>
 </body>
