@@ -1,14 +1,4 @@
 User-agent: *
 Allow: /
 
-# Disallow admin areas
-Disallow: /api/
-Disallow: /admin/
-
-# Allow important pages
-Allow: /blog/
-Allow: /tags/
-Allow: /about/
-
-Sitemap: https://bitspace.software/sitemap-index.xml
-
+Sitemap: https://bitspace.software/sitemap.xml
