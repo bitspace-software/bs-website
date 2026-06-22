@@ -61,6 +61,12 @@
   .client-logo{height:23px;width:auto;display:block;filter:brightness(0) invert(1);opacity:.5;transition:opacity .2s ease;}
   .client-logo:hover{opacity:.92;}
   html[data-theme="light"] .client-logo{filter:brightness(0);opacity:.55;}
+  details.faq summary{list-style:none;}
+  details.faq summary::-webkit-details-marker{display:none;}
+  details.faq summary:hover{color:var(--accent-2);}
+  details.faq .faq-ic{flex:none;color:var(--accent-2);font-family:'JetBrains Mono',monospace;font-weight:400;line-height:1;transition:transform .25s ease;}
+  details.faq[open] summary{color:var(--accent-2);}
+  details.faq[open] .faq-ic{transform:rotate(45deg);}
 </style>
 <script>
   (function(){try{var s=localStorage.getItem('bitspace-theme');var t=(s==='light'||s==='dark')?s:'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
@@ -82,6 +88,7 @@
       <a href="#que-hacemos" style="font-size:14px;color:var(--text-2);font-weight:500;">Servicios</a>
       <a href="#productos" style="font-size:14px;color:var(--text-2);font-weight:500;">Productos</a>
       <a href="#proceso" style="font-size:14px;color:var(--text-2);font-weight:500;">Proceso</a>
+      <a href="#faq" style="font-size:14px;color:var(--text-2);font-weight:500;">FAQ</a>
       <a href="#contacto" style="display:inline-flex;align-items:center;gap:7px;background:var(--text);color:var(--bg);font-weight:600;font-size:14px;padding:9px 17px;border-radius:8px;">Hablemos</a>
     </div>
   </div>
@@ -172,6 +179,7 @@
         <div style="margin-top:13px;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-3);">Al primer resultado en producción</div>
       </div>
     </div>
+    <p style="margin:34px 0 0;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.04em;color:var(--faint);">Rangos observados en proyectos de automatización · varían según el proceso.</p>
   </div>
 </section>
 
@@ -292,12 +300,43 @@
 <!-- ===== TESTIMONIO ===== -->
 <section data-r="pad" style="position:relative;z-index:1;background-color:var(--bg-alt);background-image:radial-gradient(var(--dot) 1px,transparent 1.5px);background-size:24px 24px;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);">
   <div style="max-width:820px;margin:0 auto;padding:88px 28px;text-align:center;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent-2);font-weight:500;margin-bottom:30px;">Por qué existimos</div>
     <p style="margin:0;font-weight:600;font-size:clamp(22px,2.8vw,30px);line-height:1.4;letter-spacing:-0.02em;color:var(--text);">
       “La mayoría de los problemas en empresas medianas no son de tecnología — son de operación. <span style="color:var(--text-3);">Bitspace existe para que puedan crecer sin que sus procesos internos se conviertan en el cuello de botella.”</span>
     </p>
     <div style="display:flex;align-items:center;justify-content:center;gap:13px;margin-top:34px;">
       <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#4D6CFF,#9B6BFF);display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;">MB</div>
       <div style="text-align:left;"><div style="font-weight:600;font-size:14.5px;color:var(--text);">Marlon Beltrán</div><div style="font-size:12.5px;color:var(--text-3);">Founder · 15 años en operaciones</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq" data-r="pad" style="position:relative;z-index:1;border-top:1px solid var(--hair);">
+  <div style="max-width:820px;margin:0 auto;padding:88px 28px;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent-2);font-weight:500;">Preguntas frecuentes</div>
+    <h2 style="margin:18px 0 44px;font-weight:700;font-size:clamp(30px,4vw,44px);line-height:1.07;letter-spacing:-0.03em;color:var(--text);">Lo que casi todos preguntan antes de empezar.</h2>
+    <div>
+      <details class="faq" style="border-top:1px solid var(--border-2);">
+        <summary style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 2px;font-weight:600;font-size:clamp(16px,2vw,18px);letter-spacing:-0.01em;color:var(--text);transition:color .2s ease;">¿Cuánto cuesta trabajar con ustedes?<span class="faq-ic" style="font-size:20px;">+</span></summary>
+        <p style="margin:0 2px 26px;font-size:15px;line-height:1.65;color:var(--text-2);max-width:680px;">No vendemos paquetes genéricos: el precio depende del alcance. La primera conversación y el diagnóstico son sin costo — ahí definimos juntos el problema y te damos una estimación clara antes de que decidas nada.</p>
+      </details>
+      <details class="faq" style="border-top:1px solid var(--border-2);">
+        <summary style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 2px;font-weight:600;font-size:clamp(16px,2vw,18px);letter-spacing:-0.01em;color:var(--text);transition:color .2s ease;">¿Cuánto tardan en entregar?<span class="faq-ic" style="font-size:20px;">+</span></summary>
+        <p style="margin:0 2px 26px;font-size:15px;line-height:1.65;color:var(--text-2);max-width:680px;">Trabajamos en entregas cortas. La mayoría de clientes ve el primer resultado en producción entre 3 y 6 semanas — no al final de un proyecto de seis meses.</p>
+      </details>
+      <details class="faq" style="border-top:1px solid var(--border-2);">
+        <summary style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 2px;font-weight:600;font-size:clamp(16px,2vw,18px);letter-spacing:-0.01em;color:var(--text);transition:color .2s ease;">Ya tengo ERP, CRM o sistema de facturación. ¿Igual sirve?<span class="faq-ic" style="font-size:20px;">+</span></summary>
+        <p style="margin:0 2px 26px;font-size:15px;line-height:1.65;color:var(--text-2);max-width:680px;">Sí. No venimos a reemplazar lo que ya funciona — construimos el puente que falta. Integramos ERP, CRM, facturación e inventario para que dejes de mover datos a mano entre sistemas.</p>
+      </details>
+      <details class="faq" style="border-top:1px solid var(--border-2);">
+        <summary style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 2px;font-weight:600;font-size:clamp(16px,2vw,18px);letter-spacing:-0.01em;color:var(--text);transition:color .2s ease;">¿Quedo amarrado a ustedes después de la entrega?<span class="faq-ic" style="font-size:20px;">+</span></summary>
+        <p style="margin:0 2px 26px;font-size:15px;line-height:1.65;color:var(--text-2);max-width:680px;">No. Diseñamos para que tu equipo opere sin depender de nosotros. Cuando necesites soporte o nuevas mejoras estamos disponibles — porque lo elijas, no porque estés atrapado.</p>
+      </details>
+      <details class="faq" style="border-top:1px solid var(--border-2);border-bottom:1px solid var(--border-2);">
+        <summary style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 2px;font-weight:600;font-size:clamp(16px,2vw,18px);letter-spacing:-0.01em;color:var(--text);transition:color .2s ease;">¿Trabajan con empresas fuera de El Salvador?<span class="faq-ic" style="font-size:20px;">+</span></summary>
+        <p style="margin:0 2px 26px;font-size:15px;line-height:1.65;color:var(--text-2);max-width:680px;">Sí. La automatización y las integraciones las hacemos de forma remota con equipos de toda la región. Las herramientas locales —como la facturación DTE con Hacienda— están pensadas para El Salvador, pero el resto no tiene frontera.</p>
+      </details>
     </div>
   </div>
 </section>
@@ -329,6 +368,7 @@
     <div style="display:flex;align-items:center;gap:24px;font-size:13.5px;color:var(--text-2);">
       <a href="#que-hacemos">Servicios</a>
       <a href="#productos">Productos</a>
+      <a href="#faq">FAQ</a>
       <a href="mailto:hola@bitspace.software">hola@bitspace.software</a>
     </div>
     <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--faint);">© 2026</span>
