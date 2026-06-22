@@ -1,0 +1,15 @@
+# Bitspace Software — static single-page site
+# Serve the page for any non-file path (single-page site)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ /index.html [L]
+</IfModule>
+
+# Cache static assets
+<IfModule mod_headers.c>
+  <FilesMatch "\.(svg|png|jpg|jpeg|webp|woff2?)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+</IfModule>

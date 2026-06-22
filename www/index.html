@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bitspace Software — Automatización operacional y software a medida</title>
+<meta name="description" content="Automatizamos los procesos que no deberían ser manuales. Software a medida, automatizaciones e integraciones para empresas que ya no pueden seguir creciendo con hojas de cálculo.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="theme-color" content="#08090A">
+<meta name="author" content="Marlon Beltran">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://bitspace.software/">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bitspace.software/">
+<meta property="og:title" content="Bitspace Software — Automatización operacional y software a medida">
+<meta property="og:description" content="Software a medida, automatizaciones e integraciones para empresas que ya no pueden seguir creciendo con hojas de cálculo.">
+<meta property="og:site_name" content="Bitspace Software">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@marom_beltran">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  :root{
+    --bg:#08090A;--bg-alt:#0B0C0F;--surface:#101115;--border:#1B1C21;--border-2:#26282F;--hair:#15161A;
+    --text:#F4F4F5;--text-2:#9C9FA8;--text-3:#74777F;--faint:#52555D;
+    --accent:#4D6CFF;--accent-2:#7C93FF;--accent-soft:rgba(77,108,255,0.12);--accent-border:rgba(77,108,255,0.28);
+    --green:#34CF77;--nav-bg:rgba(8,9,10,0.7);--glow:rgba(77,108,255,0.18);--accent-3:#EC3F8F;--glow-2:rgba(236,63,143,0.13);
+    --grid-line:rgba(255,255,255,0.05);--dot:rgba(255,255,255,0.07);--grain-opacity:0.055;--card-grid:rgba(255,255,255,0.045);
+  }
+  html[data-theme="light"]{
+    --bg:#FCFCFA;--bg-alt:#F4F4F0;--surface:#FFFFFF;--border:#E8E8E2;--border-2:#E0E0D8;--hair:#EDEDE6;
+    --text:#15161B;--text-2:#595C66;--text-3:#7C7F88;--faint:#A0A3AC;
+    --accent:#3A57E8;--accent-2:#3A57E8;--accent-soft:rgba(58,87,232,0.07);--accent-border:rgba(58,87,232,0.2);
+    --green:#1F9E58;--nav-bg:rgba(252,252,250,0.8);--glow:rgba(77,108,255,0.08);--accent-3:#D81E7E;--glow-2:rgba(216,30,126,0.07);
+    --grid-line:rgba(40,52,92,0.055);--dot:rgba(40,52,92,0.07);--grain-opacity:0;--card-grid:rgba(255,255,255,0.045);
+  }
+  body{margin:0;background:var(--bg);color:var(--text);font-family:'Archivo',sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;transition:background-color .3s ease,color .3s ease;}
+  ::selection{background:#4D6CFF;color:#fff;}
+  a{text-decoration:none;color:inherit;}
+  @keyframes bsPulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+  @keyframes bsScan{0%{transform:translateY(-100%);}100%{transform:translateY(240%);}}
+  @keyframes bsDraw{to{stroke-dashoffset:0;}}
+  [data-grain]{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px 200px;}
+  @media (max-width:920px){
+    [data-r="hero"]{grid-template-columns:1fr!important;gap:52px!important;padding-top:120px!important;padding-bottom:0!important;}
+    [data-r="hero-console"]{max-width:480px!important;}
+  }
+  @media (max-width:760px){
+    [data-r="navlinks"] a:not(:last-child){display:none!important;}
+    [data-r="g3"]{grid-template-columns:1fr!important;gap:40px!important;}
+    [data-r="g2"]{grid-template-columns:1fr!important;}
+    [data-r="pad"]{padding-top:84px!important;padding-bottom:84px!important;}
+    [data-r="footer"]{flex-direction:column!important;align-items:flex-start!important;gap:24px!important;}
+  }
+</style>
+<script>
+  (function(){try{var s=localStorage.getItem('bitspace-theme');var t=(s==='light'||s==='dark')?s:'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<div style="position:relative;overflow:hidden;">
+<div aria-hidden="true" style="position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(to right,var(--grid-line) 1px,transparent 1px),linear-gradient(to bottom,var(--grid-line) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse 78% 78% at 50% 42%,#000 38%,transparent 86%);mask-image:radial-gradient(ellipse 78% 78% at 50% 42%,#000 38%,transparent 86%);"></div>
+<div data-grain aria-hidden="true" style="position:fixed;inset:0;z-index:80;pointer-events:none;opacity:var(--grain-opacity);mix-blend-mode:overlay;"></div>
+
+<!-- ===== NAV ===== -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:50;height:68px;display:flex;align-items:center;background:var(--nav-bg);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--hair);">
+  <div style="max-width:1080px;margin:0 auto;padding:0 28px;width:100%;display:flex;align-items:center;justify-content:space-between;">
+    <a href="#top" style="display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;letter-spacing:-0.02em;color:var(--text);">
+      <span style="display:inline-flex;align-items:center;justify-content:center;width:27px;height:27px;border-radius:7px;background:#4D6CFF;color:#fff;font-family:'JetBrains Mono',monospace;font-weight:500;font-size:14px;">B</span>
+      Bitspace<span style="color:var(--text-3);font-weight:500;">Software</span>
+    </a>
+    <div data-r="navlinks" style="display:flex;align-items:center;gap:32px;">
+      <a href="#que-hacemos" style="font-size:14px;color:var(--text-2);font-weight:500;">Servicios</a>
+      <a href="#productos" style="font-size:14px;color:var(--text-2);font-weight:500;">Productos</a>
+      <a href="#proceso" style="font-size:14px;color:var(--text-2);font-weight:500;">Proceso</a>
+      <a href="#contacto" style="display:inline-flex;align-items:center;gap:7px;background:var(--text);color:var(--bg);font-weight:600;font-size:14px;padding:9px 17px;border-radius:8px;">Hablemos</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="top" data-r="hero" style="position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:150px 28px 110px;display:grid;grid-template-columns:1.08fr 0.92fr;gap:64px;align-items:center;">
+  <div style="position:relative;z-index:2;">
+    <div style="display:inline-flex;align-items:center;gap:9px;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-3);">
+      <span style="width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 9px var(--green);animation:bsPulse 1.9s infinite;"></span>
+      Automatización operacional
+    </div>
+    <h1 style="margin:24px 0 0;font-weight:800;font-size:clamp(38px,5.6vw,66px);line-height:1.02;letter-spacing:-0.04em;color:var(--text);">
+      Automatizamos los procesos que <span style="color:var(--accent-2);">no deberían ser manuales.</span>
+    </h1>
+    <p style="margin:26px 0 0;font-size:19px;line-height:1.6;color:var(--text-2);max-width:480px;">
+      Software a medida, automatizaciones e integraciones para empresas que ya no pueden seguir creciendo con hojas de cálculo.
+    </p>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:36px;">
+      <a href="https://wa.me/50378410264" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:9px;background:#4D6CFF;color:#fff;font-weight:600;font-size:15.5px;padding:15px 26px;border-radius:10px;box-shadow:0 10px 30px rgba(77,108,255,0.32);">
+        Habla con nosotros
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#proceso" style="display:inline-flex;align-items:center;gap:8px;color:var(--text);font-weight:600;font-size:15px;">Cómo trabajamos</a>
+    </div>
+    <div style="margin-top:46px;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--faint);">Confían en nosotros</span>
+      <div style="margin-top:18px;display:flex;align-items:center;gap:30px;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:9px;color:var(--text-3);"><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><path d="M3 18 9 8l4 5 3-4 5 9" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;letter-spacing:0.005em;color:var(--text-2);">Marenco</span></div>
+        <div style="display:flex;align-items:center;gap:9px;color:var(--text-3);"><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.4" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="2.8" stroke="currentColor" stroke-width="1.7"/><path d="M12 3.6v3.2M12 17.2v3.2M3.6 12h3.2M17.2 12h3.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;letter-spacing:0.005em;color:var(--text-2);">Rotary</span></div>
+        <div style="display:flex;align-items:center;gap:9px;color:var(--text-3);"><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><rect x="3.5" y="3.5" width="11" height="11" rx="2.2" stroke="currentColor" stroke-width="1.7"/><rect x="9.5" y="9.5" width="11" height="11" rx="2.2" stroke="currentColor" stroke-width="1.7"/></svg><span style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;letter-spacing:0.005em;color:var(--text-2);">Cosase</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- console (always dark) -->
+  <div data-r="hero-console" style="position:relative;z-index:2;">
+    <div style="position:relative;background:linear-gradient(180deg,#0F1117,#0B0C10);border:1px solid #23252D;border-radius:16px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,0.5);">
+      <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;"><div style="position:absolute;left:0;right:0;height:130px;background:linear-gradient(180deg,transparent,rgba(77,108,255,0.06),transparent);animation:bsScan 6.5s linear infinite;"></div></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid #1C1E25;">
+        <div style="display:flex;align-items:center;gap:11px;">
+          <div style="display:flex;gap:7px;"><span style="width:9px;height:9px;border-radius:50%;background:#2B2D34;"></span><span style="width:9px;height:9px;border-radius:50%;background:#2B2D34;"></span><span style="width:9px;height:9px;border-radius:50%;background:#2B2D34;"></span></div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.04em;color:#5E616A;">operación · tiempo real</span>
+        </div>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:#7C93FF;display:inline-flex;align-items:center;gap:6px;"><span style="width:6px;height:6px;border-radius:50%;background:#34CF77;box-shadow:0 0 8px #34CF77;animation:bsPulse 1.9s infinite;"></span>en vivo</span>
+      </div>
+      <div style="padding:16px 18px 4px;display:flex;flex-direction:column;gap:9px;font-family:'JetBrains Mono',monospace;font-size:12.5px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:#0D0F14;border:1px solid #1D1F27;border-radius:10px;"><div style="display:flex;align-items:center;gap:10px;min-width:0;"><span style="width:7px;height:7px;border-radius:50%;background:#34CF77;flex:none;box-shadow:0 0 7px rgba(52,207,119,0.55);"></span><span style="color:#C7CAD2;white-space:nowrap;">DTE validado · Hacienda</span></div><div style="display:flex;align-items:center;gap:9px;flex:none;"><span style="color:#52555D;font-size:11px;">12:04</span><span style="color:#34CF77;">✓</span></div></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:#0D0F14;border:1px solid #1D1F27;border-radius:10px;"><div style="display:flex;align-items:center;gap:10px;min-width:0;"><span style="width:7px;height:7px;border-radius:50%;background:#34CF77;flex:none;box-shadow:0 0 7px rgba(52,207,119,0.55);"></span><span style="color:#C7CAD2;white-space:nowrap;">Lote facturado · 1,240 docs</span></div><div style="display:flex;align-items:center;gap:9px;flex:none;"><span style="color:#52555D;font-size:11px;">12:01</span><span style="color:#34CF77;">✓</span></div></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:rgba(236,63,143,0.06);border:1px solid rgba(236,63,143,0.34);border-radius:10px;"><div style="display:flex;align-items:center;gap:10px;min-width:0;"><span style="width:7px;height:7px;border-radius:50%;background:#EC3F8F;flex:none;box-shadow:0 0 8px rgba(236,63,143,0.7);animation:bsPulse 1.6s infinite;"></span><span style="color:#E8D6DF;white-space:nowrap;">Aqua · cobro #2041 registrado</span></div><div style="display:flex;align-items:center;gap:9px;flex:none;"><span style="color:#9A6A80;font-size:11px;">ahora</span><span style="color:#EC3F8F;">→</span></div></div>
+      </div>
+      <div style="padding:10px 18px 2px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:9px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;color:#5E616A;">Recaudación vs facturación</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:#7C93FF;border:1px solid #23252D;padding:2px 7px;border-radius:100px;">30 días</span>
+        </div>
+        <svg viewBox="0 0 300 64" width="100%" height="60" preserveAspectRatio="none" style="display:block;"><defs><linearGradient id="bsArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4D6CFF" stop-opacity="0.26"/><stop offset="1" stop-color="#4D6CFF" stop-opacity="0"/></linearGradient></defs><path d="M0 46 C30 44 48 26 78 30 S128 16 158 26 S214 12 256 20 S300 16 300 16 L300 64 L0 64 Z" fill="url(#bsArea)"/><path d="M0 46 C30 44 48 26 78 30 S128 16 158 26 S214 12 256 20 S300 16 300 16" fill="none" stroke="#6E86FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="700" stroke-dashoffset="700" style="animation:bsDraw 2.4s ease-out 0.3s forwards;"/><path d="M0 54 C30 52 48 41 78 45 S128 35 158 41 S214 31 256 37 S300 34 300 34" fill="none" stroke="#EC3F8F" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.9" stroke-dasharray="700" stroke-dashoffset="700" style="animation:bsDraw 2.4s ease-out 0.6s forwards;"/></svg>
+        <div style="display:flex;align-items:center;gap:16px;margin-top:9px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#74777F;"><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:8px;height:2px;background:#6E86FF;border-radius:2px;"></span>Cobrado $8,640</span><span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:8px;height:2px;background:#EC3F8F;border-radius:2px;"></span>Facturado $9,240</span></div>
+      </div>
+      <div style="display:flex;gap:30px;align-items:flex-end;padding:16px 18px 20px;margin-top:10px;border-top:1px solid #16181E;">
+        <div>
+          <div style="display:flex;align-items:baseline;gap:6px;"><span style="font-family:'Archivo',sans-serif;font-weight:800;font-size:24px;letter-spacing:-0.03em;color:#F7F7F8;">+180</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#34CF77;">▲</span></div>
+          <div style="margin-top:3px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.06em;text-transform:uppercase;color:#5E616A;">Horas / mes recuperadas</div>
+        </div>
+        <div>
+          <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:24px;letter-spacing:-0.03em;color:#F7F7F8;">1,240</div>
+          <div style="margin-top:3px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.06em;text-transform:uppercase;color:#5E616A;">Docs procesados hoy</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MÉTRICAS ===== -->
+<section data-r="pad" style="position:relative;z-index:1;border-top:1px solid var(--hair);">
+  <div style="max-width:1080px;margin:0 auto;padding:76px 28px;">
+    <div data-r="g3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;">
+      <div style="text-align:center;">
+        <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(40px,5vw,56px);letter-spacing:-0.045em;line-height:1;background:linear-gradient(120deg,var(--accent),var(--accent-3));-webkit-background-clip:text;background-clip:text;color:transparent;">180+</div>
+        <div style="margin-top:13px;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-3);">Horas / mes recuperadas</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(40px,5vw,56px);letter-spacing:-0.045em;line-height:1;background:linear-gradient(120deg,var(--accent),var(--accent-3));-webkit-background-clip:text;background-clip:text;color:transparent;">94%</div>
+        <div style="margin-top:13px;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-3);">Menos errores manuales</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(40px,5vw,56px);letter-spacing:-0.045em;line-height:1;background:linear-gradient(120deg,var(--accent),var(--accent-3));-webkit-background-clip:text;background-clip:text;color:transparent;">3–6 sem</div>
+        <div style="margin-top:13px;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-3);">Al primer resultado en producción</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUÉ HACEMOS ===== -->
+<section id="que-hacemos" data-r="pad" style="position:relative;z-index:1;border-top:1px solid var(--hair);">
+  <div style="max-width:1080px;margin:0 auto;padding:120px 28px;">
+    <div style="max-width:560px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent-2);font-weight:500;">Qué hacemos</div>
+      <h2 style="margin:18px 0 0;font-weight:700;font-size:clamp(30px,4vw,44px);line-height:1.07;letter-spacing:-0.03em;color:var(--text);">Construimos la infraestructura operacional que tu empresa necesita.</h2>
+    </div>
+    <div data-r="g3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:64px;">
+      <div style="border-top:1px solid var(--border-2);padding:28px 4px 0;">
+        <div style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:var(--accent-soft);color:var(--accent);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="currentColor"/></svg></div>
+        <h3 style="margin:20px 0 10px;font-weight:700;font-size:20px;letter-spacing:-0.02em;color:var(--text);">Automatización</h3>
+        <p style="margin:0;font-size:15px;line-height:1.62;color:var(--text-2);">Flujos que corren solos: alertas, generación de documentos y sincronización entre sistemas. Menos errores, más velocidad.</p>
+      </div>
+      <div style="border-top:1px solid var(--border-2);padding:28px 4px 0;">
+        <div style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:var(--accent-soft);color:var(--accent);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 12a4 4 0 0 1 4-4h3a4 4 0 0 1 0 8h-1" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M15 12a4 4 0 0 1-4 4H8a4 4 0 0 1 0-8h1" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg></div>
+        <h3 style="margin:20px 0 10px;font-weight:700;font-size:20px;letter-spacing:-0.02em;color:var(--text);">Integraciones</h3>
+        <p style="margin:0;font-size:15px;line-height:1.62;color:var(--text-2);">Conectamos ERP, CRM, facturación e inventario. Creamos el puente que faltaba sin reemplazar lo que ya usas.</p>
+      </div>
+      <div style="border-top:1px solid var(--border-2);padding:28px 4px 0;">
+        <div style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:var(--accent-soft);color:var(--accent);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 19V11M12 19V5M19 19v-6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></svg></div>
+        <h3 style="margin:20px 0 10px;font-weight:700;font-size:20px;letter-spacing:-0.02em;color:var(--text);">Software operacional</h3>
+        <p style="margin:0;font-size:15px;line-height:1.62;color:var(--text-2);">Módulos a medida cuando las herramientas genéricas no alcanzan: inventario, contratos, aprobaciones y reportería.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRODUCTOS ===== -->
+<section id="productos" data-r="pad" style="position:relative;z-index:1;background-color:var(--bg-alt);background-image:radial-gradient(var(--dot) 1px,transparent 1.5px);background-size:24px 24px;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);">
+  <div style="max-width:1080px;margin:0 auto;padding:120px 28px;">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+      <div style="max-width:520px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent-3);font-weight:500;">Productos</div>
+        <h2 style="margin:18px 0 0;font-weight:700;font-size:clamp(30px,4vw,44px);line-height:1.07;letter-spacing:-0.03em;color:var(--text);">Soluciones listas para operar</h2>
+      </div>
+    </div>
+    <div style="position:relative;overflow:hidden;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:36px;margin-top:48px;">
+      <div aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent-3),transparent);"></div>
+      <div data-r="g2" style="display:grid;grid-template-columns:1.5fr 1fr;gap:40px;align-items:center;">
+        <div>
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <div style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:11px;background:var(--accent-3);"><svg width="21" height="21" viewBox="0 0 24 24" fill="none"><path d="M12 3.2c3.3 3.7 5.4 6.7 5.4 9.5a5.4 5.4 0 0 1-10.8 0c0-2.8 2.1-5.8 5.4-9.5Z" fill="#fff"/></svg></div>
+            <div style="font-weight:700;font-size:22px;letter-spacing:-0.02em;color:var(--text);">Aqua</div>
+            <span style="display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);border:1px solid var(--green);padding:5px 10px;border-radius:100px;"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);"></span>Disponible</span>
+          </div>
+          <div style="margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-3);">Gestión para juntas de agua</div>
+          <p style="margin:18px 0 0;font-size:15px;line-height:1.62;color:var(--text-2);max-width:460px;">Padrón, facturación, cobranza, egresos y mantenimiento de juntas de agua en una sola plataforma. Menos planillas, menos mora y cuentas claras ante la comunidad.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;"><span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.02em;color:var(--text-3);border:1px solid var(--border-2);padding:5px 10px;border-radius:7px;white-space:nowrap;">Padrón</span><span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.02em;color:var(--text-3);border:1px solid var(--border-2);padding:5px 10px;border-radius:7px;white-space:nowrap;">Cobranza</span><span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.02em;color:var(--text-3);border:1px solid var(--border-2);padding:5px 10px;border-radius:7px;white-space:nowrap;">Mantenimiento</span><span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.02em;color:var(--text-3);border:1px solid var(--border-2);padding:5px 10px;border-radius:7px;white-space:nowrap;">Avisos WhatsApp</span></div>
+          <a href="https://wa.me/50378410264" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;margin-top:22px;font-weight:600;font-size:14.5px;color:var(--accent-3);">Solicitar demo de Aqua <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+          <div style="background:var(--surface);padding:16px 18px;"><div style="font-family:'Archivo',sans-serif;font-weight:700;font-size:24px;letter-spacing:-0.03em;color:var(--text);">8</div><div style="margin-top:4px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-3);">Módulos integrados</div></div>
+          <div style="background:var(--surface);padding:16px 18px;"><div style="font-family:'Archivo',sans-serif;font-weight:700;font-size:24px;letter-spacing:-0.03em;color:var(--text);">11</div><div style="margin-top:4px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-3);">Instalaciones</div></div>
+          <div style="background:var(--surface);padding:16px 18px;"><div style="font-family:'Archivo',sans-serif;font-weight:700;font-size:24px;letter-spacing:-0.03em;color:var(--text);">100%</div><div style="margin-top:4px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-3);">En la nube</div></div>
+          <div style="background:var(--surface);padding:16px 18px;"><div style="font-family:'Archivo',sans-serif;font-weight:700;font-size:24px;letter-spacing:-0.03em;color:var(--text);">24/7</div><div style="margin-top:4px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-3);">Acceso</div></div>
+        </div>
+      </div>
+    </div>
+    <div data-r="g2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;">
+      <div style="position:relative;overflow:hidden;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:34px;"><div aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent-3),transparent);"></div>
+        <div style="display:flex;align-items:center;gap:13px;">
+          <div style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:var(--accent-3);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"/><path d="M13 3v5h5" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"/><path d="m8.5 14 2 2 4-4" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div>
+            <div style="font-weight:700;font-size:20px;letter-spacing:-0.02em;color:var(--text);">Financial OS</div>
+            <div style="margin-top:2px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-3);">DTE · Integración con Hacienda</div>
+          </div>
+        </div>
+        <p style="margin:20px 0 0;font-size:15px;line-height:1.62;color:var(--text-2);">Genera y administra tus DTE directamente con Hacienda vía API — simple y eficiente. Y si aún no facturas electrónicamente, incluye su propio módulo de facturación.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;"><span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.02em;color:var(--text-3);border:1px solid var(--border-2);padding:5px 10px;border-radius:7px;white-space:nowrap;">DTE con Hacienda</span><span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.02em;color:var(--text-3);border:1px solid var(--border-2);padding:5px 10px;border-radius:7px;white-space:nowrap;">Integración API</span><span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.02em;color:var(--text-3);border:1px solid var(--border-2);padding:5px 10px;border-radius:7px;white-space:nowrap;">Módulo de facturación</span></div>
+        <div style="margin-top:20px;"><span style="display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-3);border:1px solid var(--border-2);padding:5px 10px;border-radius:100px;white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#FFB020;"></span>En construcción</span></div>
+      </div>
+      <div style="position:relative;overflow:hidden;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:34px;"><div aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent-3),transparent);"></div>
+        <div style="display:flex;align-items:center;gap:13px;">
+          <div style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:var(--accent-3);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3 3 7.5 12 12l9-4.5L12 3Z" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/><path d="M3 12l9 4.5L21 12" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/><path d="M3 16.5 12 21l9-4.5" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+          <div>
+            <div style="font-weight:700;font-size:20px;letter-spacing:-0.02em;color:var(--text);">Bulk Invoice</div>
+            <div style="margin-top:2px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-3);">Emisión masiva de DTE</div>
+          </div>
+        </div>
+        <p style="margin:20px 0 0;font-size:15px;line-height:1.62;color:var(--text-2);">Sube un archivo, valida y emite cientos de DTE en segundos. Sin captura manual, sin errores y listos para Hacienda — ideal para alto volumen.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;"><span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.02em;color:var(--text-3);border:1px solid var(--border-2);padding:5px 10px;border-radius:7px;white-space:nowrap;">Carga por lotes</span><span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.02em;color:var(--text-3);border:1px solid var(--border-2);padding:5px 10px;border-radius:7px;white-space:nowrap;">Validación automática</span><span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.02em;color:var(--text-3);border:1px solid var(--border-2);padding:5px 10px;border-radius:7px;white-space:nowrap;">DTE en segundos</span></div>
+        <div style="margin-top:20px;"><span style="display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-3);border:1px solid var(--border-2);padding:5px 10px;border-radius:100px;white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#FFB020;"></span>En construcción</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROCESO ===== -->
+<section id="proceso" data-r="pad" style="position:relative;z-index:1;">
+  <div style="max-width:1080px;margin:0 auto;padding:120px 28px;">
+    <div style="max-width:520px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent-2);font-weight:500;">Cómo trabajamos</div>
+      <h2 style="margin:18px 0 0;font-weight:700;font-size:clamp(30px,4vw,44px);line-height:1.07;letter-spacing:-0.03em;color:var(--text);">Sin metodologías complicadas. Sin sorpresas.</h2>
+    </div>
+    <div data-r="g3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:64px;">
+      <div style="border-top:1px solid var(--border-2);padding:26px 4px 0;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent-2);">01</div>
+        <h3 style="margin:14px 0 9px;font-weight:700;font-size:18px;letter-spacing:-0.01em;color:var(--text);">Diagnóstico</h3>
+        <p style="margin:0;font-size:14.5px;line-height:1.6;color:var(--text-2);">Entendemos tu operación antes de escribir una línea de código. Una sesión de trabajo conjunto, sin costo.</p>
+      </div>
+      <div style="border-top:1px solid var(--border-2);padding:26px 4px 0;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent-2);">02</div>
+        <h3 style="margin:14px 0 9px;font-weight:700;font-size:18px;letter-spacing:-0.01em;color:var(--text);">Construcción</h3>
+        <p style="margin:0;font-size:14.5px;line-height:1.6;color:var(--text-2);">Entregas cortas. Ves resultados reales desde las primeras semanas, no al final de un proyecto de seis meses.</p>
+      </div>
+      <div style="border-top:1px solid var(--border-2);padding:26px 4px 0;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent-2);">03</div>
+        <h3 style="margin:14px 0 9px;font-weight:700;font-size:18px;letter-spacing:-0.01em;color:var(--text);">Operación</h3>
+        <p style="margin:0;font-size:14.5px;line-height:1.6;color:var(--text-2);">Tu equipo opera sin depender de nosotros. Y cuando necesitas ayuda, estamos disponibles.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIO ===== -->
+<section data-r="pad" style="position:relative;z-index:1;background-color:var(--bg-alt);background-image:radial-gradient(var(--dot) 1px,transparent 1.5px);background-size:24px 24px;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);">
+  <div style="max-width:820px;margin:0 auto;padding:120px 28px;text-align:center;">
+    <p style="margin:0;font-weight:600;font-size:clamp(22px,2.8vw,30px);line-height:1.4;letter-spacing:-0.02em;color:var(--text);">
+      “La mayoría de los problemas en empresas medianas no son de tecnología — son de operación. <span style="color:var(--text-3);">Bitspace existe para que puedan crecer sin que sus procesos internos se conviertan en el cuello de botella.”</span>
+    </p>
+    <div style="display:flex;align-items:center;justify-content:center;gap:13px;margin-top:34px;">
+      <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#4D6CFF,#9B6BFF);display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;">MB</div>
+      <div style="text-align:left;"><div style="font-weight:600;font-size:14.5px;color:var(--text);">Marlon Beltrán</div><div style="font-size:12.5px;color:var(--text-3);">Founder · 15 años en operaciones</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA (always dark) ===== -->
+<section id="contacto" data-r="pad" style="position:relative;z-index:1;padding:120px 28px;">
+  <div style="position:relative;max-width:920px;margin:0 auto;background:linear-gradient(180deg,#0E1120,#0A0B10);border:1px solid #232842;border-radius:24px;padding:80px 40px;text-align:center;overflow:hidden;">
+    <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(to right,var(--card-grid) 1px,transparent 1px),linear-gradient(to bottom,var(--card-grid) 1px,transparent 1px);background-size:42px 42px;-webkit-mask-image:radial-gradient(ellipse 85% 80% at 50% 0%,#000,transparent 72%);mask-image:radial-gradient(ellipse 85% 80% at 50% 0%,#000,transparent 72%);"></div>
+    <div style="position:absolute;top:-130px;left:50%;transform:translateX(-50%);width:680px;height:420px;background:radial-gradient(ellipse at center,rgba(77,108,255,0.26),transparent 64%);pointer-events:none;"></div>
+    <div aria-hidden="true" style="position:absolute;bottom:-170px;right:-90px;width:440px;height:380px;background:radial-gradient(ellipse at center,rgba(236,63,143,0.22),transparent 65%);pointer-events:none;"></div>
+    <div style="position:relative;z-index:1;">
+      <h2 style="margin:0 auto;max-width:580px;font-weight:800;font-size:clamp(32px,4.4vw,50px);line-height:1.05;letter-spacing:-0.035em;color:#F7F7F8;">¿Tu operación necesita más control?</h2>
+      <p style="margin:22px auto 0;max-width:480px;font-size:17px;line-height:1.6;color:#A6A9B3;">Primera conversación sin costo. Sin compromiso. Cuéntanos qué proceso te está frenando.</p>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:36px;">
+        <a href="https://wa.me/50378410264" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:9px;background:#4D6CFF;color:#fff;font-weight:600;font-size:15.5px;padding:15px 28px;border-radius:10px;box-shadow:0 10px 30px rgba(77,108,255,0.4);">Agendar una conversación</a>
+        <a href="mailto:hola@bitspace.software" style="display:inline-flex;align-items:center;gap:9px;background:transparent;color:#E6E7EB;font-weight:600;font-size:15.5px;padding:15px 24px;border-radius:10px;border:1px solid #2E3346;">hola@bitspace.software</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer style="position:relative;z-index:1;border-top:1px solid var(--hair);background:var(--bg);">
+  <div data-r="footer" style="max-width:1080px;margin:0 auto;padding:32px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+    <div style="display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px;letter-spacing:-0.02em;color:var(--text);">
+      <span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:6px;background:#4D6CFF;color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;">B</span>
+      Bitspace Software
+    </div>
+    <div style="display:flex;align-items:center;gap:24px;font-size:13.5px;color:var(--text-2);">
+      <a href="#que-hacemos">Servicios</a>
+      <a href="#productos">Productos</a>
+      <a href="mailto:hola@bitspace.software">hola@bitspace.software</a>
+    </div>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--faint);">© 2026</span>
+  </div>
+</footer>
+
+<!-- ===== THEME TOGGLE ===== -->
+<button id="bs-theme-toggle" type="button" aria-label="Cambiar tema" style="position:fixed;z-index:60;right:22px;bottom:22px;display:inline-flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--border-2);color:var(--text);padding:10px 15px;border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.04em;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,0.22);">
+  <span style="width:9px;height:9px;border-radius:50%;background:var(--accent);"></span>
+  <span id="bs-theme-label">Dark</span>
+</button>
+
+</div>
+
+<script>
+  (function(){
+    var root=document.documentElement;
+    var label=document.getElementById('bs-theme-label');
+    function cur(){return root.getAttribute('data-theme')==='light'?'light':'dark';}
+    function sync(){if(label)label.textContent=cur()==='dark'?'Dark':'Light';}
+    function apply(t){root.setAttribute('data-theme',t);try{localStorage.setItem('bitspace-theme',t);}catch(e){}sync();}
+    document.getElementById('bs-theme-toggle').addEventListener('click',function(){apply(cur()==='dark'?'light':'dark');});
+    sync();
+  })();
+</script>
+</body>
+</html>
